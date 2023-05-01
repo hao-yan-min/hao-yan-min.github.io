@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>Latex的使用 |  Gymnopedies</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-Latex"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Latex的使用
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/05/01/Latex/" class="article-date">
+  <time datetime="2023-05-01T15:12:45.000Z" itemprop="datePublished">2023-05-01</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Latex/">Latex</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.3k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">5 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="Latex环境和命令"><a href="#Latex环境和命令" class="headerlink" title="Latex环境和命令"></a>Latex环境和命令</h2><p>$latex{}$ 的命令以\开头，而环境是指用以令一些效果在局部生效，或是生成特殊的文档元素。LATEX 环境</p>
+<p>的用法为一对命令 \begin 和 \end</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;⟨environment name⟩&#125;[⟨optional arguments⟩]&#123;⟨mandatory arguments⟩&#125;</span><br><span class="line">…</span><br><span class="line">\end&#123;⟨environment name⟩&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中 <em>⟨<strong>environment name</strong>⟩</em> 为环境名，\begin 和 \end 中填写的环境名应当一致。类似命令，</p>
+<p>{<em>⟨<strong>mandatory arguments</strong>⟩</em>} 和 [<em>⟨<strong>optional arguments</strong>⟩</em>] 为环境所需的必选和可选参数。LATEX 环</p>
+<p>境可能需要一个或多个必选&#x2F;可选参数，也可能完全不需要参数。部分环境允许嵌套使用。</p>
+<h3 id="Latex源代码结构"><a href="#Latex源代码结构" class="headerlink" title="Latex源代码结构"></a>Latex源代码结构</h3><p>LATEX 源代码以一个 \documentclass 命令作为开头，它指定了文档使用的<strong>文档类</strong>。docu</p>
+<p>ment 环境当中的内容是文档正文。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\documentclass[⟨options⟩]&#123;⟨class-name⟩&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在 \documentclass 和 \begin{document} 之间的位置称为<strong>导言区</strong>。在导言区中常会使用</p>
+<p>\usepackage 命令调用<strong>宏包</strong>，还会进行文档的全局设置。</p>
+<p><img src="C:\Users\yhm36\AppData\Roaming\Typora\typora-user-images\image-20230424224310764.png" alt="image-20230424224310764"></p>
+<h3 id="Latex排版文字"><a href="#Latex排版文字" class="headerlink" title="Latex排版文字"></a>Latex排版文字</h3><p>使用latex排版中文的时候需要引入ctex包，代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\usepackage&#123;ctex&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="空格和分段"><a href="#空格和分段" class="headerlink" title="空格和分段"></a>空格和分段</h2><p>latex中每行开头的空格无效，一个或多个空格被视为一个空格。可以使用\par命令让文字分段。文末的一个换行符被视为一个空格，但多个换行符被视为一个换行符（对中文无效）</p>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><p>latex使用%进行注释，该字符到行末的所有文字都被忽略</p>
+<h3 id="字体的设置"><a href="#字体的设置" class="headerlink" title="字体的设置"></a>字体的设置</h3><p>Latex中设置正文字体的时候使用 \setmainfont命令。例如，如果要设置字体为宋体，命令为\setmainfont{Simsun}</p>
+<p>在\documentclass[11pt,a4paper]{article}命令中可以设置正文字体大小和使用的纸张大小。</p>
+<h3 id="行间距的设置"><a href="#行间距的设置" class="headerlink" title="行间距的设置"></a>行间距的设置</h3><p>Latex中通过引入宏包</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\usepackage</span>&#123;setspace&#125; <span class="comment">% 加载 setspace 宏包</span></span><br><span class="line"><span class="keyword">\setstretch</span>&#123;1.5&#125; <span class="comment">% 设置行距为1.5倍</span></span><br></pre></td></tr></table></figure>
+
+<p>通过这种方式设置行间距。</p>
+<h3 id="设置目录"><a href="#设置目录" class="headerlink" title="设置目录"></a>设置目录</h3><p>通过引入包hyperref然后在文档内容中加入目录，具体代码如下：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\usepackage</span>&#123;hyperref&#125; <span class="comment">% 引入超链接包</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\newpage</span> <span class="comment">% 新页</span></span><br><span class="line"><span class="keyword">\tableofcontents</span> <span class="comment">% 生成目录</span></span><br></pre></td></tr></table></figure>
+
+<p>这样生成的目录可以使用超链接且独占一页。</p>
+<h2 id="排版"><a href="#排版" class="headerlink" title="排版"></a>排版</h2><h3 id="段落"><a href="#段落" class="headerlink" title="段落"></a>段落</h3><p>可以使用\section{}标签生成一级段落，\subsection{}生成二级段落。 \subsubsection{} 生成三级段落。</p>
+<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p>使用</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;enumerate&#125;</span><br><span class="line"><span class="keyword">\item</span> 表项一</span><br><span class="line"><span class="keyword">\item</span> 表项二</span><br><span class="line">···</span><br><span class="line"><span class="keyword">\end</span>&#123;enumerate&#125;</span><br></pre></td></tr></table></figure>
+
+<p>生成有序列表，使用</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;itemize&#125;</span><br><span class="line"><span class="keyword">\item</span> 表项一</span><br><span class="line"><span class="keyword">\item</span> 表项二</span><br><span class="line">···</span><br><span class="line"><span class="keyword">\end</span>&#123;itemize&#125;</span><br></pre></td></tr></table></figure>
+
+<p>生成无序列表。如果要将标签数字用括号括起，使用</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\usepackage</span>&#123;enumitem&#125;</span><br><span class="line"><span class="keyword">\begin</span>&#123;enumerate&#125;[label=(<span class="keyword">\arabic</span>*)]</span><br><span class="line">    <span class="keyword">\item</span> 第一项内容</span><br><span class="line">    <span class="keyword">\item</span> 第二项内容</span><br><span class="line">    <span class="keyword">\item</span> 第三项内容</span><br><span class="line"><span class="keyword">\end</span>&#123;enumerate&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中*表示使用括号</p>
+<h2 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h2><p>如何需要添加一个公式段落，可以使用</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;equation&#125;<span class="keyword">\label</span>&#123;eq:eq1&#125;</span><br><span class="line">f(x)=a<span class="built_in">^</span>x+b</span><br><span class="line"><span class="keyword">\end</span>&#123;equation&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中label标签中定义了公式的引用key，在文章的其他部分可以使用\ref{eq:eq1}来进行引用。</p>
+<p>常用的公式符号如下：</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&#x3D;</td>
+<td>赋值</td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td>对齐符号</td>
+</tr>
+<tr>
+<td>+</td>
+<td>加法</td>
+</tr>
+<tr>
+<td>-</td>
+<td>减法</td>
+</tr>
+<tr>
+<td>*</td>
+<td>乘法</td>
+</tr>
+<tr>
+<td>&#x2F;</td>
+<td>除法</td>
+</tr>
+<tr>
+<td>%</td>
+<td>取模</td>
+</tr>
+<tr>
+<td>^</td>
+<td>指数</td>
+</tr>
+<tr>
+<td>()</td>
+<td>括号，用于改变优先级</td>
+</tr>
+<tr>
+<td>{}</td>
+<td>大括号，用于组合数学表达式</td>
+</tr>
+<tr>
+<td>[]</td>
+<td>中括号，用于表示向量或矩阵</td>
+</tr>
+<tr>
+<td>_</td>
+<td>下划线，用于表示下标</td>
+</tr>
+<tr>
+<td>^{}</td>
+<td>脚注，用于表示上标</td>
+</tr>
+<tr>
+<td>\sqrt{}</td>
+<td>开方</td>
+</tr>
+<tr>
+<td>\frac{}{}</td>
+<td>分数</td>
+</tr>
+<tr>
+<td>\sum</td>
+<td>求和</td>
+</tr>
+<tr>
+<td>\int</td>
+<td>积分</td>
+</tr>
+<tr>
+<td>\lim</td>
+<td>极限</td>
+</tr>
+<tr>
+<td>\infty</td>
+<td>无穷</td>
+</tr>
+<tr>
+<td>\pm</td>
+<td>正负号</td>
+</tr>
+<tr>
+<td>\neq</td>
+<td>不等于号</td>
+</tr>
+<tr>
+<td>\leq</td>
+<td>小于等于号</td>
+</tr>
+<tr>
+<td>\geq</td>
+<td>大于等于号</td>
+</tr>
+<tr>
+<td>\mathop{\max}\limits_{x}</td>
+<td>$\mathop{\max}\limits_{x}$</td>
+</tr>
+</tbody></table>
+<h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><p>如果要插入图片，首先要引入graphicx包，具体的代码如下：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\usepackage</span>&#123;graphicx&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>&#123;figure&#125;</span><br><span class="line"><span class="keyword">\centering</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\includegraphics</span>[width=0.5<span class="keyword">\textwidth</span>]&#123;Figure1.png&#125;</span><br><span class="line"><span class="keyword">\caption</span>&#123;DeepId模型结构图&#125; <span class="keyword">\label</span>&#123;fig:Figure1&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;figure&#125;</span><br></pre></td></tr></table></figure>
+
+<p>caption为图片题注，label为引用标签，\centering为设置图片居中</p>
+<p>$y^i_{j,k}&#x3D;\mathop{\max}\limits_{0\le m,n&lt;s}{x^i_{j\cdot s+m,k\cdot s+n}}$</p>
+<p>$y_j&#x3D;max\big(0,\sum\limits_ix^1_i\cdot w^1_{i,j}+\sum\limits_{i}x^2_i\cdot w^2_{i,j}+b_j\big)$</p>
+<p>$y_i&#x3D;\frac{exp(y’<em>i)}{\sum^n</em>{i&#x3D;1}exp(y’_j)}$</p>
+<h2 id="文献的引用"><a href="#文献的引用" class="headerlink" title="文献的引用"></a>文献的引用</h2><p>在$Latex$中，通常可以使用BibTeX文件对文件进行引用。BibTex是一个单独的文献引用数据库，其基本的格式是：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@article<span class="punctuation">&#123;</span>smith01<span class="punctuation">,</span></span><br><span class="line">  author = <span class="string">&quot;John Smith&quot;</span><span class="punctuation">,</span></span><br><span class="line">  title = <span class="string">&quot;A new approach to computer vision&quot;</span><span class="punctuation">,</span></span><br><span class="line">  journal = <span class="string">&quot;IEEE Transactions on Pattern Analysis and Machine Intelligence&quot;</span><span class="punctuation">,</span></span><br><span class="line">  volume = <span class="string">&quot;23&quot;</span><span class="punctuation">,</span></span><br><span class="line">  number = <span class="string">&quot;12&quot;</span><span class="punctuation">,</span></span><br><span class="line">  pages = <span class="string">&quot;1331--1335&quot;</span><span class="punctuation">,</span></span><br><span class="line">  year = <span class="string">&quot;2001&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这个例子中的文献条目包括作者、标题、期刊名称、卷、期、页码和年份等信息。</p>
+<p>之后可以在LaTeX文档中使用\cite命令引用文献，例如：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">According to Smith <span class="keyword">\cite</span>&#123;smith01&#125;, computer vision is a challenging field.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>之后在LaTeX文档中需要生成文献参考表的位置指定BibTeX文件的位置和样式，例如：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\bibliography</span>&#123;mybibfile&#125;</span><br><span class="line"><span class="keyword">\bibliographystyle</span>&#123;plain&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后，先使用xelatex编译一遍源文件，然后使用BibTex编译一遍源文件，然后再用xelatex编译一遍源文件就可以生成正确的pdf文件了。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/05/01/Latex/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Latex/" rel="tag">Latex</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BA%E6%96%87%E6%8E%92%E7%89%88%E5%B7%A5%E5%85%B7/" rel="tag">论文排版工具</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2023/05/01/html-css/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">html-CSS学习笔记</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2023
+        <i class="ri-heart-fill heart_icon"></i> Yan
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Gymnopedies"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="http://shenyu-vip.lofter.com">摄影</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>
