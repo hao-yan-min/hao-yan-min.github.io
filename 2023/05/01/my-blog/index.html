@@ -74,7 +74,11 @@
     <div class="article-meta">
       <a href="/2023/05/01/my-blog/" class="article-date">
   <time datetime="2023-05-01T13:19:51.000Z" itemprop="datePublished">2023-05-01</time>
-</a>   
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/index/">index</a>
+  </div>
+  
 <div class="word_count">
     <span class="post-time">
         <span class="post-meta-item-icon">
@@ -105,6 +109,7 @@
     <div class="article-entry" itemprop="articleBody">
        
   <h2 id="Hexo的使用"><a href="#Hexo的使用" class="headerlink" title="Hexo的使用"></a>Hexo的使用</h2><h3 id="GitHub-Page"><a href="#GitHub-Page" class="headerlink" title="GitHub Page"></a>GitHub Page</h3><p>Github Page可以方便的部署静态网站，当需要设置个人主页时，可以建立一个新的库，库的名字时<code>username.github.io</code>,其中username是用户的用户名。在库的setting页面上设置setting page,让其source指向master节点。</p>
+<span id="more"></span>
 <h3 id="创建一个Hexo项目"><a href="#创建一个Hexo项目" class="headerlink" title="创建一个Hexo项目"></a>创建一个Hexo项目</h3><p>Hexo是依赖Webpack的一个框架，因此是依赖Node.js的。当Node.js已经安装后，我们使用<code>npm install -g hexo-cli</code>命令安装hexo脚手架。完成之后，我们可以使用脚手架新建一个Hexo项目。具体的命令为<code>hexo init blog</code>。</p>
 <h3 id="Hexo项目的本地运行"><a href="#Hexo项目的本地运行" class="headerlink" title="Hexo项目的本地运行"></a>Hexo项目的本地运行</h3><p>如果想在本地预览Hexo的效果，可以在命令行输入<code>hexo server</code>命令在本地部署网页，这样就可以在本地预览效果。</p>
 <h3 id="Hexo的部署"><a href="#Hexo的部署" class="headerlink" title="Hexo的部署"></a>Hexo的部署</h3><p>当拥有了一个Hexo项目之后，我们就可以将他部署到GitHub Page上了。首先，在该项目中使用<code>npm install hexo-deployer-git --save</code>下载git插件，然后，修改项目根目录下的 <code>_config.yml</code> 文件。我们修改该文件末尾的deploy节点信息，具体代码如下：</p>
@@ -170,8 +175,6 @@
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/test/" rel="tag">test</a></li></ul>
-
     </footer>
   </div>
 
@@ -278,10 +281,6 @@
     
     <li class="nav-item">
       <a class="nav-item-link" href="/tags">标签</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
     </li>
     
     <li class="nav-item">
