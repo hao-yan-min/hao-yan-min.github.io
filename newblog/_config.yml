@@ -65,8 +65,19 @@ index_generator:
   per_page: 10
   order_by: -date
 
+# hexo-generator-searchdb
+search:
+  path: search.xml
+  field: post
+  format: html
+
+math:
+  engine: 'mathjax'
+  mathjax:
+    src: https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML   
+
 # Category & Tag
-default_category: uncategorized
+default_category: categorized
 category_map:
 tag_map:
 
