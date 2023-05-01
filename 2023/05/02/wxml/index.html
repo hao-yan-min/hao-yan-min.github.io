@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>wxml |  Gymnopedies</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-wxml"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  wxml
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/05/02/wxml/" class="article-date">
+  <time datetime="2023-05-01T16:08:30.000Z" itemprop="datePublished">2023-05-02</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">3.7k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">16 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="wxml"><a href="#wxml" class="headerlink" title="wxml"></a>wxml</h1><h2 id="wxml负责布局"><a href="#wxml负责布局" class="headerlink" title="wxml负责布局"></a>wxml负责布局</h2><h3 id="view"><a href="#view" class="headerlink" title="view"></a>view</h3><p>&lt;view&gt;  相当与<strong>标签</strong>，是用来划分文档内大段的</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">view</span>&gt;</span>A<span class="tag">&lt;/<span class="name">view</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>其中的class表示需要应用的样式。其中样式的编写在wxss中完成。在.wxss中使用.container view{} 来制定该样式下所有的的view的基本样式。使用nth-child(1)来为应用了container内的样式的第一个view增加特质。text-align为view的文本居中</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> view&#123;</span><br><span class="line">  <span class="attribute">width</span>:<span class="number">100px</span>; &lt;!<span class="attr">--px</span>为长度单位--&gt;</span><br><span class="line">  <span class="attribute">text-align</span>: center</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.container</span> view<span class="selector-pseudo">:nth-child</span>(<span class="number">1</span>)&#123;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>若要规定container本身的样式，则需要在wxss中进行设置</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span>&#123;</span><br><span class="line"><span class="attribute">border</span>: solid <span class="number">1px</span> red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="scroll-view"><a href="#scroll-view" class="headerlink" title="scroll-view"></a>scroll-view</h3><p>使用<scroll-view class="container" scroll-y> 可以设置滚动效果并且为沿y轴滚动。当container的大小容不下所有的标签组件时可以看到滚动效果</p>
+<ol>
+<li><p><swiper> 和<swiper-item>可以生成滑块效果。<swiper>下的每一项都是<swiper-item></p>
+<p>可以在<swiper-item>下添加<view>模块，模块的样式“item”在wxss中编写。indicator-dots可以添加圆点，autoplay可以让滑块自动播放，interval可以设置自动播放的时间。circular使滑块平滑播放。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">swiper</span> <span class="attr">class</span>=<span class="string">&quot;swiper-container&quot;</span> <span class="attr">indicator-dots</span> <span class="attr">autoplay</span> <span class="attr">interval</span>=<span class="string">&quot;3000&quot;</span> <span class="attr">circular</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">swiper-item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">&quot;item&quot;</span>&gt;</span>A<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">swiper-item</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--第一个--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">swiper-item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">&quot;item&quot;</span>&gt;</span>B<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">swiper-item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">swiper-item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">&quot;item&quot;</span>&gt;</span>C<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">swiper-item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">swiper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在wxss中，如果要改变swiper-item的组件的样式，可以使用swiper-item:nth-child(1) .item{}对组件进行修改。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.swiper-container</span>&#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">150px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.item</span>&#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">150px</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">&#125;</span><br><span class="line">swiper-item<span class="selector-pseudo">:nth-child</span>(<span class="number">1</span>) <span class="selector-class">.item</span>&#123;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line">swiper-item<span class="selector-pseudo">:nth-child</span>(<span class="number">2</span>) <span class="selector-class">.item</span>&#123;</span><br><span class="line">  <span class="attribute">background-color</span>: lightblue;</span><br><span class="line">&#125;</span><br><span class="line">swiper-item<span class="selector-pseudo">:nth-child</span>(<span class="number">3</span>) <span class="selector-class">.item</span>&#123;</span><br><span class="line">  <span class="attribute">background-color</span>: lightgreen;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&#x3D;&#x3D;swiper-item在设置的时候前面没有**.**而且.item前面有空格&#x3D;&#x3D;</p>
+</li>
+<li><p><text>组件可以用来生成文本</p>
+</li>
+<li><p><bottom>组件可以生成按钮 。type&#x3D;”primary” type&#x3D;”warning”可以改变按钮的颜色</p>
+</li>
+<li><p><image> 组件可以插入图片。src&#x3D;”\image\1.png”表示图片的路径；mode&#x3D;””为图片的样式。heightFix为保持图片的高不变，改变组件的宽以适应图片。widthFix类似。在wxss中以image{}改变配置</p>
+<h2 id="小程序开发的API"><a href="#小程序开发的API" class="headerlink" title="小程序开发的API"></a>小程序开发的API</h2><ul>
+<li><p>事件监听API</p>
+</li>
+<li><p>同步API</p>
+</li>
+<li><p>异步API</p>
+<h2 id="数据绑定"><a href="#数据绑定" class="headerlink" title="数据绑定"></a>数据绑定</h2></li>
+</ul>
+</li>
+</ol>
+<p>​    在page的js文件的data:中声明变量，在wxml文件中可以使用<code>&#123;&#123;&#125;&#125;</code>进行调用</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data: &#123;</span><br><span class="line">       info: <span class="string">&#x27;hello world&#x27;</span>,</span><br><span class="line">       imasrc: <span class="string">&#x27;/image/1.6267827695216963E9.jpg&#x27;</span></span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span>&gt;</span>&#123;&#123;info&#125;&#125;<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">image</span> <span class="attr">src</span>=<span class="string">&quot;&#123;&#123;imasrc&#125;&#125;&quot;</span> <span class="attr">mode</span>=<span class="string">&quot;widthFix&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">image</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="事件绑定"><a href="#事件绑定" class="headerlink" title="事件绑定"></a>事件绑定</h2><p>小程序中常用事件有</p>
+<table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">绑定方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">tap</td>
+<td align="center">bindtap</td>
+</tr>
+<tr>
+<td align="center">input</td>
+<td align="center">bindinput</td>
+</tr>
+<tr>
+<td align="center">change</td>
+<td align="center">bindchange</td>
+</tr>
+</tbody></table>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> <span class="attr">bindtap</span>=<span class="string">&quot;myTapHandler&quot;</span>&gt;</span>按钮<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>其中myTapHandler()函数在js文件中定义</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">myTapHandler</span>(<span class="params">e</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(e)</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<p>&#x3D;&#x3D;如果要通过函数改变数据的值，则可以通过setData()函数&#x3D;&#x3D; 注意调用类内的数据时要加上this.data</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Page</span>(&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 页面的初始数据</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="attr">data</span>: &#123;</span><br><span class="line">       <span class="attr">count</span>: <span class="number">1</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">myTapHandler</span>(<span class="params">e</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(e)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">myTapHandler1</span>(<span class="params">e</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">setData</span>(&#123;</span><br><span class="line">      <span class="attr">count</span>: <span class="variable language_">this</span>.<span class="property">data</span>.<span class="property">count</span> + <span class="number">1</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>如果需要传递参数，则在wxml中进行定义, 使用 data-**&#x3D;”” 的格式进行传参，可以使用<code>&#123;&#123;&#125;&#125;</code>的语法</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> <span class="attr">bindtap</span>=<span class="string">&quot;myTapHandler1&quot;</span> <span class="attr">data-info</span>=<span class="string">&quot;&#123;&#123;5&#125;&#125;&quot;</span>&gt;</span>按钮<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在调用的时候使用event.target.dataset找到参数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">myTapHandler1</span>(<span class="params">event</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">setData</span>(&#123;</span><br><span class="line">      <span class="attr">count</span>: <span class="variable language_">this</span>.<span class="property">data</span>.<span class="property">count</span> + <span class="number">1</span></span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(event.<span class="property">target</span>.<span class="property">dataset</span>.<span class="property">info</span>)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>在tap事件中，event.detail包含触碰的位置信息。在input事件中，detail.value为输入的内容，placeholder为输入的提示</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">bindinput</span>=<span class="string">&quot;myinput&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;请输入内容&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">input</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><b>在input中文本框显示的内容为其value，可以通过改变value改变显示的内容</b></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">myinput</span>(<span class="params">e</span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(e.<span class="property">detail</span>.<span class="property">value</span>)</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<h3 id="form组件"><a href="#form组件" class="headerlink" title="form组件"></a>form组件</h3><p>表单。将组件内的用户输入的<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/component/switch.html">switch</a> <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/component/input.html">input</a> <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/component/checkbox.html">checkbox</a> <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/component/slider.html">slider</a> <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/component/radio.html">radio</a> <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/component/picker.html">picker</a> 提交。</p>
+<p>当点击 <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/component/form.html">form</a> 表单中 form-type 为 submit 的 <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/component/button.html">button</a> 组件时，会将表单组件中的 value 值进行提交，需要在表单组件中加上 name 来作为 key。</p>
+<h2 id="属性说明"><a href="#属性说明" class="headerlink" title="属性说明"></a>属性说明</h2><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">类型</th>
+<th align="left">默认值</th>
+<th align="left">必填</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">report-submit</td>
+<td align="left">boolean</td>
+<td align="left">false</td>
+<td align="left">否</td>
+<td align="left">是否返回 formId 用于发送<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/template-message.html">模板消息</a></td>
+</tr>
+<tr>
+<td align="left">report-submit-timeout</td>
+<td align="left">number</td>
+<td align="left">0</td>
+<td align="left">否</td>
+<td align="left">等待一段时间（毫秒数）以确认 formId 是否生效。如果未指定这个参数，formId 有很小的概率是无效的（如遇到网络失败的情况）。指定这个参数将可以检测 formId 是否有效，以这个参数的时间作为这项检测的超时时间。如果失败，将返回 requestFormId:fail 开头的 formId</td>
+</tr>
+<tr>
+<td align="left">bindsubmit</td>
+<td align="left">eventhandle</td>
+<td align="left"></td>
+<td align="left">否</td>
+<td align="left">携带 form 中的数据触发 submit 事件，event.detail &#x3D; {value : {‘name’: ‘value’} , formId: ‘’}</td>
+</tr>
+<tr>
+<td align="left">bindreset</td>
+<td align="left">eventhandle</td>
+<td align="left"></td>
+<td align="left">否</td>
+<td align="left">表单重置时会触发 reset 事件</td>
+</tr>
+</tbody></table>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--点击提交后会执行的函数--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">bindsubmit</span>=<span class="string">&quot;bntSub&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;value&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;输入&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">input</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">form-type</span>=<span class="string">&quot;submit&quot;</span>&gt;</span>提交<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">form-type</span>=<span class="string">&quot;reset&quot;</span>&gt;</span>重置<span class="tag">&lt;/<span class="name">button</span>&gt;</span>        </span><br><span class="line"><span class="tag">&lt;/<span class="name">button</span>&gt;</span>    </span><br><span class="line"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>其中input组件的name属性决定了该输入在表单中的属性名称</p>
+<p>在”bntSub“中可以调用这些信息。信息存储在event.detail.value中，用设定的索引名称去引用</p>
+<h2 id="条件渲染"><a href="#条件渲染" class="headerlink" title="条件渲染"></a>条件渲染</h2><p>在小程序中，使用<code>wx:if=&quot;&#123;&#123;condition&#125;&#125;&quot;</code>的方式选择是否渲染模块，类似python，可以使用elif语句</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">block</span> <span class="attr">wx:if</span>=<span class="string">&quot;&#123;&#123;count&lt;3&#125;&#125;&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> <span class="attr">bindtap</span>=<span class="string">&quot;myTapHandler1&quot;</span> <span class="attr">data-info</span>=<span class="string">&quot;&#123;&#123;5&#125;&#125;&quot;</span>&gt;</span>按钮<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">bindinput</span>=<span class="string">&quot;myinput&quot;</span> &gt;</span><span class="tag">&lt;/<span class="name">input</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">block</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">block</span> <span class="attr">wx:elif</span>=<span class="string">&quot;&#123;&#123;count===3&#125;&#125;&quot;</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">text</span>&gt;</span>点击次数达到三次<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> <span class="attr">bindtap</span>=<span class="string">&quot;myTapHandler1&quot;</span> <span class="attr">data-info</span>=<span class="string">&quot;&#123;&#123;4&#125;&#125;&quot;</span>&gt;</span>点击<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">block</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">block</span> <span class="attr">wx:else</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">text</span>&gt;</span>超过三次了<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">block</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>block为块，在编译后不需要被渲染</p>
+<h2 id="列表渲染"><a href="#列表渲染" class="headerlink" title="列表渲染"></a>列表渲染</h2><p>列表渲染的基本语法是<code>wx:for=&quot;&#123;&#123;array&#125;&#125;&quot;</code>其中每项索引为index，内容为item。如果数组内存着键值，则可以用键值进行遍历。语法为wx:key&#x3D;”keyname”</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">wx:for</span>=<span class="string">&quot;&#123;&#123;array&#125;&#125;&quot;</span>&gt;</span></span><br><span class="line">索引为&#123;&#123;index&#125;&#125;,内容为&#123;&#123;item&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="单选框"><a href="#单选框" class="headerlink" title="单选框"></a>单选框</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">radio-group</span> <span class="attr">class</span>=<span class="string">&quot;radio-group&quot;</span> <span class="attr">bindchange</span>=<span class="string">&quot;radioChange&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">class</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">wx:for</span>=<span class="string">&quot;&#123;&#123;items&#125;&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">radio</span> <span class="attr">value</span>=<span class="string">&quot;&#123;&#123;item.name&#125;&#125;&quot;</span> <span class="attr">checked</span>=<span class="string">&quot;&#123;&#123;item.checked&#125;&#125;&quot;</span> /&gt;</span></span><br><span class="line">    &#123;&#123;item.value&#125;&#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">radio-group</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>其中radio-group组件中可以包含多个radio选项，可以用来捕捉change事件</p>
+<h2 id="弹窗设置"><a href="#弹窗设置" class="headerlink" title="弹窗设置"></a>弹窗设置</h2><p>弹窗组件为modal。 hidden为是否显示的属性，bindconfirm为按确认键后绑定的发生事件。bindcancel为按取消键后的绑定事件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">modal</span> <span class="attr">hidden</span>=<span class="string">&quot;&#123;&#123;modalhidden&#125;&#125;&quot;</span> <span class="attr">bindconfirm</span>=<span class="string">&quot;myTapHandler1&quot;</span> <span class="attr">bindcancel</span>=<span class="string">&quot;myTapHandler2&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">image</span> <span class="attr">src</span>=<span class="string">&quot;/image/passpart.cc679602.png&quot;</span> <span class="attr">mode</span>=<span class="string">&quot;widthFix&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">image</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">modal</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>validateNumber()函数可以验证输入是否为数字</p>
+<h2 id="定时函数"><a href="#定时函数" class="headerlink" title="定时函数"></a>定时函数</h2><p>使用setinterval(function(){},timeout)可以设置一个定时函数，函数每隔timeout毫秒执行一次function，在function中无法使用this，因此要在外面设置that&#x3D;this来代替使用。如果想要停止interval，则需要调用clearinterval函数</p>
+<h1 id="微信云服务"><a href="#微信云服务" class="headerlink" title="微信云服务"></a>微信云服务</h1><h2 id="数据库的查询"><a href="#数据库的查询" class="headerlink" title="数据库的查询"></a>数据库的查询</h2><p>使用&#x3D;&#x3D;wx.cloud.database&#x3D;&#x3D;函数对数据库进行引用。假设有一个数据库的环境名为“test”，则可以用如下代码获取引用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> db=wx.<span class="property">cloud</span>.<span class="title function_">database</span>(</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">env</span>: <span class="string">&quot;test&quot;</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//为了获取集合，可以使用collection函数，doc可以筛选id</span></span><br><span class="line"><span class="keyword">const</span> todos=db.<span class="title function_">collection</span>(<span class="string">&quot;todos&quot;</span>)</span><br><span class="line">todos.<span class="property">get</span>.<span class="title function_">doc</span>(<span class="string">&quot;_id&quot;</span>)(&#123;</span><br><span class="line">    <span class="attr">success</span>:<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(res.<span class="property">data</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//也可以使用链式调用</span></span><br><span class="line">todos.<span class="title function_">get</span>().<span class="title function_">then</span>(<span class="function"><span class="params">res</span>=&gt;</span>&#123;&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">res</span>=&gt;</span>&#123;&#125;).<span class="title function_">end</span>(<span class="function"><span class="params">err</span>=&gt;</span>&#123;&#125;)</span><br><span class="line"><span class="comment">//如果要筛选查询的数据，需要用到where函数</span></span><br><span class="line">todos.<span class="title function_">where</span>(&#123;</span><br><span class="line">    <span class="attr">author</span>:<span class="string">&quot;jack&quot;</span></span><br><span class="line">    <span class="attr">progress</span>: db.<span class="property">command</span>.<span class="title function_">gt</span>(<span class="number">30</span>)</span><br><span class="line">&#125;).<span class="title function_">get</span>().<span class="title function_">then</span>(<span class="function"><span class="params">res</span>=&gt;</span>&#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>常用的查询指令：</p>
+<table>
+<thead>
+<tr>
+<th align="left">查询指令</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">eq</td>
+<td align="left">等于</td>
+</tr>
+<tr>
+<td align="left">neq</td>
+<td align="left">不等于</td>
+</tr>
+<tr>
+<td align="left">lt</td>
+<td align="left">小于</td>
+</tr>
+<tr>
+<td align="left">lte</td>
+<td align="left">小于或等于</td>
+</tr>
+<tr>
+<td align="left">gt</td>
+<td align="left">大于</td>
+</tr>
+<tr>
+<td align="left">gte</td>
+<td align="left">大于或等于</td>
+</tr>
+<tr>
+<td align="left">in</td>
+<td align="left">字段值在给定数组中</td>
+</tr>
+<tr>
+<td align="left">nin</td>
+<td align="left">字段值不在给定数组中</td>
+</tr>
+</tbody></table>
+<p>使用where().get()时返回的res.data为满足条件的数组</p>
+<p><strong>如果需要随机返回几条满足条件的记录</strong> ：可以使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">List</span> = db.<span class="title function_">collection</span>(<span class="string">&quot;name&quot;</span>).<span class="title function_">aggregate</span>().<span class="title function_">sample</span>(<span class="attr">size</span>:<span class="number">1</span>).<span class="title function_">end</span>()<span class="comment">//返回的对象为一个aggregate，数据储存在List.list里面</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="aggregate-lookup"><a href="#aggregate-lookup" class="headerlink" title="aggregate.lookup()"></a>aggregate.lookup()</h4><p>使用lookup函数可以跨表查询。具体的使用方法为：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">db.<span class="title function_">collection</span>(<span class="string">&#x27;fav&#x27;</span>).<span class="title function_">aggregate</span>()</span><br><span class="line">			.<span class="title function_">lookup</span>(&#123;</span><br><span class="line">				<span class="attr">from</span>: <span class="string">&#x27;store&#x27;</span>,</span><br><span class="line">				<span class="attr">localField</span>: <span class="string">&#x27;fav_id&#x27;</span>,</span><br><span class="line">				<span class="attr">foreignField</span>: <span class="string">&#x27;_id&#x27;</span>,</span><br><span class="line">				<span class="attr">as</span>: <span class="string">&#x27;storedetail&#x27;</span>,</span><br><span class="line">			&#125;)</span><br><span class="line">			.<span class="title function_">match</span>(&#123;</span><br><span class="line">				<span class="attr">_openid</span>: event.<span class="property">userInfo</span>.<span class="property">openId</span></span><br><span class="line">			&#125;)</span><br><span class="line">			.<span class="title function_">end</span>()</span><br></pre></td></tr></table></figure>
+
+<p><b>避坑提示：使用云函数的时候，直接返回整个查询结果，不要用promise返回res</b></p>
+<h2 id="数据库的插入"><a href="#数据库的插入" class="headerlink" title="数据库的插入"></a>数据库的插入</h2><h3 id="插入一条数据"><a href="#插入一条数据" class="headerlink" title="插入一条数据"></a>插入一条数据</h3><p>使用db.collection(“todos”).add()函数可以增加一条数据</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">db.<span class="title function_">collection</span>(<span class="string">&#x27;todos&#x27;</span>).<span class="title function_">add</span>(&#123;</span><br><span class="line">  <span class="comment">// data 字段表示需新增的 JSON 数据</span></span><br><span class="line">  <span class="attr">data</span>: &#123;</span><br><span class="line">    <span class="attr">description</span>: <span class="string">&quot;learn cloud database&quot;</span>,</span><br><span class="line">    <span class="attr">due</span>: <span class="keyword">new</span> <span class="title class_">Date</span>(<span class="string">&quot;2018-09-01&quot;</span>),</span><br><span class="line">    <span class="attr">tags</span>: [</span><br><span class="line">      <span class="string">&quot;cloud&quot;</span>,</span><br><span class="line">      <span class="string">&quot;database&quot;</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">location</span>: <span class="keyword">new</span> db.<span class="property">Geo</span>.<span class="title class_">Point</span>(<span class="number">113</span>, <span class="number">23</span>),</span><br><span class="line">    <span class="attr">done</span>: <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">.<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(res)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//或者用success函数</span></span><br><span class="line">db.<span class="title function_">collection</span>(<span class="string">&#x27;todos&#x27;</span>).<span class="title function_">add</span>(&#123;</span><br><span class="line">  <span class="comment">// data 字段表示需新增的 JSON 数据</span></span><br><span class="line">  <span class="attr">data</span>: &#123;</span><br><span class="line">    <span class="comment">// _id: &#x27;todo-identifiant-aleatoire&#x27;, // 可选自定义 _id，在此处场景下用数据库自动分配的就可以了</span></span><br><span class="line">    <span class="attr">description</span>: <span class="string">&quot;learn cloud database&quot;</span>,</span><br><span class="line">    <span class="attr">due</span>: <span class="keyword">new</span> <span class="title class_">Date</span>(<span class="string">&quot;2018-09-01&quot;</span>),</span><br><span class="line">    <span class="attr">tags</span>: [</span><br><span class="line">      <span class="string">&quot;cloud&quot;</span>,</span><br><span class="line">      <span class="string">&quot;database&quot;</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="comment">// 为待办事项添加一个地理位置（113°E，23°N）</span></span><br><span class="line">    <span class="attr">location</span>: <span class="keyword">new</span> db.<span class="property">Geo</span>.<span class="title class_">Point</span>(<span class="number">113</span>, <span class="number">23</span>),</span><br><span class="line">    <span class="attr">done</span>: <span class="literal">false</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">success</span>: <span class="keyword">function</span>(<span class="params">res</span>) &#123;</span><br><span class="line">    <span class="comment">// res 是一个对象，其中有 _id 字段标记刚创建的记录的 id</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>tips</strong>:使用wx.showLoading函数可以生成加载图像</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wx.<span class="title function_">showLoading</span>(&#123;</span><br><span class="line">    <span class="attr">title</span>:<span class="string">&quot;Loading...&quot;</span>,</span><br><span class="line">    <span class="attr">mask</span>:<span class="literal">true</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//结束加载图片</span></span><br><span class="line">wx.<span class="title function_">hideLoading</span>()</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="插入一个表单"><a href="#插入一个表单" class="headerlink" title="插入一个表单"></a>插入一个表单</h3><p>使用form组件生成一个表单之后在form的bindsubmit绑定的函数进行表单提交</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">bindsubmit</span>=<span class="string">&quot;mytap&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;num1&quot;</span> <span class="attr">style</span>=<span class="string">&quot;border: 1px solid grey;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">input</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;op&quot;</span> <span class="attr">style</span>=<span class="string">&quot;border: 1px solid grey;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">input</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;num2&quot;</span> <span class="attr">style</span>=<span class="string">&quot;border: 1px solid grey;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">input</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> <span class="attr">form-type</span>=<span class="string">&quot;submit&quot;</span>&gt;</span>提交<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">form-type</span>=<span class="string">&quot;reset&quot;</span>&gt;</span>重置<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">mytap</span>(<span class="params">e</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">const</span> demo=db.<span class="title function_">collection</span>(<span class="string">&quot;demolist&quot;</span>)</span><br><span class="line">    <span class="keyword">var</span>&#123;num1,op,num2&#125;=e.<span class="property">detail</span>.<span class="property">value</span></span><br><span class="line">    demo.<span class="title function_">add</span>(&#123;</span><br><span class="line">      <span class="attr">data</span>:&#123;</span><br><span class="line">        <span class="attr">id</span>:<span class="number">1</span>,</span><br><span class="line">        <span class="attr">num1</span>:num1,</span><br><span class="line">        <span class="attr">op</span>:op,</span><br><span class="line">        <span class="attr">num2</span>:num2</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;).<span class="title function_">then</span>(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(e)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h3><p>  使用update函数可以实现局部更新</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">db.<span class="title function_">collection</span>(<span class="string">&#x27;todos&#x27;</span>).<span class="title function_">doc</span>(<span class="string">&#x27;todo-identifiant-aleatoire&#x27;</span>).<span class="title function_">update</span>(&#123;</span><br><span class="line">  <span class="comment">// data 传入需要局部更新的数据</span></span><br><span class="line">  <span class="attr">data</span>: &#123;</span><br><span class="line">    <span class="comment">// 表示将 done 字段置为 true</span></span><br><span class="line">    <span class="attr">done</span>: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">success</span>: <span class="keyword">function</span>(<span class="params">res</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res.<span class="property">data</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>除了用指定值更新字段外，数据库 API 还提供了一系列的更新指令用于执行更复杂的更新操作，更新指令可以通过 <code>db.command</code> 取得：</p>
+<table>
+<thead>
+<tr>
+<th align="left">更新指令</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">set</td>
+<td align="left">设置字段为指定值</td>
+</tr>
+<tr>
+<td align="left">remove</td>
+<td align="left">删除字段</td>
+</tr>
+<tr>
+<td align="left">inc</td>
+<td align="left">原子自增字段值</td>
+</tr>
+<tr>
+<td align="left">mul</td>
+<td align="left">原子自乘字段值</td>
+</tr>
+<tr>
+<td align="left">push</td>
+<td align="left">如字段值为数组，往数组尾部增加指定值</td>
+</tr>
+<tr>
+<td align="left">pop</td>
+<td align="left">如字段值为数组，从数组尾部删除一个元素</td>
+</tr>
+<tr>
+<td align="left">shift</td>
+<td align="left">如字段值为数组，从数组头部删除一个元素</td>
+</tr>
+<tr>
+<td align="left">unshift</td>
+<td align="left">如字段值为数组，往数组头部增加指定值</td>
+</tr>
+</tbody></table>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> _ = db.<span class="property">command</span></span><br><span class="line">db.<span class="title function_">collection</span>(<span class="string">&#x27;todos&#x27;</span>).<span class="title function_">doc</span>(<span class="string">&#x27;todo-identifiant-aleatoire&#x27;</span>).<span class="title function_">update</span>(&#123;</span><br><span class="line">  <span class="attr">data</span>: &#123;</span><br><span class="line">    <span class="attr">style</span>: _.<span class="title function_">set</span>(&#123;</span><br><span class="line">      <span class="attr">color</span>: <span class="string">&#x27;blue&#x27;</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">success</span>: <span class="keyword">function</span>(<span class="params">res</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res.<span class="property">data</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>如果需要更新多个数据，需在 Server 端进行操作（云函数），在 <code>where</code> 语句后同样的调用 <code>update</code> 方法即可，比如将所有未完待办事项的进度加 10%：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用了 async await 语法</span></span><br><span class="line"><span class="keyword">const</span> cloud = <span class="built_in">require</span>(<span class="string">&#x27;wx-server-sdk&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> db = cloud.<span class="title function_">database</span>()</span><br><span class="line"><span class="keyword">const</span> _ = db.<span class="property">command</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">exports</span>.<span class="property">main</span> = <span class="keyword">async</span> (event, context) =&gt; &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> db.<span class="title function_">collection</span>(<span class="string">&#x27;todos&#x27;</span>).<span class="title function_">where</span>(&#123;</span><br><span class="line">      <span class="attr">done</span>: <span class="literal">false</span></span><br><span class="line">    &#125;)</span><br><span class="line">    .<span class="title function_">update</span>(&#123;</span><br><span class="line">      <span class="attr">data</span>: &#123;</span><br><span class="line">        <span class="attr">progress</span>: _.<span class="title function_">inc</span>(<span class="number">10</span>)</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125; <span class="keyword">catch</span>(e) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(e)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用command-push指令为数据库的数组增加元素"><a href="#使用command-push指令为数据库的数组增加元素" class="headerlink" title="使用command.push指令为数据库的数组增加元素"></a>使用command.push指令为数据库的数组增加元素</h4><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">类型</th>
+<th align="left">默认值</th>
+<th align="left">必填</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">each</td>
+<td align="left">Array.<any></td>
+<td align="left"></td>
+<td align="left">是</td>
+<td align="left">要插入的所有元素</td>
+</tr>
+<tr>
+<td align="left">position</td>
+<td align="left">number</td>
+<td align="left"></td>
+<td align="left">否</td>
+<td align="left">从哪个位置开始插入，不填则是尾部</td>
+</tr>
+<tr>
+<td align="left">sort</td>
+<td align="left">number</td>
+<td align="left"></td>
+<td align="left">否</td>
+<td align="left">对结果数组排序</td>
+</tr>
+<tr>
+<td align="left">slice</td>
+<td align="left">number</td>
+<td align="left"></td>
+<td align="left">否</td>
+<td align="left">限制结果数组长度</td>
+</tr>
+</tbody></table>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> _ = db.<span class="property">command</span></span><br><span class="line">db.<span class="title function_">collection</span>(<span class="string">&#x27;todos&#x27;</span>).<span class="title function_">doc</span>(<span class="string">&#x27;doc-id&#x27;</span>).<span class="title function_">update</span>(&#123;</span><br><span class="line">  <span class="attr">data</span>: &#123;</span><br><span class="line">    <span class="attr">tags</span>: _.<span class="title function_">push</span>([<span class="string">&#x27;mini-program&#x27;</span>, <span class="string">&#x27;cloud&#x27;</span>])</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="监视database的变化"><a href="#监视database的变化" class="headerlink" title="监视database的变化"></a>监视database的变化</h3><p>监听集合中符合查询条件的数据的更新事件。使用 <code>collection.watch</code>函数</p>
+<table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">类型</th>
+<th align="left">默认值</th>
+<th align="left">必填</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">onChange</td>
+<td align="left">function</td>
+<td align="left"></td>
+<td align="left">是</td>
+<td align="left">成功回调，回调传入的参数 snapshot 是变更快照，snapshot 定义见下方</td>
+</tr>
+<tr>
+<td align="left">onError</td>
+<td align="left">function</td>
+<td align="left"></td>
+<td align="left">是</td>
+<td align="left">失败回调</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">类型</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">close</td>
+<td align="left">function</td>
+<td align="left">关闭监听，无需参数，返回 Promise，会在关闭完成时 <code>resolve</code></td>
+</tr>
+</tbody></table>
+<h4 id="snapshot-说明"><a href="#snapshot-说明" class="headerlink" title="snapshot 说明"></a>snapshot 说明</h4><table>
+<thead>
+<tr>
+<th align="left">字段</th>
+<th align="left">类型</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">docChanges</td>
+<td align="left">ChangeEvent[]</td>
+<td align="left">更新事件数组</td>
+</tr>
+<tr>
+<td align="left">docs</td>
+<td align="left">object[]</td>
+<td align="left">数据快照，表示此更新事件发生后查询语句对应的查询结果</td>
+</tr>
+<tr>
+<td align="left">type</td>
+<td align="left">string</td>
+<td align="left">快照类型，仅在第一次初始化数据时有值为 init</td>
+</tr>
+<tr>
+<td align="left">id</td>
+<td align="left">number</td>
+<td align="left">变更事件 id</td>
+</tr>
+</tbody></table>
+<h4 id="ChangeEvent-说明"><a href="#ChangeEvent-说明" class="headerlink" title="ChangeEvent 说明"></a>ChangeEvent 说明</h4><table>
+<thead>
+<tr>
+<th align="left">字段</th>
+<th align="left">类型</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">id</td>
+<td align="left">number</td>
+<td align="left">更新事件 id</td>
+</tr>
+<tr>
+<td align="left">queueType</td>
+<td align="left">string</td>
+<td align="left">列表更新类型，表示更新事件对监听列表的影响，枚举值，定义见 QueueType</td>
+</tr>
+<tr>
+<td align="left">dataType</td>
+<td align="left">string</td>
+<td align="left">数据更新类型，表示记录的具体更新类型，枚举值，定义见 DataType</td>
+</tr>
+<tr>
+<td align="left">docId</td>
+<td align="left">string</td>
+<td align="left">更新的记录 id</td>
+</tr>
+<tr>
+<td align="left">doc</td>
+<td align="left">object</td>
+<td align="left">更新的完整记录</td>
+</tr>
+<tr>
+<td align="left">updatedFields</td>
+<td align="left">object</td>
+<td align="left">所有更新的字段及字段更新后的值，key 为更新的字段路径，value 为字段更新后的值，仅在 <code>update</code> 操作时有此信息</td>
+</tr>
+<tr>
+<td align="left">removedFields</td>
+<td align="left">string[]</td>
+<td align="left">所有被删除的字段，仅在 <code>update</code> 操作时有此信息</td>
+</tr>
+</tbody></table>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> player=db.<span class="title function_">collection</span>(<span class="string">&quot;rooms&quot;</span>).<span class="title function_">doc</span>(docid).<span class="title function_">watch</span>(&#123;</span><br><span class="line">     <span class="attr">onError</span>:<span class="function"><span class="params">error</span>=&gt;</span>&#123;<span class="variable language_">console</span>.<span class="title function_">log</span>(error)&#125;,</span><br><span class="line">     <span class="attr">onChange</span>: <span class="function"><span class="params">snapshot</span>=&gt;</span>&#123;</span><br><span class="line">       <span class="keyword">if</span>(snapshot.<span class="property">docChanges</span>[<span class="number">0</span>].<span class="property">dataType</span>==<span class="string">&quot;update&quot;</span>&amp;&amp;snapshot.<span class="property">docs</span>[<span class="number">0</span>].<span class="property">peoplenum</span>==<span class="number">2</span>)</span><br><span class="line">       &#123;</span><br><span class="line">          <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;匹配成功&quot;</span>)</span><br><span class="line">          player.<span class="title function_">close</span>()</span><br><span class="line">          <span class="variable language_">this</span>.<span class="title function_">communi</span>()</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;)	</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="云函数的创建"><a href="#云函数的创建" class="headerlink" title="云函数的创建"></a>云函数的创建</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> cloud = <span class="built_in">require</span>(<span class="string">&#x27;wx-server-sdk&#x27;</span>)</span><br><span class="line"></span><br><span class="line">cloud.<span class="title function_">init</span>(&#123; <span class="attr">env</span>: cloud.<span class="property">DYNAMIC_CURRENT_ENV</span> &#125;) <span class="comment">// 使用当前云环境</span></span><br><span class="line"><span class="keyword">const</span> db=cloud.<span class="title function_">database</span>()</span><br><span class="line"><span class="comment">// 云函数入口函数</span></span><br><span class="line"><span class="built_in">exports</span>.<span class="property">main</span> = <span class="keyword">async</span> (event, context) =&gt; &#123;</span><br><span class="line">  db.<span class="title function_">collection</span>(event.<span class="property">collection</span>).<span class="title function_">doc</span>(event.<span class="property">docid</span>).<span class="title function_">update</span>(&#123;</span><br><span class="line">    <span class="attr">data</span>:&#123;</span><br><span class="line">      <span class="attr">peoplenum</span>:event.<span class="property">peoplenum</span>,</span><br><span class="line">      <span class="attr">enable</span>:<span class="literal">false</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="wx-createSelectorQuery"><a href="#wx-createSelectorQuery" class="headerlink" title="wx.createSelectorQuery()"></a>wx.createSelectorQuery()</h2><p>在js页面进行组件的交互</p>
+<h1 id="微信小程序官方文档"><a href="#微信小程序官方文档" class="headerlink" title="微信小程序官方文档"></a><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/wxcloud/reference-sdk-api/database/aggregate/Aggregate.lookup.html">微信小程序官方文档</a></h1> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/05/02/wxml/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0/" rel="tag">前端学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">微信小程序</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2023/05/01/rdt/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">rdt</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2023
+        <i class="ri-heart-fill heart_icon"></i> Yan
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Gymnopedies"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="http://shenyu-vip.lofter.com">摄影</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>

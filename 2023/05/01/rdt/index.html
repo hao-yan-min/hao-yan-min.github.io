@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>Archives |  Gymnopedies</title>
+      <title>rdt |  Gymnopedies</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -54,220 +54,168 @@
       
     <main class="content on">
       <section class="outer">
-  
-  
-  <article class="articles">
+  <article
+  id="post-rdt"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
     
-    
-    <h1 class="page-type-title">Archives</h1>
-    
-    
-  
-  
-  
-  
-  
-  
-  <div class="archives-wrap">
-    <div class="archive-year-wrap">
-      <a href="/archives/2023" class="archive-year">2023</a>
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  rdt
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/05/01/rdt/" class="article-date">
+  <time datetime="2023-05-01T15:56:10.000Z" itemprop="datePublished">2023-05-01</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">286</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">1 min</span>
+        </span>
+    </span>
+</div>
+ 
     </div>
-    <div class="archives">
       
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/05/02/wxml/" class="archive-article-date">
-  <time datetime="2023-05-01T16:08:30.000Z" itemprop="datePublished">05/02</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/05/02/wxml/"
-    >wxml</a> 
-</h2>
- 
+    <div class="tocbot"></div>
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/05/01/rdt/" class="archive-article-date">
-  <time datetime="2023-05-01T15:56:10.000Z" itemprop="datePublished">05/01</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/05/01/rdt/"
-    >rdt</a> 
-</h2>
- 
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/05/01/Vue/" class="archive-article-date">
-  <time datetime="2023-05-01T15:48:03.000Z" itemprop="datePublished">05/01</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/05/01/Vue/"
-    >Vue</a> 
-</h2>
- 
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/05/01/sql/" class="archive-article-date">
-  <time datetime="2023-05-01T15:46:28.000Z" itemprop="datePublished">05/01</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/05/01/sql/"
-    >sql笔记</a> 
-</h2>
- 
 
-    </header>
-    
-    
-  </div>
-</article>
-      
   
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/05/01/Latex/" class="archive-article-date">
-  <time datetime="2023-05-01T15:12:45.000Z" itemprop="datePublished">05/01</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
        
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/05/01/Latex/"
-    >Latex的使用</a> 
-</h2>
- 
+  <h1 id="RDT实验"><a href="#RDT实验" class="headerlink" title="RDT实验"></a>RDT实验</h1><h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">GBNReceiver</span> :<span class="keyword">public</span> RdtReceiver</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="type">int</span> expectSequenceNumberRcvd;	<span class="comment">// 期待收到的下一个报文序号</span></span><br><span class="line">	<span class="type">int</span> seqlen;                     <span class="comment">//序号宽度</span></span><br><span class="line">	Packet lastAckPkt;				<span class="comment">//上次发送的确认报文</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/05/01/html-css/" class="archive-article-date">
-  <time datetime="2023-05-01T15:05:09.000Z" itemprop="datePublished">05/01</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/05/01/html-css/"
-    >html-CSS学习笔记</a> 
-</h2>
- 
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">GBNSender</span> :<span class="keyword">public</span> RdtSender</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="type">int</span> expectSequenceNumberSend;	<span class="comment">// 下一个发送序号 </span></span><br><span class="line">	<span class="type">bool</span> waitingState;				<span class="comment">// 是否处于等待Ack的状态</span></span><br><span class="line">	<span class="type">int</span> base;                       <span class="comment">//当前窗口基序号</span></span><br><span class="line">	<span class="type">int</span> winlen;                     <span class="comment">//窗口大小</span></span><br><span class="line">	<span class="type">int</span> seqlen;                     <span class="comment">//序号宽度</span></span><br><span class="line">	deque&lt;Packet&gt; window;           <span class="comment">//窗口队列</span></span><br><span class="line">	Packet packetWaitingAck;		<span class="comment">//已发送并等待Ack的数据包</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/05/01/graphsurvey/" class="archive-article-date">
-  <time datetime="2023-05-01T14:59:22.000Z" itemprop="datePublished">05/01</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/05/01/graphsurvey/"
-    >graph survey</a> 
-</h2>
- 
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span>  <span class="title class_">Packet</span> &#123;</span><br><span class="line">	<span class="type">int</span> seqnum;										<span class="comment">//序号 发送方发送报文的序号</span></span><br><span class="line">	<span class="type">int</span> acknum;										<span class="comment">//确认号 接收端发送给发送端的确认序号</span></span><br><span class="line">	<span class="type">int</span> checksum;									<span class="comment">//校验和</span></span><br><span class="line">	<span class="type">char</span> payload[Configuration::PAYLOAD_SIZE];		<span class="comment">//payload 装载的数据</span></span><br><span class="line">	</span><br></pre></td></tr></table></figure>
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/05/01/dockernote/" class="archive-article-date">
-  <time datetime="2023-05-01T14:43:54.000Z" itemprop="datePublished">05/01</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/05/01/dockernote/"
-    >docker使用笔记</a> 
-</h2>
- 
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/05/01/Hexo%E4%BD%BF%E7%94%A8%E7%AE%80%E4%BB%8B/" class="archive-article-date">
-  <time datetime="2023-05-01T13:19:51.000Z" itemprop="datePublished">05/01</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/05/01/Hexo%E4%BD%BF%E7%94%A8%E7%AE%80%E4%BB%8B/"
-    >Hexo使用简介</a> 
-</h2>
- 
 
-    </header>
-    
-    
-  </div>
-</article>
-      
+<h3 id="GBN协议"><a href="#GBN协议" class="headerlink" title="GBN协议"></a>GBN协议</h3><p><img src="/%5Ctypora-user-images%5Cimage-20221112172024646.png" alt="image-20221112172024646"></p>
+<ul>
+<li>不等发送方收到确认报文，就继续发送下一组报文。可以连续发送的数量为窗口的大小。</li>
+<li>如果接受方收到的报文序号和预期序号不同，则发送上一次的确认报文；否则发送新的确认报文</li>
+<li>如果发送方收到的确认帧在等待确认的数据帧中，则默认该帧及以前的帧都已经收到了，窗口继续滑动。</li>
+</ul>
+ 
+      <!-- reward -->
       
     </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/05/01/rdt/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%8E%E7%A7%91%E5%AE%9E%E9%AA%8C/" rel="tag">华科实验</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E4%BF%A1%E4%B8%8E%E7%BD%91%E7%BB%9C/" rel="tag">计算机通信与网络</a></li></ul>
+
+    </footer>
   </div>
-  
-  
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2023/05/02/wxml/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            wxml
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2023/05/01/Vue/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">Vue</div>
+      </a>
+    
+  </nav>
 
   
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
 </section>
       <footer class="footer">
   <div class="outer">
@@ -408,6 +356,22 @@
 <script src="/js/lazyload.min.js"></script>
 
 <!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
 
 <script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
 <link
