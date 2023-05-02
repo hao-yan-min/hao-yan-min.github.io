@@ -87,6 +87,6 @@ categories:
 
 * They search for subgraphs that satisfy the conditions of the algorithm in the input graph G. The process of finding subgraphs can be modeled with a search tree where each node represents a subgraph, and the subgraphs at the k+1 level are expanded from the subgraphs at the k level.
 
-  ![image-20230312162325702](\typora-user-images\image-20230312162325702.png)
+  ![image-20230312162325702](/images/image-20230312162325702.png)
 
   

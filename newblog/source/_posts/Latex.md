@@ -46,7 +46,7 @@ ment 环境当中的内容是文档正文。
 
 \usepackage 命令调用**宏包**，还会进行文档的全局设置。
 
-![image-20230424224310764](C:\Users\yhm36\AppData\Roaming\Typora\typora-user-images\image-20230424224310764.png)
+![image-20230424224310764](/images/image-20230424224310764.png)
 
 ### Latex排版文字
 

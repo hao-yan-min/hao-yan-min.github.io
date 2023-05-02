@@ -48,7 +48,7 @@ el为挂载点，表示该Vue的生效范围，其中"#app"表示生效的组件
 
 #### v-text
 
-![image-20230101170617149](C:\Users\yhm36\AppData\Roaming\Typora\typora-user-images\image-20230101170617149.png)
+![image-20230101170617149](/images/image-20230101170617149.png)
 
 段落中的内容会被表达式替换
 
@@ -93,7 +93,7 @@ html事件
 
 绑定事件的基本语法如图
 
-![image-20230101171907823](C:\Users\yhm36\AppData\Roaming\Typora\typora-user-images\image-20230101171907823.png)
+![image-20230101171907823](/images/image-20230101171907823.png)
 
 当绑定的事件不传参的时候，函数默认有一个传入的参数event，包含了所有的事件信息。其中e.target为触发了事件的组件。
 
@@ -101,13 +101,13 @@ html事件
 
 
 
-![image-20230103181121230](C:\Users\yhm36\AppData\Roaming\Typora\typora-user-images\image-20230103181121230.png)
+![image-20230103181121230](/images/image-20230103181121230.png)
 
 
 
 ### 按键修饰符
 
-![image-20230104120759345](C:\Users\yhm36\AppData\Roaming\Typora\typora-user-images\image-20230104120759345.png)
+![image-20230104120759345](/images/image-20230104120759345.png)
 
 
 
@@ -115,7 +115,7 @@ html事件
 
 
 
-![image-20230103181602959](C:\Users\yhm36\AppData\Roaming\Typora\typora-user-images\image-20230103181602959.png)
+![image-20230103181602959](/images/image-20230103181602959.png)
 
 
 
@@ -123,13 +123,13 @@ html事件
 
 v-bind可以用于绑定元素的属性
 
-![image-20230102131405893](C:\Users\yhm36\AppData\Roaming\Typora\typora-user-images\image-20230102131405893.png)
+![image-20230102131405893](/images/image-20230102131405893.png)
 
 
 
 #### v-for
 
-![image-20230102131617651](C:\Users\yhm36\AppData\Roaming\Typora\typora-user-images\image-20230102131617651.png)
+![image-20230102131617651](/images/image-20230102131617651.png)
 
 使用v-for进行列表渲染，具体语法和微信小程序类似
 
@@ -143,9 +143,9 @@ v-bind可以用于绑定元素的属性
 
 v-model可以实现数据的双向绑定，即当绑定的元素改变时，Vue中的值也会改变。
 
-![image-20230104121557050](C:\Users\yhm36\AppData\Roaming\Typora\typora-user-images\image-20230104121557050.png)
+![image-20230104121557050](/images/image-20230104121557050.png)
 
-![image-20230104122044579](C:\Users\yhm36\AppData\Roaming\Typora\typora-user-images\image-20230104122044579.png)
+![image-20230104122044579](/images/image-20230104122044579.png)
 
 ### js获取元素和绑定事件
 
@@ -155,7 +155,7 @@ v-model可以实现数据的双向绑定，即当绑定的元素改变时，Vue�
 
 ### 网页初始化函数
 
-![image-20230102141838661](C:\Users\yhm36\AppData\Roaming\Typora\typora-user-images\image-20230102141838661.png)
+![image-20230102141838661](/images/image-20230102141838661.png)
 
 类似微信小程序中onload函数，是在页面加载的时候执行的
 
@@ -167,7 +167,7 @@ v-model可以实现数据的双向绑定，即当绑定的元素改变时，Vue�
 
 Webpack的使用方法为运行脚本，具体指令为'npm run dev'如果脚本的名称为dev。Webpack的默认输入文件为src/index.js；输出路径为dist/main.js。如果要改变，就在Webpack.config.js中修改配置
 
-![image-20230103132704930](C:\Users\yhm36\AppData\Roaming\Typora\typora-user-images\image-20230103132704930.png)
+![image-20230103132704930](/images/image-20230103132704930.png)
 
 
 

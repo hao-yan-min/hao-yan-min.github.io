@@ -172,11 +172,4 @@ categories:
 男<input type="radio"/> 女<input type="radio">
 ```
 
-| 属性 | 描述 |
-| ---- | ---- |
-| name |      |
-|      |      |
-|      |      |
-|      |      |
-
 

@@ -132,9 +132,9 @@ hdfs dfs -get file filepath
 
 * 运行样例
 
-  ![image-20221029140122971](\typora-user-images\image-20221029140122971.png)
+  ![image-20221029140122971](/images/image-20221029140122971.png)
 
-![image-20221029140150160](\typora-user-images\image-20221029140150160.png)
+![image-20221029140150160](/images/image-20221029140150160.png)
 
 ```shell
 hadoop jar ./share/hadoop/mapreduce/hadoop-mapreduce-examples-2.9.2.jar wordcount /wordcount/input/ /wordcount/output
