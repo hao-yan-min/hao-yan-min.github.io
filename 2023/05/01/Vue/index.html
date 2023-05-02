@@ -118,7 +118,7 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> app = <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">el</span>: <span class="string">&quot;#app&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">data</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">msg</span>: <span class="string">&quot;Hello World!&quot;</span></span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;)</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>el为挂载点，表示该Vue的生效范围，其中”#app”表示生效的组件的id为”app”。</p>
-<h3 id="Vue指令"><a href="#Vue指令" class="headerlink" title="Vue指令"></a>Vue指令</h3><h4 id="v-text"><a href="#v-text" class="headerlink" title="v-text"></a>v-text</h4><p><img src="C:\Users\yhm36\AppData\Roaming\Typora\typora-user-images\image-20230101170617149.png" alt="image-20230101170617149"></p>
+<h3 id="Vue指令"><a href="#Vue指令" class="headerlink" title="Vue指令"></a>Vue指令</h3><h4 id="v-text"><a href="#v-text" class="headerlink" title="v-text"></a>v-text</h4><p><img src="/%5Cimages%5Cimage-20230101170617149.png" alt="image-20230101170617149"></p>
 <p>段落中的内容会被表达式替换</p>
 <h4 id="v-html"><a href="#v-html" class="headerlink" title="v-html"></a>v-html</h4><p>v-html指令和v-text指令相比，可以将vue中的字符串以html的格式进行渲染。</p>
 <h4 id="v-on"><a href="#v-on" class="headerlink" title="v-on"></a>v-on</h4><p>v-on指令可以将元素与事件进行绑定</p>
@@ -213,28 +213,28 @@
 </tr>
 </tbody></table>
 <p>绑定事件的基本语法如图</p>
-<p><img src="C:\Users\yhm36\AppData\Roaming\Typora\typora-user-images\image-20230101171907823.png" alt="image-20230101171907823"></p>
+<p><img src="/%5Cimages%5Cimage-20230101171907823.png" alt="image-20230101171907823"></p>
 <p>当绑定的事件不传参的时候，函数默认有一个传入的参数event，包含了所有的事件信息。其中e.target为触发了事件的组件。</p>
 <p>当需要传入参数的时候，为了将事件传入，可以使用$event作为参数之一传入。</p>
-<p><img src="C:\Users\yhm36\AppData\Roaming\Typora\typora-user-images\image-20230103181121230.png" alt="image-20230103181121230"></p>
-<h3 id="按键修饰符"><a href="#按键修饰符" class="headerlink" title="按键修饰符"></a>按键修饰符</h3><p><img src="C:\Users\yhm36\AppData\Roaming\Typora\typora-user-images\image-20230104120759345.png" alt="image-20230104120759345"></p>
-<h4 id="事件修饰符"><a href="#事件修饰符" class="headerlink" title="事件修饰符"></a>事件修饰符</h4><p><img src="C:\Users\yhm36\AppData\Roaming\Typora\typora-user-images\image-20230103181602959.png" alt="image-20230103181602959"></p>
+<p><img src="/%5Cimages%5Cimage-20230103181121230.png" alt="image-20230103181121230"></p>
+<h3 id="按键修饰符"><a href="#按键修饰符" class="headerlink" title="按键修饰符"></a>按键修饰符</h3><p><img src="/%5Cimages%5Cimage-20230104120759345.png" alt="image-20230104120759345"></p>
+<h4 id="事件修饰符"><a href="#事件修饰符" class="headerlink" title="事件修饰符"></a>事件修饰符</h4><p><img src="/%5Cimages%5Cimage-20230103181602959.png" alt="image-20230103181602959"></p>
 <h4 id="v-bind"><a href="#v-bind" class="headerlink" title="v-bind"></a>v-bind</h4><p>v-bind可以用于绑定元素的属性</p>
-<p><img src="C:\Users\yhm36\AppData\Roaming\Typora\typora-user-images\image-20230102131405893.png" alt="image-20230102131405893"></p>
-<h4 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a>v-for</h4><p><img src="C:\Users\yhm36\AppData\Roaming\Typora\typora-user-images\image-20230102131617651.png" alt="image-20230102131617651"></p>
+<p><img src="/%5Cimages%5Cimage-20230102131405893.png" alt="image-20230102131405893"></p>
+<h4 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a>v-for</h4><p><img src="/%5Cimages%5Cimage-20230102131617651.png" alt="image-20230102131617651"></p>
 <p>使用v-for进行列表渲染，具体语法和微信小程序类似</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">&quot;(item,index) in list&quot;</span>&gt;</span>内容是&#123;&#123;item.content&#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 
 
 <h3 id="v-model"><a href="#v-model" class="headerlink" title="v-model"></a>v-model</h3><p>v-model可以实现数据的双向绑定，即当绑定的元素改变时，Vue中的值也会改变。</p>
-<p><img src="C:\Users\yhm36\AppData\Roaming\Typora\typora-user-images\image-20230104121557050.png" alt="image-20230104121557050"></p>
-<p><img src="C:\Users\yhm36\AppData\Roaming\Typora\typora-user-images\image-20230104122044579.png" alt="image-20230104122044579"></p>
+<p><img src="/%5Cimages%5Cimage-20230104121557050.png" alt="image-20230104121557050"></p>
+<p><img src="/%5Cimages%5Cimage-20230104122044579.png" alt="image-20230104122044579"></p>
 <h3 id="js获取元素和绑定事件"><a href="#js获取元素和绑定事件" class="headerlink" title="js获取元素和绑定事件"></a>js获取元素和绑定事件</h3><p>使用document.getElementById()可以获取某个元素，可以根据获得的该元素在js中改变元素的属性</p>
-<h3 id="网页初始化函数"><a href="#网页初始化函数" class="headerlink" title="网页初始化函数"></a>网页初始化函数</h3><p><img src="C:\Users\yhm36\AppData\Roaming\Typora\typora-user-images\image-20230102141838661.png" alt="image-20230102141838661"></p>
+<h3 id="网页初始化函数"><a href="#网页初始化函数" class="headerlink" title="网页初始化函数"></a>网页初始化函数</h3><p><img src="/%5Cimages%5Cimage-20230102141838661.png" alt="image-20230102141838661"></p>
 <p>类似微信小程序中onload函数，是在页面加载的时候执行的</p>
 <h3 id="Webpack"><a href="#Webpack" class="headerlink" title="Webpack"></a>Webpack</h3><p>Webpack的使用方法为运行脚本，具体指令为’npm run dev’如果脚本的名称为dev。Webpack的默认输入文件为src&#x2F;index.js；输出路径为dist&#x2F;main.js。如果要改变，就在Webpack.config.js中修改配置</p>
-<p><img src="C:\Users\yhm36\AppData\Roaming\Typora\typora-user-images\image-20230103132704930.png" alt="image-20230103132704930"></p>
+<p><img src="/%5Cimages%5Cimage-20230103132704930.png" alt="image-20230103132704930"></p>
 <h3 id="监听器"><a href="#监听器" class="headerlink" title="监听器"></a>监听器</h3><p>监听器可以监视某一数值的变化，让程序员可以在数据发生变化的时候进行相应的操作，具体的定义方式如下：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">               msg(newval, old) &#123;</span><br><span class="line">                   console.log(newval, old);</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br></pre></td></tr></table></figure>
 
