@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Hexo使用简介</title>
+    <url>/2023/05/01/Hexo%E4%BD%BF%E7%94%A8%E7%AE%80%E4%BB%8B/</url>
+    <content><![CDATA[<h2 id="Hexo的使用"><a href="#Hexo的使用" class="headerlink" title="Hexo的使用"></a>Hexo的使用</h2><h3 id="GitHub-Page"><a href="#GitHub-Page" class="headerlink" title="GitHub Page"></a>GitHub Page</h3><p>Github Page可以方便的部署静态网站，当需要设置个人主页时，可以建立一个新的库，库的名字时<code>username.github.io</code>,其中username是用户的用户名。在库的setting页面上设置setting page,让其source指向master节点。</p>
+<span id="more"></span>
+<h3 id="创建一个Hexo项目"><a href="#创建一个Hexo项目" class="headerlink" title="创建一个Hexo项目"></a>创建一个Hexo项目</h3><p>Hexo是依赖Webpack的一个框架，因此是依赖Node.js的。当Node.js已经安装后，我们使用<code>npm install -g hexo-cli</code>命令安装hexo脚手架。完成之后，我们可以使用脚手架新建一个Hexo项目。具体的命令为<code>hexo init blog</code>。</p>
+<h3 id="Hexo项目的本地运行"><a href="#Hexo项目的本地运行" class="headerlink" title="Hexo项目的本地运行"></a>Hexo项目的本地运行</h3><p>如果想在本地预览Hexo的效果，可以在命令行输入<code>hexo server</code>命令在本地部署网页，这样就可以在本地预览效果。</p>
+<h3 id="Hexo的部署"><a href="#Hexo的部署" class="headerlink" title="Hexo的部署"></a>Hexo的部署</h3><p>当拥有了一个Hexo项目之后，我们就可以将他部署到GitHub Page上了。首先，在该项目中使用<code>npm install hexo-deployer-git --save</code>下载git插件，然后，修改项目根目录下的 <code>_config.yml</code> 文件。我们修改该文件末尾的deploy节点信息，具体代码如下：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">deploy<span class="punctuation">:</span></span><br><span class="line">  type<span class="punctuation">:</span> git</span><br><span class="line">  repository<span class="punctuation">:</span> https<span class="punctuation">:</span><span class="comment">//github.com/username/username.github.io.git</span></span><br><span class="line">  branch<span class="punctuation">:</span> master</span><br></pre></td></tr></table></figure>
+
+<p>其中respository表示需要部署的库的地址。branch表示需要上传的代码的分支是master。</p>
+<p>将修改之后的配置文件保存之后，我们使用<code>hexo generate</code>或<code>hexo g</code>命令生成静态文件，然后使用<code>hexo deploy</code>命令将文件部署到GitHub上。</p>
+<h3 id="更改Blog的主题"><a href="#更改Blog的主题" class="headerlink" title="更改Blog的主题"></a>更改Blog的主题</h3><p><a href="https://hexo.io/themes/">Hexo</a>提供了很多开源的主题，这些主题通过git保存到项目的库中以后可以通过更改_config.yml中<code>theme:</code>项来改变配置。</p>
+<h3 id="创建新的页面"><a href="#创建新的页面" class="headerlink" title="创建新的页面"></a>创建新的页面</h3><p>新的页面的创建可以由指令<code>hexo new pagename</code>来创建，创建之后，会自动生成一个md文件。如果需要生成一个新的文件夹，则只需要将命令改写成<code>hexo new page dirname</code>就可以了。对于每一个md文件的头部需要生成一些关键的信息。具体的格式如下：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: &quot;Hello World&quot;</span><br><span class="line">date: 2022-05-15 10:00:00</span><br><span class="line">categories:</span><br><span class="line"><span class="bullet">-</span> 技术</span><br><span class="line">tags:</span><br><span class="line"><span class="bullet">-</span> Hexo</span><br><span class="line"><span class="section">- Blog</span></span><br><span class="line"><span class="section">---</span></span><br></pre></td></tr></table></figure>
+
+<p>其中tags可以有多个而categories只能有一个。</p>
+]]></content>
+      <categories>
+        <category>index</category>
+      </categories>
+      <tags>
+        <tag>第一个</tag>
+        <tag>技术</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Latex的使用</title>
     <url>/2023/05/01/Latex/</url>
     <content><![CDATA[<h2 id="Latex环境和命令"><a href="#Latex环境和命令" class="headerlink" title="Latex环境和命令"></a>Latex环境和命令</h2><p>$latex{}$ 的命令以\开头，而环境是指用以令一些效果在局部生效，或是生成特殊的文档元素。LATEX 环境</p>
@@ -364,32 +390,6 @@
         <tag>Vue</tag>
         <tag>网页设计</tag>
         <tag>前端学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo使用简介</title>
-    <url>/2023/05/01/Hexo%E4%BD%BF%E7%94%A8%E7%AE%80%E4%BB%8B/</url>
-    <content><![CDATA[<h2 id="Hexo的使用"><a href="#Hexo的使用" class="headerlink" title="Hexo的使用"></a>Hexo的使用</h2><h3 id="GitHub-Page"><a href="#GitHub-Page" class="headerlink" title="GitHub Page"></a>GitHub Page</h3><p>Github Page可以方便的部署静态网站，当需要设置个人主页时，可以建立一个新的库，库的名字时<code>username.github.io</code>,其中username是用户的用户名。在库的setting页面上设置setting page,让其source指向master节点。</p>
-<span id="more"></span>
-<h3 id="创建一个Hexo项目"><a href="#创建一个Hexo项目" class="headerlink" title="创建一个Hexo项目"></a>创建一个Hexo项目</h3><p>Hexo是依赖Webpack的一个框架，因此是依赖Node.js的。当Node.js已经安装后，我们使用<code>npm install -g hexo-cli</code>命令安装hexo脚手架。完成之后，我们可以使用脚手架新建一个Hexo项目。具体的命令为<code>hexo init blog</code>。</p>
-<h3 id="Hexo项目的本地运行"><a href="#Hexo项目的本地运行" class="headerlink" title="Hexo项目的本地运行"></a>Hexo项目的本地运行</h3><p>如果想在本地预览Hexo的效果，可以在命令行输入<code>hexo server</code>命令在本地部署网页，这样就可以在本地预览效果。</p>
-<h3 id="Hexo的部署"><a href="#Hexo的部署" class="headerlink" title="Hexo的部署"></a>Hexo的部署</h3><p>当拥有了一个Hexo项目之后，我们就可以将他部署到GitHub Page上了。首先，在该项目中使用<code>npm install hexo-deployer-git --save</code>下载git插件，然后，修改项目根目录下的 <code>_config.yml</code> 文件。我们修改该文件末尾的deploy节点信息，具体代码如下：</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">deploy<span class="punctuation">:</span></span><br><span class="line">  type<span class="punctuation">:</span> git</span><br><span class="line">  repository<span class="punctuation">:</span> https<span class="punctuation">:</span><span class="comment">//github.com/username/username.github.io.git</span></span><br><span class="line">  branch<span class="punctuation">:</span> master</span><br></pre></td></tr></table></figure>
-
-<p>其中respository表示需要部署的库的地址。branch表示需要上传的代码的分支是master。</p>
-<p>将修改之后的配置文件保存之后，我们使用<code>hexo generate</code>或<code>hexo g</code>命令生成静态文件，然后使用<code>hexo deploy</code>命令将文件部署到GitHub上。</p>
-<h3 id="更改Blog的主题"><a href="#更改Blog的主题" class="headerlink" title="更改Blog的主题"></a>更改Blog的主题</h3><p><a href="https://hexo.io/themes/">Hexo</a>提供了很多开源的主题，这些主题通过git保存到项目的库中以后可以通过更改_config.yml中<code>theme:</code>项来改变配置。</p>
-<h3 id="创建新的页面"><a href="#创建新的页面" class="headerlink" title="创建新的页面"></a>创建新的页面</h3><p>新的页面的创建可以由指令<code>hexo new pagename</code>来创建，创建之后，会自动生成一个md文件。如果需要生成一个新的文件夹，则只需要将命令改写成<code>hexo new page dirname</code>就可以了。对于每一个md文件的头部需要生成一些关键的信息。具体的格式如下：</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: &quot;Hello World&quot;</span><br><span class="line">date: 2022-05-15 10:00:00</span><br><span class="line">categories:</span><br><span class="line"><span class="bullet">-</span> 技术</span><br><span class="line">tags:</span><br><span class="line"><span class="bullet">-</span> Hexo</span><br><span class="line"><span class="section">- Blog</span></span><br><span class="line"><span class="section">---</span></span><br></pre></td></tr></table></figure>
-
-<p>其中tags可以有多个而categories只能有一个。</p>
-]]></content>
-      <categories>
-        <category>index</category>
-      </categories>
-      <tags>
-        <tag>第一个</tag>
-        <tag>技术</tag>
       </tags>
   </entry>
   <entry>
@@ -794,6 +794,29 @@
       <tags>
         <tag>html</tag>
         <tag>CSS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>rdt</title>
+    <url>/2023/05/01/rdt/</url>
+    <content><![CDATA[<h1 id="RDT实验"><a href="#RDT实验" class="headerlink" title="RDT实验"></a>RDT实验</h1><h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">GBNReceiver</span> :<span class="keyword">public</span> RdtReceiver</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="type">int</span> expectSequenceNumberRcvd;	<span class="comment">// 期待收到的下一个报文序号</span></span><br><span class="line">	<span class="type">int</span> seqlen;                     <span class="comment">//序号宽度</span></span><br><span class="line">	Packet lastAckPkt;				<span class="comment">//上次发送的确认报文</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">GBNSender</span> :<span class="keyword">public</span> RdtSender</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="type">int</span> expectSequenceNumberSend;	<span class="comment">// 下一个发送序号 </span></span><br><span class="line">	<span class="type">bool</span> waitingState;				<span class="comment">// 是否处于等待Ack的状态</span></span><br><span class="line">	<span class="type">int</span> base;                       <span class="comment">//当前窗口基序号</span></span><br><span class="line">	<span class="type">int</span> winlen;                     <span class="comment">//窗口大小</span></span><br><span class="line">	<span class="type">int</span> seqlen;                     <span class="comment">//序号宽度</span></span><br><span class="line">	deque&lt;Packet&gt; window;           <span class="comment">//窗口队列</span></span><br><span class="line">	Packet packetWaitingAck;		<span class="comment">//已发送并等待Ack的数据包</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span>  <span class="title class_">Packet</span> &#123;</span><br><span class="line">	<span class="type">int</span> seqnum;										<span class="comment">//序号 发送方发送报文的序号</span></span><br><span class="line">	<span class="type">int</span> acknum;										<span class="comment">//确认号 接收端发送给发送端的确认序号</span></span><br><span class="line">	<span class="type">int</span> checksum;									<span class="comment">//校验和</span></span><br><span class="line">	<span class="type">char</span> payload[Configuration::PAYLOAD_SIZE];		<span class="comment">//payload 装载的数据</span></span><br><span class="line">	</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="GBN协议"><a href="#GBN协议" class="headerlink" title="GBN协议"></a>GBN协议</h3><p><img src="/%5Ctypora-user-images%5Cimage-20221112172024646.png" alt="image-20221112172024646"></p>
+<ul>
+<li>不等发送方收到确认报文，就继续发送下一组报文。可以连续发送的数量为窗口的大小。</li>
+<li>如果接受方收到的报文序号和预期序号不同，则发送上一次的确认报文；否则发送新的确认报文</li>
+<li>如果发送方收到的确认帧在等待确认的数据帧中，则默认该帧及以前的帧都已经收到了，窗口继续滑动。</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>计算机通信与网络</tag>
+        <tag>华科实验</tag>
       </tags>
   </entry>
   <entry>
@@ -1289,29 +1312,6 @@
       <tags>
         <tag>前端学习</tag>
         <tag>微信小程序</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>rdt</title>
-    <url>/2023/05/01/rdt/</url>
-    <content><![CDATA[<h1 id="RDT实验"><a href="#RDT实验" class="headerlink" title="RDT实验"></a>RDT实验</h1><h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">GBNReceiver</span> :<span class="keyword">public</span> RdtReceiver</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="type">int</span> expectSequenceNumberRcvd;	<span class="comment">// 期待收到的下一个报文序号</span></span><br><span class="line">	<span class="type">int</span> seqlen;                     <span class="comment">//序号宽度</span></span><br><span class="line">	Packet lastAckPkt;				<span class="comment">//上次发送的确认报文</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">GBNSender</span> :<span class="keyword">public</span> RdtSender</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="type">int</span> expectSequenceNumberSend;	<span class="comment">// 下一个发送序号 </span></span><br><span class="line">	<span class="type">bool</span> waitingState;				<span class="comment">// 是否处于等待Ack的状态</span></span><br><span class="line">	<span class="type">int</span> base;                       <span class="comment">//当前窗口基序号</span></span><br><span class="line">	<span class="type">int</span> winlen;                     <span class="comment">//窗口大小</span></span><br><span class="line">	<span class="type">int</span> seqlen;                     <span class="comment">//序号宽度</span></span><br><span class="line">	deque&lt;Packet&gt; window;           <span class="comment">//窗口队列</span></span><br><span class="line">	Packet packetWaitingAck;		<span class="comment">//已发送并等待Ack的数据包</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span>  <span class="title class_">Packet</span> &#123;</span><br><span class="line">	<span class="type">int</span> seqnum;										<span class="comment">//序号 发送方发送报文的序号</span></span><br><span class="line">	<span class="type">int</span> acknum;										<span class="comment">//确认号 接收端发送给发送端的确认序号</span></span><br><span class="line">	<span class="type">int</span> checksum;									<span class="comment">//校验和</span></span><br><span class="line">	<span class="type">char</span> payload[Configuration::PAYLOAD_SIZE];		<span class="comment">//payload 装载的数据</span></span><br><span class="line">	</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="GBN协议"><a href="#GBN协议" class="headerlink" title="GBN协议"></a>GBN协议</h3><p><img src="/%5Ctypora-user-images%5Cimage-20221112172024646.png" alt="image-20221112172024646"></p>
-<ul>
-<li>不等发送方收到确认报文，就继续发送下一组报文。可以连续发送的数量为窗口的大小。</li>
-<li>如果接受方收到的报文序号和预期序号不同，则发送上一次的确认报文；否则发送新的确认报文</li>
-<li>如果发送方收到的确认帧在等待确认的数据帧中，则默认该帧及以前的帧都已经收到了，窗口继续滑动。</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>计算机通信与网络</tag>
-        <tag>华科实验</tag>
       </tags>
   </entry>
 </search>
