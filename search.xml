@@ -408,90 +408,6 @@
       </tags>
   </entry>
   <entry>
-    <title>graph survey</title>
-    <url>/2023/05/01/graphsurvey/</url>
-    <content><![CDATA[<h1 id="graph-survey"><a href="#graph-survey" class="headerlink" title="graph survey"></a>graph survey</h1><h2 id="introduction"><a href="#introduction" class="headerlink" title="introduction"></a>introduction</h2><ul>
-<li><p>Graph ananalytics mainly includes s graph processing, graph mining, and graph learning.(图像处理，图像挖掘，图学习)</p>
-</li>
-<li><p>Graph Processing. Conventional grapg algorithms are designed to process graphs iteratively(迭代) until covergence(收敛). (<a href="https://zhuanlan.zhihu.com/p/137561088">PageRank算法</a>，<a href="https://blog.csdn.net/weixin_41579721/article/details/114552443">单源最短路径算法</a>)</p>
-<ul>
-<li>are based on traversal operations and generally focus on performing linear algebra-like computational operations on the graph.</li>
-</ul>
-</li>
-<li><p>Graph mining. Graph mining aims to discover specific structures or patterns in graphs.</p>
-<ul>
-<li><p>graph mining technology is an ideal tool for dealing with complex data structures because of its complex data object relationships and rich data presentation. </p>
-</li>
-<li><p>graph mining can be used to discover structure</p>
-<p>content relationships in social media data, to mine</p>
-<p>community-dense subgraphs, to extract network motifs or</p>
-<p>signifificant subgraphs in protein-protein or gene interaction</p>
-<p>networks, to discover 3D motifs in protein structures or</p>
-<p>chemical compounds, etc.</p>
-</li>
-</ul>
-</li>
-<li><p>Graph learning. </p>
-<ul>
-<li>graphs can characterize the relationships between everything.</li>
-<li>Graph neural networks establish a deep learning framework for non-Euclidean spatial data, and compared to traditional network representation learning, it is able to perform deeper information aggregation operations on graph structures than traditional network representation learning models.（图神经网络为非欧几里得空间数据建立了深度学习框架，与传统的网络表示学习相比，它能够比传统的网络表示学习模型对图结构执行更深入的信息聚合作。）</li>
-</ul>
-</li>
-</ul>
-<h2 id="background"><a href="#background" class="headerlink" title="background"></a>background</h2><ul>
-<li><p>graph  Terminology</p>
-<ul>
-<li>The formula for a graph is G &#x3D;(V,E), where V stands for the vertex set and E for the edge set.  Each vertex and each edge has its attribute value at the same time.</li>
-</ul>
-</li>
-<li><p>Domain-Specifific Architecture Types for Graph Analytics.</p>
-<p>FPGA-Based Architecture.</p>
-<ul>
-<li><p>consists various types of programmable resources, which enables developers to rapidly prototype application-specifific accelerators using dedicated hardware description languages and reconfigure these accelerators as often as needed. (使开发人员能够使用专用的硬件描述语言快速地原型化特定于应用程序的加速器，并根据需要经常重新配置这些加速器。)</p>
-</li>
-<li><p>offer reconfifigurability at the expense of lowered</p>
-<p>clock frequencies, which is about 10 × lower than that of</p>
-<p>CPUs(降低了时钟的频率)</p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="Software-Systems-Implementation-for-Graph-Analytics"><a href="#Software-Systems-Implementation-for-Graph-Analytics" class="headerlink" title="Software Systems Implementation for Graph Analytics"></a>Software Systems Implementation for Graph Analytics</h2><h3 id="Software-Graph-Processing-Systems"><a href="#Software-Graph-Processing-Systems" class="headerlink" title="Software Graph Processing Systems"></a>Software Graph Processing Systems</h3><ul>
-<li><p>can be classifified into two main categories: single-machine graph processing systems and distributed graph processing systems.</p>
-</li>
-<li><p>According to whether the graph data can be stored in memory during processing, these systems can be divided into in-memory graph processing systems and out-of-core graph processing systems.</p>
-</li>
-<li><p>Single-Machine Graph Processing Systems. </p>
-<ul>
-<li>Single machine graph processing systems can fully exploit the ability of a single machine to handle graph computation tasks and avoid the expensive network communication overhead in distributed systems. </li>
-<li>统受到固定的硬件资源的限制，无法实现良好的可伸缩性，并且处理时间通常与图形数据的大小成正比。</li>
-<li>Single-machine in-memory graph processing systems often have multiple cores and support very large memory of more than 1 TB, allowing them to handle graph data with hundreds of billions of edges.  However, single shared memory systems can only scale by increasing the number of CPUs or expanding the memory size.</li>
-<li>Ligra is a lightweight shared memory-based single machine graph processing system, which provides programming abstraction based on edgeMap function, vertexMap function, and vertexSubset type, simplifying the writing of graph processing algorithms.</li>
-<li>The key idea of Galois [85] single-machine graph processing system is to fully exploit the benefifits of autonomous scheduling in a data-driven computing mode.</li>
-</ul>
-</li>
-<li><p>Distributed Graph Processing Systems.</p>
-<ul>
-<li>A distributed graph computing system consists of multiple computing nodes, each of which has its own memory and external memory. Therefore, compared to single-machine graph computing systems, distributed graph processing systems are less limited by hardware in terms of scalability.</li>
-<li>设计一个合适的数据划分策略是一个挑战。同时，计算节点之间的通信成为性能的瓶颈</li>
-</ul>
-</li>
-</ul>
-<h3 id="Software-Graph-Mining-Systems"><a href="#Software-Graph-Mining-Systems" class="headerlink" title="Software Graph Mining Systems"></a>Software Graph Mining Systems</h3><ul>
-<li><p>They search for subgraphs that satisfy the conditions of the algorithm in the input graph G. The process of finding subgraphs can be modeled with a search tree where each node represents a subgraph, and the subgraphs at the k+1 level are expanded from the subgraphs at the k level.</p>
-<p><img src="/..%5Ctypora-user-images%5Cimage-20230312162325702.png" alt="image-20230312162325702"></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>图神经网络</category>
-      </categories>
-      <tags>
-        <tag>图学习</tag>
-        <tag>深度学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>docker使用笔记</title>
     <url>/2023/05/01/dockernote/</url>
     <content><![CDATA[<h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><h3 id="搜索-Docker-镜像"><a href="#搜索-Docker-镜像" class="headerlink" title="搜索 Docker 镜像"></a>搜索 Docker 镜像</h3><p>Docker Hub 是 Docker 镜像的官方仓库，可以通过 docker search 命令在 Docker Hub 中搜索需要的镜像。例如，要搜索 Ubuntu 镜像，可以使用以下命令：</p>
@@ -589,6 +505,90 @@
       <tags>
         <tag>Docker</tag>
         <tag>虚拟机</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>graph survey</title>
+    <url>/2023/05/01/graphsurvey/</url>
+    <content><![CDATA[<h1 id="graph-survey"><a href="#graph-survey" class="headerlink" title="graph survey"></a>graph survey</h1><h2 id="introduction"><a href="#introduction" class="headerlink" title="introduction"></a>introduction</h2><ul>
+<li><p>Graph ananalytics mainly includes s graph processing, graph mining, and graph learning.(图像处理，图像挖掘，图学习)</p>
+</li>
+<li><p>Graph Processing. Conventional grapg algorithms are designed to process graphs iteratively(迭代) until covergence(收敛). (<a href="https://zhuanlan.zhihu.com/p/137561088">PageRank算法</a>，<a href="https://blog.csdn.net/weixin_41579721/article/details/114552443">单源最短路径算法</a>)</p>
+<ul>
+<li>are based on traversal operations and generally focus on performing linear algebra-like computational operations on the graph.</li>
+</ul>
+</li>
+<li><p>Graph mining. Graph mining aims to discover specific structures or patterns in graphs.</p>
+<ul>
+<li><p>graph mining technology is an ideal tool for dealing with complex data structures because of its complex data object relationships and rich data presentation. </p>
+</li>
+<li><p>graph mining can be used to discover structure</p>
+<p>content relationships in social media data, to mine</p>
+<p>community-dense subgraphs, to extract network motifs or</p>
+<p>signifificant subgraphs in protein-protein or gene interaction</p>
+<p>networks, to discover 3D motifs in protein structures or</p>
+<p>chemical compounds, etc.</p>
+</li>
+</ul>
+</li>
+<li><p>Graph learning. </p>
+<ul>
+<li>graphs can characterize the relationships between everything.</li>
+<li>Graph neural networks establish a deep learning framework for non-Euclidean spatial data, and compared to traditional network representation learning, it is able to perform deeper information aggregation operations on graph structures than traditional network representation learning models.（图神经网络为非欧几里得空间数据建立了深度学习框架，与传统的网络表示学习相比，它能够比传统的网络表示学习模型对图结构执行更深入的信息聚合作。）</li>
+</ul>
+</li>
+</ul>
+<h2 id="background"><a href="#background" class="headerlink" title="background"></a>background</h2><ul>
+<li><p>graph  Terminology</p>
+<ul>
+<li>The formula for a graph is G &#x3D;(V,E), where V stands for the vertex set and E for the edge set.  Each vertex and each edge has its attribute value at the same time.</li>
+</ul>
+</li>
+<li><p>Domain-Specifific Architecture Types for Graph Analytics.</p>
+<p>FPGA-Based Architecture.</p>
+<ul>
+<li><p>consists various types of programmable resources, which enables developers to rapidly prototype application-specifific accelerators using dedicated hardware description languages and reconfigure these accelerators as often as needed. (使开发人员能够使用专用的硬件描述语言快速地原型化特定于应用程序的加速器，并根据需要经常重新配置这些加速器。)</p>
+</li>
+<li><p>offer reconfifigurability at the expense of lowered</p>
+<p>clock frequencies, which is about 10 × lower than that of</p>
+<p>CPUs(降低了时钟的频率)</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Software-Systems-Implementation-for-Graph-Analytics"><a href="#Software-Systems-Implementation-for-Graph-Analytics" class="headerlink" title="Software Systems Implementation for Graph Analytics"></a>Software Systems Implementation for Graph Analytics</h2><h3 id="Software-Graph-Processing-Systems"><a href="#Software-Graph-Processing-Systems" class="headerlink" title="Software Graph Processing Systems"></a>Software Graph Processing Systems</h3><ul>
+<li><p>can be classifified into two main categories: single-machine graph processing systems and distributed graph processing systems.</p>
+</li>
+<li><p>According to whether the graph data can be stored in memory during processing, these systems can be divided into in-memory graph processing systems and out-of-core graph processing systems.</p>
+</li>
+<li><p>Single-Machine Graph Processing Systems. </p>
+<ul>
+<li>Single machine graph processing systems can fully exploit the ability of a single machine to handle graph computation tasks and avoid the expensive network communication overhead in distributed systems. </li>
+<li>统受到固定的硬件资源的限制，无法实现良好的可伸缩性，并且处理时间通常与图形数据的大小成正比。</li>
+<li>Single-machine in-memory graph processing systems often have multiple cores and support very large memory of more than 1 TB, allowing them to handle graph data with hundreds of billions of edges.  However, single shared memory systems can only scale by increasing the number of CPUs or expanding the memory size.</li>
+<li>Ligra is a lightweight shared memory-based single machine graph processing system, which provides programming abstraction based on edgeMap function, vertexMap function, and vertexSubset type, simplifying the writing of graph processing algorithms.</li>
+<li>The key idea of Galois [85] single-machine graph processing system is to fully exploit the benefifits of autonomous scheduling in a data-driven computing mode.</li>
+</ul>
+</li>
+<li><p>Distributed Graph Processing Systems.</p>
+<ul>
+<li>A distributed graph computing system consists of multiple computing nodes, each of which has its own memory and external memory. Therefore, compared to single-machine graph computing systems, distributed graph processing systems are less limited by hardware in terms of scalability.</li>
+<li>设计一个合适的数据划分策略是一个挑战。同时，计算节点之间的通信成为性能的瓶颈</li>
+</ul>
+</li>
+</ul>
+<h3 id="Software-Graph-Mining-Systems"><a href="#Software-Graph-Mining-Systems" class="headerlink" title="Software Graph Mining Systems"></a>Software Graph Mining Systems</h3><ul>
+<li><p>They search for subgraphs that satisfy the conditions of the algorithm in the input graph G. The process of finding subgraphs can be modeled with a search tree where each node represents a subgraph, and the subgraphs at the k+1 level are expanded from the subgraphs at the k level.</p>
+<p><img src="/../typora-user-images/image-20230312162325702.png" alt="image-20230312162325702"></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>图神经网络</category>
+      </categories>
+      <tags>
+        <tag>图学习</tag>
+        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>
@@ -832,70 +832,6 @@
       <tags>
         <tag>计算机通信与网络</tag>
         <tag>华科实验</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>sql笔记</title>
-    <url>/2023/05/01/sql/</url>
-    <content><![CDATA[<h2 id="基本指令"><a href="#基本指令" class="headerlink" title="基本指令"></a>基本指令</h2><ul>
-<li><p>创建数据库</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> database dbname</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建表</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> tablename(</span><br><span class="line">deptNo <span class="type">int</span> <span class="keyword">primary</span> key,  #<span class="keyword">primary</span> key为主键，主键的值是唯一的</span><br><span class="line">deptName <span class="type">varchar</span>(<span class="number">32</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建外码约束</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">#表级外码约束可以直接在创建表的时候定义，一般开头为FK_</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> dept(</span><br><span class="line">deptNo <span class="type">int</span> <span class="keyword">primary</span> key,</span><br><span class="line">deptName <span class="type">varchar</span>(<span class="number">32</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> staff(</span><br><span class="line">staffNo <span class="type">INT</span> <span class="keyword">primary</span> key, </span><br><span class="line">staffName <span class="type">varchar</span>(<span class="number">32</span>),</span><br><span class="line">gender <span class="type">char</span>(<span class="number">1</span>),</span><br><span class="line">dob <span class="type">date</span>,</span><br><span class="line">Salary <span class="type">numeric</span>(<span class="number">8</span>,<span class="number">2</span>),</span><br><span class="line">deptNo <span class="type">int</span>,</span><br><span class="line">#定义外码约束</span><br><span class="line"><span class="keyword">constraint</span> FK_staff_deptNo <span class="keyword">foreign</span> key(deptNo) <span class="keyword">references</span> dept(deptNo)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建CHECK约束</p>
-<p>只有在CHECK的表达式为TRUE时数据插入才有效</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">#当需要命名约束的名称时</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line">(</span><br><span class="line">P_Id <span class="type">int</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">LastName <span class="type">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">FirstName <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">Address <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">City <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line"><span class="keyword">CONSTRAINT</span> chk_Person <span class="keyword">CHECK</span> (P_Id<span class="operator">&gt;</span><span class="number">0</span> <span class="keyword">AND</span> City<span class="operator">=</span><span class="string">&#x27;Sandnes&#x27;</span>)</span><br><span class="line">);</span><br><span class="line">#当表已经创建后，需要添加约束时</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> chk_Person <span class="keyword">CHECK</span> (P_Id<span class="operator">&gt;</span><span class="number">0</span> <span class="keyword">AND</span> City<span class="operator">=</span><span class="string">&#x27;Sandnes&#x27;</span>)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建default约束</p>
-<p>default约束用于向列中加入默认值</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line">(</span><br><span class="line">    P_Id <span class="type">int</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    LastName <span class="type">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    FirstName <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">    Address <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">    City <span class="type">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="string">&#x27;Sandnes&#x27;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">#<span class="keyword">default</span>也可以使用函数插入系统值</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Orders</span><br><span class="line">(</span><br><span class="line">    O_Id <span class="type">int</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    OrderNo <span class="type">int</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    P_Id <span class="type">int</span>,</span><br><span class="line">    OrderDate <span class="type">date</span> <span class="keyword">DEFAULT</span> GETDATE()</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">#创建表后加入<span class="keyword">default</span>约束</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> ab_c <span class="keyword">DEFAULT</span> <span class="string">&#x27;SANDNES&#x27;</span> <span class="keyword">for</span> City</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#撤销<span class="keyword">default</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">COLUMN</span> City <span class="keyword">DROP</span> <span class="keyword">DEFAULT</span></span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>UNIQUE约束</p>
-<p>UNIQUE约束和主键约束类似，但是可以允许为NULL。</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> department(</span><br><span class="line">  dno <span class="type">char</span>(<span class="number">10</span>) <span class="keyword">primary</span> key,</span><br><span class="line">  dname <span class="type">varchar</span>(<span class="number">32</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">UNIQUE</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
-
-</li>
-<li><p>插入数据</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> table_name</span><br><span class="line"><span class="keyword">VALUES</span> (value1,value2,value3,...);</span><br><span class="line"></span><br><span class="line">#也可以指定插入的列</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> table_name (column1,column2,column3,...)</span><br><span class="line"><span class="keyword">VALUES</span> (value1,value2,value3,...);</span><br><span class="line"></span><br><span class="line">#如需命名 <span class="keyword">UNIQUE</span> 约束，并定义多个列的 <span class="keyword">UNIQUE</span> 约束，请使用下面的 <span class="keyword">SQL</span> 语法</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line">(</span><br><span class="line">P_Id <span class="type">int</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">LastName <span class="type">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">FirstName <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">Address <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">City <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line"><span class="keyword">CONSTRAINT</span> uc_PersonID <span class="keyword">UNIQUE</span> (P_Id,LastName)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">#当表已被创建时，如需在 &quot;P_Id&quot; 列创建 <span class="keyword">UNIQUE</span> 约束，请使用下面的 <span class="keyword">SQL</span>:</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> uc_PersonID <span class="keyword">UNIQUE</span> (P_Id,LastName)</span><br><span class="line"></span><br><span class="line">#如需撤销 <span class="keyword">UNIQUE</span> 约束，请使用下面的 <span class="keyword">SQL</span>：</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">CONSTRAINT</span> uc_PersonID</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>删除表</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> table_name</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>更改表的内容</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> table_name</span><br><span class="line"></span><br><span class="line">  <span class="keyword">ADD</span> [<span class="keyword">COLUMN</span>] 列名 数据类型 [列约束]</span><br><span class="line">       [<span class="keyword">FIRST</span> <span class="operator">|</span> AFTER col_name]</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">ADD</span> &#123;INDEX<span class="operator">|</span>KEY&#125; [索引名] [类型] (列<span class="number">1</span>,...) </span><br><span class="line">  <span class="operator">|</span> <span class="keyword">ADD</span> [<span class="keyword">CONSTRAINT</span> [约束名]] 主码约束</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">ADD</span> [<span class="keyword">CONSTRAINT</span> [约束名]] <span class="keyword">UNIQUE</span>约束</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">ADD</span> [<span class="keyword">CONSTRAINT</span> [约束名]] 外码约束</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">ADD</span> [<span class="keyword">CONSTRAINT</span> [约束名]] <span class="keyword">CHECK</span>约束</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">DROP</span> &#123;<span class="keyword">CHECK</span><span class="operator">|</span><span class="keyword">CONSTRAINT</span>&#125; 约束名</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">ALTER</span> [<span class="keyword">COLUMN</span>] 列名 &#123;<span class="keyword">SET</span> <span class="keyword">DEFAULT</span> &#123;常量 <span class="operator">|</span> (表达式)&#125; <span class="operator">|</span> <span class="keyword">DROP</span> <span class="keyword">DEFAULT</span>&#125;</span><br><span class="line">  <span class="operator">|</span> CHANGE [<span class="keyword">COLUMN</span>] 列名 新列名 数据类型 [列约束]</span><br><span class="line">        [<span class="keyword">FIRST</span> <span class="operator">|</span> AFTER col_name]</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">DROP</span> [<span class="keyword">COLUMN</span>] 列名</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">DROP</span> &#123;INDEX<span class="operator">|</span>KEY&#125; 索引名</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">DROP</span> <span class="keyword">PRIMARY</span> KEY</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">DROP</span> <span class="keyword">FOREIGN</span> KEY fk_symbol</span><br><span class="line">  <span class="operator">|</span> MODIFY [<span class="keyword">COLUMN</span>] 列名 数据类型 [列约束]</span><br><span class="line">        [<span class="keyword">FIRST</span> <span class="operator">|</span> AFTER col_name]</span><br><span class="line">  <span class="operator">|</span> RENAME <span class="keyword">COLUMN</span> 列名 <span class="keyword">TO</span> 新列名</span><br><span class="line">  <span class="operator">|</span> RENAME &#123;INDEX<span class="operator">|</span>KEY&#125; 索引名 <span class="keyword">TO</span> 新索引名</span><br><span class="line">  <span class="operator">|</span> RENAME [<span class="keyword">TO</span>] 新表名</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>sql-service中更改表名使用 exec sp_rename oldname,nername; 语句</p>
-</li>
-</ul>
-<h3 id="跨表查询"><a href="#跨表查询" class="headerlink" title="跨表查询"></a>跨表查询</h3><ul>
-<li>select * from t_1,t_2 where()</li>
-</ul>
-<h3 id="group-by"><a href="#group-by" class="headerlink" title="group by"></a>group by</h3><p> group by 可以将表格按照某些元素聚集起来。如可以将表单中id号相同的人聚集起来，这样方便对某一元素进行集中操作。如查询某一id下所有资产的总和就可以用group by</p>
-<h3 id="order-by"><a href="#order-by" class="headerlink" title="order by"></a>order by</h3><p>order by 可以让数据集按照某个数据的大小进行排序 如果要降序则在最后加上desc</p>
-<h3 id="in"><a href="#in" class="headerlink" title="in()"></a>in()</h3><p>in()可以用在筛选数据的where语句中，表示判断某个字段是否在某个数据集中，与之相反的有not in()</p>
-<h3 id="limit-a-offset-b"><a href="#limit-a-offset-b" class="headerlink" title="limit a offset b"></a>limit a offset b</h3><p>limit表示将查询的记录分页，每页a条记录，b表示显示第几页的数据</p>
-<h3 id="rank-over-…"><a href="#rank-over-…" class="headerlink" title="rank() over(…)"></a>rank() over(…)</h3><p>可以根据over内的排序生成序号,序号为间断的</p>
-<h3 id="dense-rank"><a href="#dense-rank" class="headerlink" title="dense_rank()"></a>dense_rank()</h3><p>对结果集进行排序，排名值没有间断。 特定行的排名等于该特定行之前不同排名值的数量加一。</p>
-<h3 id="opengauss-返回星期"><a href="#opengauss-返回星期" class="headerlink" title="opengauss 返回星期"></a>opengauss 返回星期</h3><h4 id="几个重要函数"><a href="#几个重要函数" class="headerlink" title="几个重要函数"></a>几个重要函数</h4><ul>
-<li>date_part(‘week’,d1) - 日期d1在当年的周次。week(‘2022-2-7’) &#x3D; 6;</li>
-<li>extract(DOW FROM cast(d1 as TIMESTAMP) - 返回d1在本周的次序(0 &#x3D; Sunday, 1 &#x3D; Monday, …, 6 &#x3D; Saturday)</li>
-<li>case when expr1 then expr2 else expr3 end - 若expr1为TRUE，返回expr2，否则返回expr3.</li>
-</ul>
-]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>sql</tag>
-        <tag>数据库</tag>
       </tags>
   </entry>
   <entry>
@@ -1327,6 +1263,70 @@
       <tags>
         <tag>前端学习</tag>
         <tag>微信小程序</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>sql笔记</title>
+    <url>/2023/05/01/sql/</url>
+    <content><![CDATA[<h2 id="基本指令"><a href="#基本指令" class="headerlink" title="基本指令"></a>基本指令</h2><ul>
+<li><p>创建数据库</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> database dbname</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建表</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> tablename(</span><br><span class="line">deptNo <span class="type">int</span> <span class="keyword">primary</span> key,  #<span class="keyword">primary</span> key为主键，主键的值是唯一的</span><br><span class="line">deptName <span class="type">varchar</span>(<span class="number">32</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建外码约束</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">#表级外码约束可以直接在创建表的时候定义，一般开头为FK_</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> dept(</span><br><span class="line">deptNo <span class="type">int</span> <span class="keyword">primary</span> key,</span><br><span class="line">deptName <span class="type">varchar</span>(<span class="number">32</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> staff(</span><br><span class="line">staffNo <span class="type">INT</span> <span class="keyword">primary</span> key, </span><br><span class="line">staffName <span class="type">varchar</span>(<span class="number">32</span>),</span><br><span class="line">gender <span class="type">char</span>(<span class="number">1</span>),</span><br><span class="line">dob <span class="type">date</span>,</span><br><span class="line">Salary <span class="type">numeric</span>(<span class="number">8</span>,<span class="number">2</span>),</span><br><span class="line">deptNo <span class="type">int</span>,</span><br><span class="line">#定义外码约束</span><br><span class="line"><span class="keyword">constraint</span> FK_staff_deptNo <span class="keyword">foreign</span> key(deptNo) <span class="keyword">references</span> dept(deptNo)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建CHECK约束</p>
+<p>只有在CHECK的表达式为TRUE时数据插入才有效</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">#当需要命名约束的名称时</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line">(</span><br><span class="line">P_Id <span class="type">int</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">LastName <span class="type">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">FirstName <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">Address <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">City <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line"><span class="keyword">CONSTRAINT</span> chk_Person <span class="keyword">CHECK</span> (P_Id<span class="operator">&gt;</span><span class="number">0</span> <span class="keyword">AND</span> City<span class="operator">=</span><span class="string">&#x27;Sandnes&#x27;</span>)</span><br><span class="line">);</span><br><span class="line">#当表已经创建后，需要添加约束时</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> chk_Person <span class="keyword">CHECK</span> (P_Id<span class="operator">&gt;</span><span class="number">0</span> <span class="keyword">AND</span> City<span class="operator">=</span><span class="string">&#x27;Sandnes&#x27;</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建default约束</p>
+<p>default约束用于向列中加入默认值</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line">(</span><br><span class="line">    P_Id <span class="type">int</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    LastName <span class="type">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    FirstName <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">    Address <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">    City <span class="type">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="string">&#x27;Sandnes&#x27;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">#<span class="keyword">default</span>也可以使用函数插入系统值</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Orders</span><br><span class="line">(</span><br><span class="line">    O_Id <span class="type">int</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    OrderNo <span class="type">int</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    P_Id <span class="type">int</span>,</span><br><span class="line">    OrderDate <span class="type">date</span> <span class="keyword">DEFAULT</span> GETDATE()</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">#创建表后加入<span class="keyword">default</span>约束</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> ab_c <span class="keyword">DEFAULT</span> <span class="string">&#x27;SANDNES&#x27;</span> <span class="keyword">for</span> City</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#撤销<span class="keyword">default</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">COLUMN</span> City <span class="keyword">DROP</span> <span class="keyword">DEFAULT</span></span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>UNIQUE约束</p>
+<p>UNIQUE约束和主键约束类似，但是可以允许为NULL。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> department(</span><br><span class="line">  dno <span class="type">char</span>(<span class="number">10</span>) <span class="keyword">primary</span> key,</span><br><span class="line">  dname <span class="type">varchar</span>(<span class="number">32</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">UNIQUE</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>插入数据</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> table_name</span><br><span class="line"><span class="keyword">VALUES</span> (value1,value2,value3,...);</span><br><span class="line"></span><br><span class="line">#也可以指定插入的列</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> table_name (column1,column2,column3,...)</span><br><span class="line"><span class="keyword">VALUES</span> (value1,value2,value3,...);</span><br><span class="line"></span><br><span class="line">#如需命名 <span class="keyword">UNIQUE</span> 约束，并定义多个列的 <span class="keyword">UNIQUE</span> 约束，请使用下面的 <span class="keyword">SQL</span> 语法</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line">(</span><br><span class="line">P_Id <span class="type">int</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">LastName <span class="type">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">FirstName <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">Address <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">City <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line"><span class="keyword">CONSTRAINT</span> uc_PersonID <span class="keyword">UNIQUE</span> (P_Id,LastName)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">#当表已被创建时，如需在 &quot;P_Id&quot; 列创建 <span class="keyword">UNIQUE</span> 约束，请使用下面的 <span class="keyword">SQL</span>:</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> uc_PersonID <span class="keyword">UNIQUE</span> (P_Id,LastName)</span><br><span class="line"></span><br><span class="line">#如需撤销 <span class="keyword">UNIQUE</span> 约束，请使用下面的 <span class="keyword">SQL</span>：</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">CONSTRAINT</span> uc_PersonID</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除表</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> table_name</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更改表的内容</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> table_name</span><br><span class="line"></span><br><span class="line">  <span class="keyword">ADD</span> [<span class="keyword">COLUMN</span>] 列名 数据类型 [列约束]</span><br><span class="line">       [<span class="keyword">FIRST</span> <span class="operator">|</span> AFTER col_name]</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">ADD</span> &#123;INDEX<span class="operator">|</span>KEY&#125; [索引名] [类型] (列<span class="number">1</span>,...) </span><br><span class="line">  <span class="operator">|</span> <span class="keyword">ADD</span> [<span class="keyword">CONSTRAINT</span> [约束名]] 主码约束</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">ADD</span> [<span class="keyword">CONSTRAINT</span> [约束名]] <span class="keyword">UNIQUE</span>约束</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">ADD</span> [<span class="keyword">CONSTRAINT</span> [约束名]] 外码约束</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">ADD</span> [<span class="keyword">CONSTRAINT</span> [约束名]] <span class="keyword">CHECK</span>约束</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">DROP</span> &#123;<span class="keyword">CHECK</span><span class="operator">|</span><span class="keyword">CONSTRAINT</span>&#125; 约束名</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">ALTER</span> [<span class="keyword">COLUMN</span>] 列名 &#123;<span class="keyword">SET</span> <span class="keyword">DEFAULT</span> &#123;常量 <span class="operator">|</span> (表达式)&#125; <span class="operator">|</span> <span class="keyword">DROP</span> <span class="keyword">DEFAULT</span>&#125;</span><br><span class="line">  <span class="operator">|</span> CHANGE [<span class="keyword">COLUMN</span>] 列名 新列名 数据类型 [列约束]</span><br><span class="line">        [<span class="keyword">FIRST</span> <span class="operator">|</span> AFTER col_name]</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">DROP</span> [<span class="keyword">COLUMN</span>] 列名</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">DROP</span> &#123;INDEX<span class="operator">|</span>KEY&#125; 索引名</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">DROP</span> <span class="keyword">PRIMARY</span> KEY</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">DROP</span> <span class="keyword">FOREIGN</span> KEY fk_symbol</span><br><span class="line">  <span class="operator">|</span> MODIFY [<span class="keyword">COLUMN</span>] 列名 数据类型 [列约束]</span><br><span class="line">        [<span class="keyword">FIRST</span> <span class="operator">|</span> AFTER col_name]</span><br><span class="line">  <span class="operator">|</span> RENAME <span class="keyword">COLUMN</span> 列名 <span class="keyword">TO</span> 新列名</span><br><span class="line">  <span class="operator">|</span> RENAME &#123;INDEX<span class="operator">|</span>KEY&#125; 索引名 <span class="keyword">TO</span> 新索引名</span><br><span class="line">  <span class="operator">|</span> RENAME [<span class="keyword">TO</span>] 新表名</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>sql-service中更改表名使用 exec sp_rename oldname,nername; 语句</p>
+</li>
+</ul>
+<h3 id="跨表查询"><a href="#跨表查询" class="headerlink" title="跨表查询"></a>跨表查询</h3><ul>
+<li>select * from t_1,t_2 where()</li>
+</ul>
+<h3 id="group-by"><a href="#group-by" class="headerlink" title="group by"></a>group by</h3><p> group by 可以将表格按照某些元素聚集起来。如可以将表单中id号相同的人聚集起来，这样方便对某一元素进行集中操作。如查询某一id下所有资产的总和就可以用group by</p>
+<h3 id="order-by"><a href="#order-by" class="headerlink" title="order by"></a>order by</h3><p>order by 可以让数据集按照某个数据的大小进行排序 如果要降序则在最后加上desc</p>
+<h3 id="in"><a href="#in" class="headerlink" title="in()"></a>in()</h3><p>in()可以用在筛选数据的where语句中，表示判断某个字段是否在某个数据集中，与之相反的有not in()</p>
+<h3 id="limit-a-offset-b"><a href="#limit-a-offset-b" class="headerlink" title="limit a offset b"></a>limit a offset b</h3><p>limit表示将查询的记录分页，每页a条记录，b表示显示第几页的数据</p>
+<h3 id="rank-over-…"><a href="#rank-over-…" class="headerlink" title="rank() over(…)"></a>rank() over(…)</h3><p>可以根据over内的排序生成序号,序号为间断的</p>
+<h3 id="dense-rank"><a href="#dense-rank" class="headerlink" title="dense_rank()"></a>dense_rank()</h3><p>对结果集进行排序，排名值没有间断。 特定行的排名等于该特定行之前不同排名值的数量加一。</p>
+<h3 id="opengauss-返回星期"><a href="#opengauss-返回星期" class="headerlink" title="opengauss 返回星期"></a>opengauss 返回星期</h3><h4 id="几个重要函数"><a href="#几个重要函数" class="headerlink" title="几个重要函数"></a>几个重要函数</h4><ul>
+<li>date_part(‘week’,d1) - 日期d1在当年的周次。week(‘2022-2-7’) &#x3D; 6;</li>
+<li>extract(DOW FROM cast(d1 as TIMESTAMP) - 返回d1在本周的次序(0 &#x3D; Sunday, 1 &#x3D; Monday, …, 6 &#x3D; Saturday)</li>
+<li>case when expr1 then expr2 else expr3 end - 若expr1为TRUE，返回expr2，否则返回expr3.</li>
+</ul>
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>sql</tag>
+        <tag>数据库</tag>
       </tags>
   </entry>
 </search>
