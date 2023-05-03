@@ -155,7 +155,7 @@
 <h2 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h2><p>如何需要添加一个公式段落，可以使用</p>
 <figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;equation&#125;<span class="keyword">\label</span>&#123;eq:eq1&#125;</span><br><span class="line">f(x)=a<span class="built_in">^</span>x+b</span><br><span class="line"><span class="keyword">\end</span>&#123;equation&#125;</span><br></pre></td></tr></table></figure>
 
-<p>其中label标签中定义了公式的引用key，在文章的其他部分可以使用\ref{eq:eq1}来进行引用。</p>
+<p>其中label标签中定义了公式的引用key，在文章的其他部分可以使用<code>\ref&#123;eq:eq1&#125;</code>来进行引用。</p>
 <p>常用的公式符号如下：</p>
 <table>
 <thead>
@@ -267,7 +267,7 @@
 <p>caption为图片题注，label为引用标签，\centering为设置图片居中</p>
 <p>$y^i_{j,k}&#x3D;\mathop{\max}\limits_{0\le m,n&lt;s}{x^i_{j\cdot s+m,k\cdot s+n}}$</p>
 <p>$y_j&#x3D;max\big(0,\sum\limits_ix^1_i\cdot w^1_{i,j}+\sum\limits_{i}x^2_i\cdot w^2_{i,j}+b_j\big)$</p>
-<p>$y_i&#x3D;\frac{exp(y’<em>i)}{\sum^n</em>{i&#x3D;1}exp(y’_j)}$</p>
+<p>$y_i&#x3D;\frac {exp(y_i)} {\sum^n_{i&#x3D;1}exp(y_j)}$</p>
 <h2 id="文献的引用"><a href="#文献的引用" class="headerlink" title="文献的引用"></a>文献的引用</h2><p>在$Latex$中，通常可以使用BibTeX文件对文件进行引用。BibTex是一个单独的文献引用数据库，其基本的格式是：</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@article<span class="punctuation">&#123;</span>smith01<span class="punctuation">,</span></span><br><span class="line">  author = <span class="string">&quot;John Smith&quot;</span><span class="punctuation">,</span></span><br><span class="line">  title = <span class="string">&quot;A new approach to computer vision&quot;</span><span class="punctuation">,</span></span><br><span class="line">  journal = <span class="string">&quot;IEEE Transactions on Pattern Analysis and Machine Intelligence&quot;</span><span class="punctuation">,</span></span><br><span class="line">  volume = <span class="string">&quot;23&quot;</span><span class="punctuation">,</span></span><br><span class="line">  number = <span class="string">&quot;12&quot;</span><span class="punctuation">,</span></span><br><span class="line">  pages = <span class="string">&quot;1331--1335&quot;</span><span class="punctuation">,</span></span><br><span class="line">  year = <span class="string">&quot;2001&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -649,6 +649,30 @@
     viewer_init()
 </script> 
 <!-- MathJax -->
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/MathJax.js"></script>
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/config/TeX-AMS-MML_HTMLorMML-full.js"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true,
+  };
+</script>
 
 <!-- Katex -->
 
