@@ -155,7 +155,7 @@ f(x)=a^x+b
 \end{equation}
 ```
 
-其中label标签中定义了公式的引用key，在文章的其他部分可以使用\ref{eq:eq1}来进行引用。
+其中label标签中定义了公式的引用key，在文章的其他部分可以使用``\ref{eq:eq1}``来进行引用。
 
 
 
@@ -212,7 +212,7 @@ $y^i_{j,k}=\mathop{\max}\limits_{0\le m,n<s}\{x^i_{j\cdot s+m,k\cdot s+n}\}$
 
 $y_j=max\big(0,\sum\limits_ix^1_i\cdot w^1_{i,j}+\sum\limits_{i}x^2_i\cdot w^2_{i,j}+b_j\big)$
 
-$y_i=\frac{exp(y'_i)}{\sum^n_{i=1}exp(y'_j)}$
+$y_i=\frac {exp(y_i)} {\sum^n_{i=1}exp(y_j)}$
 
 
 
