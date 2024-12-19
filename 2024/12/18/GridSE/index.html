@@ -119,13 +119,15 @@
 <ul>
 <li><p>理论上，许多的技术，例如全同态加密 (FHE)和多方计算 (MPC)，可以通过对密文进行前缀搜索来实现SGS。然而，这些技术的当前实现当实时性能受到关注时仍然远非实用。</p>
 </li>
-<li><p>为了实现对加密数据的安全搜索，可搜索对称加密 (SSE) 提供了一种通用且可行的解决方案。然而，现有的方案无法实现前缀搜索。少数作品，例如 Moataz 等人，支持子串搜索并提供语义安全的 SSE，但无法解决正向隐私或反向隐私。且方案使用了ORAM方案，导致了导致高通信复杂度。</p>
+<li><p>为了实现对加密数据的安全搜索，可搜索对称加密 (SSE) 提供了一种通用且可行的解决方案。然而，现有的方案无法实现前缀搜索。少数作品，例如 Moataz 等人，支持子串搜索并提供语义安全的 SSE，但无法实现前向安全和后向安全。且方案使用了ORAM方案，导致了导致高通信复杂度。</p>
 </li>
 </ul>
 <p><strong>本文贡献：</strong></p>
 <ul>
-<li>构建了一个高效、可扩展且与 DGGS 兼容的 SGS 方案 GridSE，它支持正向和反向隐私。</li>
-<li>设计了一种新的密码学原语 - 对称前缀谓词加密 (SP2E) - 用于对前缀进行谓词加密。</li>
+<li><p>设计了一种新的密码学原语 - 对称前缀谓词加密 ($SP^2E$) - 用于对前缀进行谓词加密。</p>
+</li>
+<li><p>构建了一个高效、可扩展且与 DGGS 兼容的 SGS 方案 GridSE，它支持前向和后向安全。</p>
+</li>
 </ul>
 <h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="地理搜索框架"><a href="#地理搜索框架" class="headerlink" title="地理搜索框架"></a>地理搜索框架</h3><p>一个典型的地理信息服务系统主要包含三个主要实体，分别是用户、客户端、服务器。其中服务器是一个提供计算或存储服务的云提供商。客户端是一个 GIS&#x2F;LBS 提供商，它将数据（加密后）外包给服务器，同时保留一些本地计算和存储能力；用户是发出地理搜索请求的使用者。</p>
 <p><img src="/images/%E6%88%AA%E5%B1%8F2024.png" alt="图2：地理搜索框架"></p>
@@ -144,7 +146,7 @@
 </li>
 </ul>
 <p><img src="/images/image-20241219185659455.png" alt="图3"></p>
-<h3 id="symmetric-preﬁx-predicate-encryption-scheme-SP-2E"><a href="#symmetric-preﬁx-predicate-encryption-scheme-SP-2E" class="headerlink" title="symmetric preﬁx predicate encryption scheme $(SP^2E)$"></a>symmetric preﬁx predicate encryption scheme $(SP^2E)$</h3><p>一个$SP^2E$方案包含Enc了$(KeyGen,PreEnc,Enc,TKGen,PrefDec)$</p>
+<h3 id="symmetric-preﬁx-predicate-encryption-scheme-SP-2E"><a href="#symmetric-preﬁx-predicate-encryption-scheme-SP-2E" class="headerlink" title="symmetric preﬁx predicate encryption scheme $(SP^2E)$"></a>symmetric preﬁx predicate encryption scheme $(SP^2E)$</h3><p>一个$SP^2E$方案包含了$(KeyGen,PreEnc,Enc,TKGen,PrefDec)$</p>
 <ul>
 <li><p>$KeyGen(1^\lambda,t)→SK,MSK:$输入安全参数和最大长度t，返回加密密钥SK和主密钥MSK。该算法在执行的时候从密钥空间K中随机均匀采样$|\Lambda|$个密钥其中$\Lambda$为构成关键字的字母数量。我们记录$MSK&#x3D;{sk_{c_1},sk_{c_2},\dots,sk_{c_|Λ|},f} ,SK&#x3D;{sk_1,sk_2}$。其中的$f$为查询结果确定位的数量，需要满足$0&lt;\frac{\lambda}{t-1}&lt;f$。其中t为关键字最大的字母数量。</p>
 </li>
