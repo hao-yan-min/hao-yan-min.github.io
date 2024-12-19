@@ -86,7 +86,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.8k</span>
+            <span class="post-count">2.3k</span>
         </span>
     </span>
 
@@ -95,19 +95,13 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">6 min</span>
+            <span class="post-count">9 min</span>
         </span>
     </span>
 </div>
  
     </div>
       
-    <div class="tocbot"></div>
-
-
-
-
-  
     <div class="article-entry" itemprop="articleBody">
        
   <h1 id="GridSE-Towards-Practical-Secure-Geographic-Search-via-Prefix-Symmetric-Searchable-Encryption"><a href="#GridSE-Towards-Practical-Secure-Geographic-Search-via-Prefix-Symmetric-Searchable-Encryption" class="headerlink" title="GridSE: Towards Practical Secure Geographic Search via Prefix Symmetric Searchable Encryption"></a>GridSE: Towards Practical Secure Geographic Search via Prefix Symmetric Searchable Encryption</h1><hr>
@@ -146,7 +140,7 @@
 <li><p>$SE−f.Dec(k_1,k_2,ct)→m’:$需要解密连续$f$位的情况下，令开始和结束的位置为pos1和pos2。则<br>$$<br>m’&#x3D;ct\oplus(G(k_2,m).sub(0,pos1)||G(k_1,m).sub(pos1,pos2)||G(k_2,m).sub(pos2,\lambda))<br>$$</p>
 </li>
 </ul>
-<p><img src="/images/image-20241219140430424.png" alt="图3"></p>
+<p><img src="/images/image-20241219185659455.png" alt="图3"></p>
 <h3 id="symmetric-preﬁx-predicate-encryption-scheme-SP-2E"><a href="#symmetric-preﬁx-predicate-encryption-scheme-SP-2E" class="headerlink" title="symmetric preﬁx predicate encryption scheme $(SP^2E)$"></a>symmetric preﬁx predicate encryption scheme $(SP^2E)$</h3><p>一个$SP^2E$方案包含Enc了$(KeyGen,PreEnc,Enc,TKGen,PrefDec)$</p>
 <ul>
 <li><p>$KeyGen(1^\lambda,t)→SK,MSK:$输入安全参数和最大长度t，返回加密密钥SK和主密钥MSK。该算法在执行的时候从密钥空间K中随机均匀采样$|\Lambda|$个密钥其中$\Lambda$为构成关键字的字母数量。我们记录$MSK&#x3D;{sk_{c_1},sk_{c_2},\dots,sk_{c_|Λ|},f} ,SK&#x3D;{sk_1,sk_2}$。其中的$f$为查询结果确定位的数量，需要满足$0&lt;\frac{\lambda}{t-1}&lt;f$。其中t为关键字最大的字母数量。</p>
@@ -157,7 +151,8 @@
 <li>输出$m&#x3D;⨁_{i&#x3D;1}^{|w|}(0^{(i−1)f}||H(sk_{w_i}||seq||i)).substr(0,\lambda)$</li>
 </ol>
 </li>
-<li><p>$Enc(SK,m)→ct,\delta:$ 输入SK和m，算法输出密文ct以及一个存储在本地的状态参数$\delta$输入SK和m之后，通过SK中的密钥$sk_1$对m进行加密，得到密文:<br>$$<br>ct&#x3D;SE−f.Enc(sk_1,m)&#x3D;m\oplus G(sk_1,m)<br>\ δ&#x3D;G(sk_1,m)<br>$$</p>
+<li><p>$Enc(SK,m)→ct,\delta:$ 输入SK和m，算法输出密文ct以及一个存储在本地的状态参数$\delta$输入SK和m之后，通过SK中的密钥$sk_1$对m进行加密，得到密文:<br>$$<br>ct&#x3D;SE−f.Enc(sk_1,m)&#x3D;m\oplus G(sk_1,m)<br>$$</p>
+<p>$$<br>\ δ&#x3D;G(sk_1,m)<br>$$</p>
 </li>
 <li><p>$TKGen(SK,MSK,\delta,seq,w_p)→k’:$ 该算法用于输出搜索令牌：</p>
 <ol>
@@ -165,11 +160,50 @@
 </li>
 <li><p>设置pos1&#x3D;$(|w_p|−1)∗f,pos2&#x3D;(|w_p|)∗f$ ,则$pos2-pos1&#x3D;f$</p>
 </li>
-<li><p>输出k’<br>$$<br>k’&#x3D;\oplus_{i&#x3D;1}^{|w_p|}(0^{(i−1)f}||H(sk_</p>
+<li><p>输出</p>
+<p><img src="/images/image-20241219181528584.png"></p>
 </li>
 </ol>
 </li>
+<li><p>$PrefDec(k’,ct)→⊥ or\ w_p⊑w:$输入令牌和密文，判断$w_p$是否为w的前缀。$r’&#x3D;k’⨁ct$，if$ r’&#x3D;0$,则$w_p$是$w$的前缀，否则不是。</p>
+</li>
 </ul>
+<p><img src="/images/image-20241219143556516.png" alt="图4:关键字&quot;dr5r77&quot;和前缀&quot;dr5r7&quot;的加解密过程"></p>
+<h3 id="GridSE方案构建"><a href="#GridSE方案构建" class="headerlink" title="GridSE方案构建"></a>GridSE方案构建</h3><ul>
+<li>Setup <ol>
+<li>初始化EDB和本地状态</li>
+<li>根据参数$\lambda$生成方案的密钥K并初始化$SP^2E$</li>
+<li>初始化列表$\hat{\delta}$用于存储之后的掩码</li>
+<li>初始化UpdateCnt用于存储关键字更新次数，初始化InxDict用于存储加密的索引</li>
+</ol>
+</li>
+</ul>
+<p><img src="/images/image-20241219184423253.png"></p>
+<ul>
+<li>Update<ol>
+<li>从UpdateCnt中获取关键字w的更新次数，如果关键字不存在，则UpdateCnt[w]&#x3D;0</li>
+<li>查询关键字w的seq,如果w，不存在，则seq&#x3D;UpdateCnt.size()，否则取出相应的seqUpdateCnt[w]++</li>
+<li>使用$SP^2E.Enc$ 对关键字进行加密，得到关键字对应的addr，并将生成的掩码$\delta$存储在本地</li>
+<li>根据UpdateCnt[w]和seq生成掩码，和(id||op)进行异或操作后得到val并上传服务器</li>
+<li>服务器在InxDict[addr]中插入val</li>
+</ol>
+</li>
+</ul>
+<p><img src="/images/image-20241219184503295.png"></p>
+<ul>
+<li>Search<ol>
+<li>对于搜索关键字$w_p$,根据$SP^2E.TKGen$生成关于服务器上所有关键字的搜索令牌，存储在TList中</li>
+<li>服务器对于IdxDict中存储的所有addr执行$SP^2E.PrefDec(TList[i],addr)$,如果匹配成功，则将该InxDict中的valList存入结果中返回</li>
+<li>客户端在本地根据seq按照更新顺序将内容解密，得到需要的索引。</li>
+</ol>
+</li>
+</ul>
+<p><img src="/images/image-20241219184543382.png"></p>
+<p><strong>值得注意的是</strong>，该方案在更新的时候，由于同一个关键字的seq是不会随着更新次数变化的，且服务器端关键字的上传位置仅由关键字w和seq决定（见Update算法第6行），因此相同关键字的每一次更新位置是固定的。这导致方案并没有真的实现前向安全。</p>
+<p><strong>清除被删除条目：</strong></p>
+<p>为了删除条目，可以考虑在客户端搜索取回条目的时候，剔除被删除的条目。但在原本的构造中，对相同的内容进行加密，由于输入的内容相同，会导致重加密的密文相同，使隐私泄露。为了克服这个问题，可以在方案中增加一个搜索计数器，让每次搜索计数器加一，这样重加密之后密文就不会相同了。</p>
+<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p><img src="/images/image-20241219185140391.png" alt="不同参数下方案运行效率对比"></p>
+<p><img src="/images/image-20241219185230339.png" alt="不同参数下方案运行效率对比"></p>
  
       <!-- reward -->
       
@@ -397,22 +431,6 @@
 <script src="/js/lazyload.min.js"></script>
 
 <!-- Tocbot -->
- 
-<script src="/js/tocbot.min.js"></script>
-
-<script>
-  tocbot.init({
-    tocSelector: ".tocbot",
-    contentSelector: ".article-entry",
-    headingSelector: "h1, h2, h3, h4, h5, h6",
-    hasInnerContainers: true,
-    scrollSmooth: true,
-    scrollContainer: "main",
-    positionFixedSelector: ".tocbot",
-    positionFixedClass: "is-position-fixed",
-    fixedSidebarOffset: "auto",
-  });
-</script>
 
 <script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
 <link

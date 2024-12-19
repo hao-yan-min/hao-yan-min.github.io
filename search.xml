@@ -39,7 +39,7 @@
 <li><p>$SE−f.Dec(k_1,k_2,ct)→m’:$需要解密连续$f$位的情况下，令开始和结束的位置为pos1和pos2。则<br>$$<br>m’&#x3D;ct\oplus(G(k_2,m).sub(0,pos1)||G(k_1,m).sub(pos1,pos2)||G(k_2,m).sub(pos2,\lambda))<br>$$</p>
 </li>
 </ul>
-<p><img src="/images/image-20241219140430424.png" alt="图3"></p>
+<p><img src="/images/image-20241219185659455.png" alt="图3"></p>
 <h3 id="symmetric-preﬁx-predicate-encryption-scheme-SP-2E"><a href="#symmetric-preﬁx-predicate-encryption-scheme-SP-2E" class="headerlink" title="symmetric preﬁx predicate encryption scheme $(SP^2E)$"></a>symmetric preﬁx predicate encryption scheme $(SP^2E)$</h3><p>一个$SP^2E$方案包含Enc了$(KeyGen,PreEnc,Enc,TKGen,PrefDec)$</p>
 <ul>
 <li><p>$KeyGen(1^\lambda,t)→SK,MSK:$输入安全参数和最大长度t，返回加密密钥SK和主密钥MSK。该算法在执行的时候从密钥空间K中随机均匀采样$|\Lambda|$个密钥其中$\Lambda$为构成关键字的字母数量。我们记录$MSK&#x3D;{sk_{c_1},sk_{c_2},\dots,sk_{c_|Λ|},f} ,SK&#x3D;{sk_1,sk_2}$。其中的$f$为查询结果确定位的数量，需要满足$0&lt;\frac{\lambda}{t-1}&lt;f$。其中t为关键字最大的字母数量。</p>
@@ -50,7 +50,8 @@
 <li>输出$m&#x3D;⨁_{i&#x3D;1}^{|w|}(0^{(i−1)f}||H(sk_{w_i}||seq||i)).substr(0,\lambda)$</li>
 </ol>
 </li>
-<li><p>$Enc(SK,m)→ct,\delta:$ 输入SK和m，算法输出密文ct以及一个存储在本地的状态参数$\delta$输入SK和m之后，通过SK中的密钥$sk_1$对m进行加密，得到密文:<br>$$<br>ct&#x3D;SE−f.Enc(sk_1,m)&#x3D;m\oplus G(sk_1,m)<br>\ δ&#x3D;G(sk_1,m)<br>$$</p>
+<li><p>$Enc(SK,m)→ct,\delta:$ 输入SK和m，算法输出密文ct以及一个存储在本地的状态参数$\delta$输入SK和m之后，通过SK中的密钥$sk_1$对m进行加密，得到密文:<br>$$<br>ct&#x3D;SE−f.Enc(sk_1,m)&#x3D;m\oplus G(sk_1,m)<br>$$</p>
+<p>$$<br>\ δ&#x3D;G(sk_1,m)<br>$$</p>
 </li>
 <li><p>$TKGen(SK,MSK,\delta,seq,w_p)→k’:$ 该算法用于输出搜索令牌：</p>
 <ol>
@@ -58,11 +59,50 @@
 </li>
 <li><p>设置pos1&#x3D;$(|w_p|−1)∗f,pos2&#x3D;(|w_p|)∗f$ ,则$pos2-pos1&#x3D;f$</p>
 </li>
-<li><p>输出k’<br>$$<br>k’&#x3D;\oplus_{i&#x3D;1}^{|w_p|}(0^{(i−1)f}||H(sk_</p>
+<li><p>输出</p>
+<p><img src="/images/image-20241219181528584.png"></p>
 </li>
 </ol>
 </li>
+<li><p>$PrefDec(k’,ct)→⊥ or\ w_p⊑w:$输入令牌和密文，判断$w_p$是否为w的前缀。$r’&#x3D;k’⨁ct$，if$ r’&#x3D;0$,则$w_p$是$w$的前缀，否则不是。</p>
+</li>
 </ul>
+<p><img src="/images/image-20241219143556516.png" alt="图4:关键字&quot;dr5r77&quot;和前缀&quot;dr5r7&quot;的加解密过程"></p>
+<h3 id="GridSE方案构建"><a href="#GridSE方案构建" class="headerlink" title="GridSE方案构建"></a>GridSE方案构建</h3><ul>
+<li>Setup <ol>
+<li>初始化EDB和本地状态</li>
+<li>根据参数$\lambda$生成方案的密钥K并初始化$SP^2E$</li>
+<li>初始化列表$\hat{\delta}$用于存储之后的掩码</li>
+<li>初始化UpdateCnt用于存储关键字更新次数，初始化InxDict用于存储加密的索引</li>
+</ol>
+</li>
+</ul>
+<p><img src="/images/image-20241219184423253.png"></p>
+<ul>
+<li>Update<ol>
+<li>从UpdateCnt中获取关键字w的更新次数，如果关键字不存在，则UpdateCnt[w]&#x3D;0</li>
+<li>查询关键字w的seq,如果w，不存在，则seq&#x3D;UpdateCnt.size()，否则取出相应的seqUpdateCnt[w]++</li>
+<li>使用$SP^2E.Enc$ 对关键字进行加密，得到关键字对应的addr，并将生成的掩码$\delta$存储在本地</li>
+<li>根据UpdateCnt[w]和seq生成掩码，和(id||op)进行异或操作后得到val并上传服务器</li>
+<li>服务器在InxDict[addr]中插入val</li>
+</ol>
+</li>
+</ul>
+<p><img src="/images/image-20241219184503295.png"></p>
+<ul>
+<li>Search<ol>
+<li>对于搜索关键字$w_p$,根据$SP^2E.TKGen$生成关于服务器上所有关键字的搜索令牌，存储在TList中</li>
+<li>服务器对于IdxDict中存储的所有addr执行$SP^2E.PrefDec(TList[i],addr)$,如果匹配成功，则将该InxDict中的valList存入结果中返回</li>
+<li>客户端在本地根据seq按照更新顺序将内容解密，得到需要的索引。</li>
+</ol>
+</li>
+</ul>
+<p><img src="/images/image-20241219184543382.png"></p>
+<p><strong>值得注意的是</strong>，该方案在更新的时候，由于同一个关键字的seq是不会随着更新次数变化的，且服务器端关键字的上传位置仅由关键字w和seq决定（见Update算法第6行），因此相同关键字的每一次更新位置是固定的。这导致方案并没有真的实现前向安全。</p>
+<p><strong>清除被删除条目：</strong></p>
+<p>为了删除条目，可以考虑在客户端搜索取回条目的时候，剔除被删除的条目。但在原本的构造中，对相同的内容进行加密，由于输入的内容相同，会导致重加密的密文相同，使隐私泄露。为了克服这个问题，可以在方案中增加一个搜索计数器，让每次搜索计数器加一，这样重加密之后密文就不会相同了。</p>
+<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p><img src="/images/image-20241219185140391.png" alt="不同参数下方案运行效率对比"></p>
+<p><img src="/images/image-20241219185230339.png" alt="不同参数下方案运行效率对比"></p>
 ]]></content>
       <categories>
         <category>DEES论文汇报</category>
@@ -98,6 +138,187 @@
       <tags>
         <tag>第一个</tag>
         <tag>技术</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Latex的使用</title>
+    <url>/2023/05/01/Latex/</url>
+    <content><![CDATA[<h2 id="Latex环境和命令"><a href="#Latex环境和命令" class="headerlink" title="Latex环境和命令"></a>Latex环境和命令</h2><p>$latex{}$ 的命令以\开头，而环境是指用以令一些效果在局部生效，或是生成特殊的文档元素。LATEX 环境</p>
+<p>的用法为一对命令 \begin 和 \end</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\begin&#123;⟨environment name⟩&#125;[⟨optional arguments⟩]&#123;⟨mandatory arguments⟩&#125;</span><br><span class="line">…</span><br><span class="line">\end&#123;⟨environment name⟩&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中 <em>⟨<strong>environment name</strong>⟩</em> 为环境名，\begin 和 \end 中填写的环境名应当一致。类似命令，</p>
+<p>{<em>⟨<strong>mandatory arguments</strong>⟩</em>} 和 [<em>⟨<strong>optional arguments</strong>⟩</em>] 为环境所需的必选和可选参数。LATEX 环</p>
+<p>境可能需要一个或多个必选&#x2F;可选参数，也可能完全不需要参数。部分环境允许嵌套使用。</p>
+<h3 id="Latex源代码结构"><a href="#Latex源代码结构" class="headerlink" title="Latex源代码结构"></a>Latex源代码结构</h3><p>LATEX 源代码以一个 \documentclass 命令作为开头，它指定了文档使用的<strong>文档类</strong>。docu</p>
+<p>ment 环境当中的内容是文档正文。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\documentclass[⟨options⟩]&#123;⟨class-name⟩&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在 \documentclass 和 \begin{document} 之间的位置称为<strong>导言区</strong>。在导言区中常会使用</p>
+<p>\usepackage 命令调用<strong>宏包</strong>，还会进行文档的全局设置。</p>
+<p><img src="/images/image-20230424224310764.png" alt="image-20230424224310764"></p>
+<h3 id="Latex排版文字"><a href="#Latex排版文字" class="headerlink" title="Latex排版文字"></a>Latex排版文字</h3><p>使用latex排版中文的时候需要引入ctex包，代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\usepackage&#123;ctex&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="空格和分段"><a href="#空格和分段" class="headerlink" title="空格和分段"></a>空格和分段</h2><p>latex中每行开头的空格无效，一个或多个空格被视为一个空格。可以使用\par命令让文字分段。文末的一个换行符被视为一个空格，但多个换行符被视为一个换行符（对中文无效）</p>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><p>latex使用%进行注释，该字符到行末的所有文字都被忽略</p>
+<h3 id="字体的设置"><a href="#字体的设置" class="headerlink" title="字体的设置"></a>字体的设置</h3><p>Latex中设置正文字体的时候使用 \setmainfont命令。例如，如果要设置字体为宋体，命令为\setmainfont{Simsun}</p>
+<p>在\documentclass[11pt,a4paper]{article}命令中可以设置正文字体大小和使用的纸张大小。</p>
+<h3 id="行间距的设置"><a href="#行间距的设置" class="headerlink" title="行间距的设置"></a>行间距的设置</h3><p>Latex中通过引入宏包</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\usepackage</span>&#123;setspace&#125; <span class="comment">% 加载 setspace 宏包</span></span><br><span class="line"><span class="keyword">\setstretch</span>&#123;1.5&#125; <span class="comment">% 设置行距为1.5倍</span></span><br></pre></td></tr></table></figure>
+
+<p>通过这种方式设置行间距。</p>
+<h3 id="设置目录"><a href="#设置目录" class="headerlink" title="设置目录"></a>设置目录</h3><p>通过引入包hyperref然后在文档内容中加入目录，具体代码如下：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\usepackage</span>&#123;hyperref&#125; <span class="comment">% 引入超链接包</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\newpage</span> <span class="comment">% 新页</span></span><br><span class="line"><span class="keyword">\tableofcontents</span> <span class="comment">% 生成目录</span></span><br></pre></td></tr></table></figure>
+
+<p>这样生成的目录可以使用超链接且独占一页。</p>
+<h2 id="排版"><a href="#排版" class="headerlink" title="排版"></a>排版</h2><h3 id="段落"><a href="#段落" class="headerlink" title="段落"></a>段落</h3><p>可以使用\section{}标签生成一级段落，\subsection{}生成二级段落。 \subsubsection{} 生成三级段落。</p>
+<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p>使用</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;enumerate&#125;</span><br><span class="line"><span class="keyword">\item</span> 表项一</span><br><span class="line"><span class="keyword">\item</span> 表项二</span><br><span class="line">···</span><br><span class="line"><span class="keyword">\end</span>&#123;enumerate&#125;</span><br></pre></td></tr></table></figure>
+
+<p>生成有序列表，使用</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;itemize&#125;</span><br><span class="line"><span class="keyword">\item</span> 表项一</span><br><span class="line"><span class="keyword">\item</span> 表项二</span><br><span class="line">···</span><br><span class="line"><span class="keyword">\end</span>&#123;itemize&#125;</span><br></pre></td></tr></table></figure>
+
+<p>生成无序列表。如果要将标签数字用括号括起，使用</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\usepackage</span>&#123;enumitem&#125;</span><br><span class="line"><span class="keyword">\begin</span>&#123;enumerate&#125;[label=(<span class="keyword">\arabic</span>*)]</span><br><span class="line">    <span class="keyword">\item</span> 第一项内容</span><br><span class="line">    <span class="keyword">\item</span> 第二项内容</span><br><span class="line">    <span class="keyword">\item</span> 第三项内容</span><br><span class="line"><span class="keyword">\end</span>&#123;enumerate&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中*表示使用括号</p>
+<h2 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h2><p>如何需要添加一个公式段落，可以使用</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;equation&#125;<span class="keyword">\label</span>&#123;eq:eq1&#125;</span><br><span class="line">f(x)=a<span class="built_in">^</span>x+b</span><br><span class="line"><span class="keyword">\end</span>&#123;equation&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中label标签中定义了公式的引用key，在文章的其他部分可以使用<code>\ref&#123;eq:eq1&#125;</code>来进行引用。</p>
+<p>常用的公式符号如下：</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&#x3D;</td>
+<td>赋值</td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td>对齐符号</td>
+</tr>
+<tr>
+<td>+</td>
+<td>加法</td>
+</tr>
+<tr>
+<td>-</td>
+<td>减法</td>
+</tr>
+<tr>
+<td>*</td>
+<td>乘法</td>
+</tr>
+<tr>
+<td>&#x2F;</td>
+<td>除法</td>
+</tr>
+<tr>
+<td>%</td>
+<td>取模</td>
+</tr>
+<tr>
+<td>^</td>
+<td>指数</td>
+</tr>
+<tr>
+<td>()</td>
+<td>括号，用于改变优先级</td>
+</tr>
+<tr>
+<td>{}</td>
+<td>大括号，用于组合数学表达式</td>
+</tr>
+<tr>
+<td>[]</td>
+<td>中括号，用于表示向量或矩阵</td>
+</tr>
+<tr>
+<td>_</td>
+<td>下划线，用于表示下标</td>
+</tr>
+<tr>
+<td>^{}</td>
+<td>脚注，用于表示上标</td>
+</tr>
+<tr>
+<td>\sqrt{}</td>
+<td>开方</td>
+</tr>
+<tr>
+<td>\frac{}{}</td>
+<td>分数</td>
+</tr>
+<tr>
+<td>\sum</td>
+<td>求和</td>
+</tr>
+<tr>
+<td>\int</td>
+<td>积分</td>
+</tr>
+<tr>
+<td>\lim</td>
+<td>极限</td>
+</tr>
+<tr>
+<td>\infty</td>
+<td>无穷</td>
+</tr>
+<tr>
+<td>\pm</td>
+<td>正负号</td>
+</tr>
+<tr>
+<td>\neq</td>
+<td>不等于号</td>
+</tr>
+<tr>
+<td>\leq</td>
+<td>小于等于号</td>
+</tr>
+<tr>
+<td>\geq</td>
+<td>大于等于号</td>
+</tr>
+<tr>
+<td>\mathop{\max}\limits_{x}</td>
+<td>$\mathop{\max}\limits_{x}$</td>
+</tr>
+</tbody></table>
+<h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><p>如果要插入图片，首先要引入graphicx包，具体的代码如下：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\usepackage</span>&#123;graphicx&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>&#123;figure&#125;</span><br><span class="line"><span class="keyword">\centering</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\includegraphics</span>[width=0.5<span class="keyword">\textwidth</span>]&#123;Figure1.png&#125;</span><br><span class="line"><span class="keyword">\caption</span>&#123;DeepId模型结构图&#125; <span class="keyword">\label</span>&#123;fig:Figure1&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;figure&#125;</span><br></pre></td></tr></table></figure>
+
+<p>caption为图片题注，label为引用标签，\centering为设置图片居中</p>
+<p>$y^i_{j,k}&#x3D;\mathop{\max}\limits_{0\le m,n&lt;s}{x^i_{j\cdot s+m,k\cdot s+n}}$</p>
+<p>$y_j&#x3D;max\big(0,\sum\limits_ix^1_i\cdot w^1_{i,j}+\sum\limits_{i}x^2_i\cdot w^2_{i,j}+b_j\big)$</p>
+<p>$y_i&#x3D;\frac {exp(y_i)} {\sum^n_{i&#x3D;1}exp(y_j)}$</p>
+<h2 id="文献的引用"><a href="#文献的引用" class="headerlink" title="文献的引用"></a>文献的引用</h2><p>在$Latex$中，通常可以使用BibTeX文件对文件进行引用。BibTex是一个单独的文献引用数据库，其基本的格式是：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">@article<span class="punctuation">&#123;</span>smith01<span class="punctuation">,</span></span><br><span class="line">  author = <span class="string">&quot;John Smith&quot;</span><span class="punctuation">,</span></span><br><span class="line">  title = <span class="string">&quot;A new approach to computer vision&quot;</span><span class="punctuation">,</span></span><br><span class="line">  journal = <span class="string">&quot;IEEE Transactions on Pattern Analysis and Machine Intelligence&quot;</span><span class="punctuation">,</span></span><br><span class="line">  volume = <span class="string">&quot;23&quot;</span><span class="punctuation">,</span></span><br><span class="line">  number = <span class="string">&quot;12&quot;</span><span class="punctuation">,</span></span><br><span class="line">  pages = <span class="string">&quot;1331--1335&quot;</span><span class="punctuation">,</span></span><br><span class="line">  year = <span class="string">&quot;2001&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这个例子中的文献条目包括作者、标题、期刊名称、卷、期、页码和年份等信息。</p>
+<p>之后可以在LaTeX文档中使用\cite命令引用文献，例如：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line">According to Smith <span class="keyword">\cite</span>&#123;smith01&#125;, computer vision is a challenging field.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>之后在LaTeX文档中需要生成文献参考表的位置指定BibTeX文件的位置和样式，例如：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\bibliography</span>&#123;mybibfile&#125;</span><br><span class="line"><span class="keyword">\bibliographystyle</span>&#123;plain&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后，先使用xelatex编译一遍源文件，然后使用BibTex编译一遍源文件，然后再用xelatex编译一遍源文件就可以生成正确的pdf文件了。</p>
+]]></content>
+      <categories>
+        <category>Latex</category>
+      </categories>
+      <tags>
+        <tag>Latex</tag>
+        <tag>论文排版工具</tag>
       </tags>
   </entry>
   <entry>
@@ -368,187 +589,6 @@
         <tag>计算机系统结构</tag>
         <tag>cache</tag>
         <tag>硬件</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Latex的使用</title>
-    <url>/2023/05/01/Latex/</url>
-    <content><![CDATA[<h2 id="Latex环境和命令"><a href="#Latex环境和命令" class="headerlink" title="Latex环境和命令"></a>Latex环境和命令</h2><p>$latex{}$ 的命令以\开头，而环境是指用以令一些效果在局部生效，或是生成特殊的文档元素。LATEX 环境</p>
-<p>的用法为一对命令 \begin 和 \end</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\begin&#123;⟨environment name⟩&#125;[⟨optional arguments⟩]&#123;⟨mandatory arguments⟩&#125;</span><br><span class="line">…</span><br><span class="line">\end&#123;⟨environment name⟩&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中 <em>⟨<strong>environment name</strong>⟩</em> 为环境名，\begin 和 \end 中填写的环境名应当一致。类似命令，</p>
-<p>{<em>⟨<strong>mandatory arguments</strong>⟩</em>} 和 [<em>⟨<strong>optional arguments</strong>⟩</em>] 为环境所需的必选和可选参数。LATEX 环</p>
-<p>境可能需要一个或多个必选&#x2F;可选参数，也可能完全不需要参数。部分环境允许嵌套使用。</p>
-<h3 id="Latex源代码结构"><a href="#Latex源代码结构" class="headerlink" title="Latex源代码结构"></a>Latex源代码结构</h3><p>LATEX 源代码以一个 \documentclass 命令作为开头，它指定了文档使用的<strong>文档类</strong>。docu</p>
-<p>ment 环境当中的内容是文档正文。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\documentclass[⟨options⟩]&#123;⟨class-name⟩&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>在 \documentclass 和 \begin{document} 之间的位置称为<strong>导言区</strong>。在导言区中常会使用</p>
-<p>\usepackage 命令调用<strong>宏包</strong>，还会进行文档的全局设置。</p>
-<p><img src="/images/image-20230424224310764.png" alt="image-20230424224310764"></p>
-<h3 id="Latex排版文字"><a href="#Latex排版文字" class="headerlink" title="Latex排版文字"></a>Latex排版文字</h3><p>使用latex排版中文的时候需要引入ctex包，代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\usepackage&#123;ctex&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="空格和分段"><a href="#空格和分段" class="headerlink" title="空格和分段"></a>空格和分段</h2><p>latex中每行开头的空格无效，一个或多个空格被视为一个空格。可以使用\par命令让文字分段。文末的一个换行符被视为一个空格，但多个换行符被视为一个换行符（对中文无效）</p>
-<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><p>latex使用%进行注释，该字符到行末的所有文字都被忽略</p>
-<h3 id="字体的设置"><a href="#字体的设置" class="headerlink" title="字体的设置"></a>字体的设置</h3><p>Latex中设置正文字体的时候使用 \setmainfont命令。例如，如果要设置字体为宋体，命令为\setmainfont{Simsun}</p>
-<p>在\documentclass[11pt,a4paper]{article}命令中可以设置正文字体大小和使用的纸张大小。</p>
-<h3 id="行间距的设置"><a href="#行间距的设置" class="headerlink" title="行间距的设置"></a>行间距的设置</h3><p>Latex中通过引入宏包</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\usepackage</span>&#123;setspace&#125; <span class="comment">% 加载 setspace 宏包</span></span><br><span class="line"><span class="keyword">\setstretch</span>&#123;1.5&#125; <span class="comment">% 设置行距为1.5倍</span></span><br></pre></td></tr></table></figure>
-
-<p>通过这种方式设置行间距。</p>
-<h3 id="设置目录"><a href="#设置目录" class="headerlink" title="设置目录"></a>设置目录</h3><p>通过引入包hyperref然后在文档内容中加入目录，具体代码如下：</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\usepackage</span>&#123;hyperref&#125; <span class="comment">% 引入超链接包</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\newpage</span> <span class="comment">% 新页</span></span><br><span class="line"><span class="keyword">\tableofcontents</span> <span class="comment">% 生成目录</span></span><br></pre></td></tr></table></figure>
-
-<p>这样生成的目录可以使用超链接且独占一页。</p>
-<h2 id="排版"><a href="#排版" class="headerlink" title="排版"></a>排版</h2><h3 id="段落"><a href="#段落" class="headerlink" title="段落"></a>段落</h3><p>可以使用\section{}标签生成一级段落，\subsection{}生成二级段落。 \subsubsection{} 生成三级段落。</p>
-<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p>使用</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;enumerate&#125;</span><br><span class="line"><span class="keyword">\item</span> 表项一</span><br><span class="line"><span class="keyword">\item</span> 表项二</span><br><span class="line">···</span><br><span class="line"><span class="keyword">\end</span>&#123;enumerate&#125;</span><br></pre></td></tr></table></figure>
-
-<p>生成有序列表，使用</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;itemize&#125;</span><br><span class="line"><span class="keyword">\item</span> 表项一</span><br><span class="line"><span class="keyword">\item</span> 表项二</span><br><span class="line">···</span><br><span class="line"><span class="keyword">\end</span>&#123;itemize&#125;</span><br></pre></td></tr></table></figure>
-
-<p>生成无序列表。如果要将标签数字用括号括起，使用</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\usepackage</span>&#123;enumitem&#125;</span><br><span class="line"><span class="keyword">\begin</span>&#123;enumerate&#125;[label=(<span class="keyword">\arabic</span>*)]</span><br><span class="line">    <span class="keyword">\item</span> 第一项内容</span><br><span class="line">    <span class="keyword">\item</span> 第二项内容</span><br><span class="line">    <span class="keyword">\item</span> 第三项内容</span><br><span class="line"><span class="keyword">\end</span>&#123;enumerate&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中*表示使用括号</p>
-<h2 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h2><p>如何需要添加一个公式段落，可以使用</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;equation&#125;<span class="keyword">\label</span>&#123;eq:eq1&#125;</span><br><span class="line">f(x)=a<span class="built_in">^</span>x+b</span><br><span class="line"><span class="keyword">\end</span>&#123;equation&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中label标签中定义了公式的引用key，在文章的其他部分可以使用<code>\ref&#123;eq:eq1&#125;</code>来进行引用。</p>
-<p>常用的公式符号如下：</p>
-<table>
-<thead>
-<tr>
-<th>符号</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>&#x3D;</td>
-<td>赋值</td>
-</tr>
-<tr>
-<td>&amp;</td>
-<td>对齐符号</td>
-</tr>
-<tr>
-<td>+</td>
-<td>加法</td>
-</tr>
-<tr>
-<td>-</td>
-<td>减法</td>
-</tr>
-<tr>
-<td>*</td>
-<td>乘法</td>
-</tr>
-<tr>
-<td>&#x2F;</td>
-<td>除法</td>
-</tr>
-<tr>
-<td>%</td>
-<td>取模</td>
-</tr>
-<tr>
-<td>^</td>
-<td>指数</td>
-</tr>
-<tr>
-<td>()</td>
-<td>括号，用于改变优先级</td>
-</tr>
-<tr>
-<td>{}</td>
-<td>大括号，用于组合数学表达式</td>
-</tr>
-<tr>
-<td>[]</td>
-<td>中括号，用于表示向量或矩阵</td>
-</tr>
-<tr>
-<td>_</td>
-<td>下划线，用于表示下标</td>
-</tr>
-<tr>
-<td>^{}</td>
-<td>脚注，用于表示上标</td>
-</tr>
-<tr>
-<td>\sqrt{}</td>
-<td>开方</td>
-</tr>
-<tr>
-<td>\frac{}{}</td>
-<td>分数</td>
-</tr>
-<tr>
-<td>\sum</td>
-<td>求和</td>
-</tr>
-<tr>
-<td>\int</td>
-<td>积分</td>
-</tr>
-<tr>
-<td>\lim</td>
-<td>极限</td>
-</tr>
-<tr>
-<td>\infty</td>
-<td>无穷</td>
-</tr>
-<tr>
-<td>\pm</td>
-<td>正负号</td>
-</tr>
-<tr>
-<td>\neq</td>
-<td>不等于号</td>
-</tr>
-<tr>
-<td>\leq</td>
-<td>小于等于号</td>
-</tr>
-<tr>
-<td>\geq</td>
-<td>大于等于号</td>
-</tr>
-<tr>
-<td>\mathop{\max}\limits_{x}</td>
-<td>$\mathop{\max}\limits_{x}$</td>
-</tr>
-</tbody></table>
-<h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><p>如果要插入图片，首先要引入graphicx包，具体的代码如下：</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\usepackage</span>&#123;graphicx&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>&#123;figure&#125;</span><br><span class="line"><span class="keyword">\centering</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\includegraphics</span>[width=0.5<span class="keyword">\textwidth</span>]&#123;Figure1.png&#125;</span><br><span class="line"><span class="keyword">\caption</span>&#123;DeepId模型结构图&#125; <span class="keyword">\label</span>&#123;fig:Figure1&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;figure&#125;</span><br></pre></td></tr></table></figure>
-
-<p>caption为图片题注，label为引用标签，\centering为设置图片居中</p>
-<p>$y^i_{j,k}&#x3D;\mathop{\max}\limits_{0\le m,n&lt;s}{x^i_{j\cdot s+m,k\cdot s+n}}$</p>
-<p>$y_j&#x3D;max\big(0,\sum\limits_ix^1_i\cdot w^1_{i,j}+\sum\limits_{i}x^2_i\cdot w^2_{i,j}+b_j\big)$</p>
-<p>$y_i&#x3D;\frac {exp(y_i)} {\sum^n_{i&#x3D;1}exp(y_j)}$</p>
-<h2 id="文献的引用"><a href="#文献的引用" class="headerlink" title="文献的引用"></a>文献的引用</h2><p>在$Latex$中，通常可以使用BibTeX文件对文件进行引用。BibTex是一个单独的文献引用数据库，其基本的格式是：</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">@article<span class="punctuation">&#123;</span>smith01<span class="punctuation">,</span></span><br><span class="line">  author = <span class="string">&quot;John Smith&quot;</span><span class="punctuation">,</span></span><br><span class="line">  title = <span class="string">&quot;A new approach to computer vision&quot;</span><span class="punctuation">,</span></span><br><span class="line">  journal = <span class="string">&quot;IEEE Transactions on Pattern Analysis and Machine Intelligence&quot;</span><span class="punctuation">,</span></span><br><span class="line">  volume = <span class="string">&quot;23&quot;</span><span class="punctuation">,</span></span><br><span class="line">  number = <span class="string">&quot;12&quot;</span><span class="punctuation">,</span></span><br><span class="line">  pages = <span class="string">&quot;1331--1335&quot;</span><span class="punctuation">,</span></span><br><span class="line">  year = <span class="string">&quot;2001&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>这个例子中的文献条目包括作者、标题、期刊名称、卷、期、页码和年份等信息。</p>
-<p>之后可以在LaTeX文档中使用\cite命令引用文献，例如：</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line">According to Smith <span class="keyword">\cite</span>&#123;smith01&#125;, computer vision is a challenging field.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>之后在LaTeX文档中需要生成文献参考表的位置指定BibTeX文件的位置和样式，例如：</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\bibliography</span>&#123;mybibfile&#125;</span><br><span class="line"><span class="keyword">\bibliographystyle</span>&#123;plain&#125;</span><br></pre></td></tr></table></figure>
-
-<p>最后，先使用xelatex编译一遍源文件，然后使用BibTex编译一遍源文件，然后再用xelatex编译一遍源文件就可以生成正确的pdf文件了。</p>
-]]></content>
-      <categories>
-        <category>Latex</category>
-      </categories>
-      <tags>
-        <tag>Latex</tag>
-        <tag>论文排版工具</tag>
       </tags>
   </entry>
   <entry>
@@ -956,6 +996,70 @@
       <tags>
         <tag>计算机通信与网络</tag>
         <tag>华科实验</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>sql笔记</title>
+    <url>/2023/05/01/sql/</url>
+    <content><![CDATA[<h2 id="基本指令"><a href="#基本指令" class="headerlink" title="基本指令"></a>基本指令</h2><ul>
+<li><p>创建数据库</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> database dbname</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建表</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> tablename(</span><br><span class="line">deptNo <span class="type">int</span> <span class="keyword">primary</span> key,  #<span class="keyword">primary</span> key为主键，主键的值是唯一的</span><br><span class="line">deptName <span class="type">varchar</span>(<span class="number">32</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建外码约束</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">#表级外码约束可以直接在创建表的时候定义，一般开头为FK_</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> dept(</span><br><span class="line">deptNo <span class="type">int</span> <span class="keyword">primary</span> key,</span><br><span class="line">deptName <span class="type">varchar</span>(<span class="number">32</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> staff(</span><br><span class="line">staffNo <span class="type">INT</span> <span class="keyword">primary</span> key, </span><br><span class="line">staffName <span class="type">varchar</span>(<span class="number">32</span>),</span><br><span class="line">gender <span class="type">char</span>(<span class="number">1</span>),</span><br><span class="line">dob <span class="type">date</span>,</span><br><span class="line">Salary <span class="type">numeric</span>(<span class="number">8</span>,<span class="number">2</span>),</span><br><span class="line">deptNo <span class="type">int</span>,</span><br><span class="line">#定义外码约束</span><br><span class="line"><span class="keyword">constraint</span> FK_staff_deptNo <span class="keyword">foreign</span> key(deptNo) <span class="keyword">references</span> dept(deptNo)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建CHECK约束</p>
+<p>只有在CHECK的表达式为TRUE时数据插入才有效</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">#当需要命名约束的名称时</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line">(</span><br><span class="line">P_Id <span class="type">int</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">LastName <span class="type">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">FirstName <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">Address <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">City <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line"><span class="keyword">CONSTRAINT</span> chk_Person <span class="keyword">CHECK</span> (P_Id<span class="operator">&gt;</span><span class="number">0</span> <span class="keyword">AND</span> City<span class="operator">=</span><span class="string">&#x27;Sandnes&#x27;</span>)</span><br><span class="line">);</span><br><span class="line">#当表已经创建后，需要添加约束时</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> chk_Person <span class="keyword">CHECK</span> (P_Id<span class="operator">&gt;</span><span class="number">0</span> <span class="keyword">AND</span> City<span class="operator">=</span><span class="string">&#x27;Sandnes&#x27;</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建default约束</p>
+<p>default约束用于向列中加入默认值</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line">(</span><br><span class="line">    P_Id <span class="type">int</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    LastName <span class="type">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    FirstName <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">    Address <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">    City <span class="type">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="string">&#x27;Sandnes&#x27;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">#<span class="keyword">default</span>也可以使用函数插入系统值</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Orders</span><br><span class="line">(</span><br><span class="line">    O_Id <span class="type">int</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    OrderNo <span class="type">int</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    P_Id <span class="type">int</span>,</span><br><span class="line">    OrderDate <span class="type">date</span> <span class="keyword">DEFAULT</span> GETDATE()</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">#创建表后加入<span class="keyword">default</span>约束</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> ab_c <span class="keyword">DEFAULT</span> <span class="string">&#x27;SANDNES&#x27;</span> <span class="keyword">for</span> City</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#撤销<span class="keyword">default</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">COLUMN</span> City <span class="keyword">DROP</span> <span class="keyword">DEFAULT</span></span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>UNIQUE约束</p>
+<p>UNIQUE约束和主键约束类似，但是可以允许为NULL。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> department(</span><br><span class="line">  dno <span class="type">char</span>(<span class="number">10</span>) <span class="keyword">primary</span> key,</span><br><span class="line">  dname <span class="type">varchar</span>(<span class="number">32</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">UNIQUE</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>插入数据</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> table_name</span><br><span class="line"><span class="keyword">VALUES</span> (value1,value2,value3,...);</span><br><span class="line"></span><br><span class="line">#也可以指定插入的列</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> table_name (column1,column2,column3,...)</span><br><span class="line"><span class="keyword">VALUES</span> (value1,value2,value3,...);</span><br><span class="line"></span><br><span class="line">#如需命名 <span class="keyword">UNIQUE</span> 约束，并定义多个列的 <span class="keyword">UNIQUE</span> 约束，请使用下面的 <span class="keyword">SQL</span> 语法</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line">(</span><br><span class="line">P_Id <span class="type">int</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">LastName <span class="type">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">FirstName <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">Address <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">City <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line"><span class="keyword">CONSTRAINT</span> uc_PersonID <span class="keyword">UNIQUE</span> (P_Id,LastName)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">#当表已被创建时，如需在 &quot;P_Id&quot; 列创建 <span class="keyword">UNIQUE</span> 约束，请使用下面的 <span class="keyword">SQL</span>:</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> uc_PersonID <span class="keyword">UNIQUE</span> (P_Id,LastName)</span><br><span class="line"></span><br><span class="line">#如需撤销 <span class="keyword">UNIQUE</span> 约束，请使用下面的 <span class="keyword">SQL</span>：</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">CONSTRAINT</span> uc_PersonID</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除表</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> table_name</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更改表的内容</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> table_name</span><br><span class="line"></span><br><span class="line">  <span class="keyword">ADD</span> [<span class="keyword">COLUMN</span>] 列名 数据类型 [列约束]</span><br><span class="line">       [<span class="keyword">FIRST</span> <span class="operator">|</span> AFTER col_name]</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">ADD</span> &#123;INDEX<span class="operator">|</span>KEY&#125; [索引名] [类型] (列<span class="number">1</span>,...) </span><br><span class="line">  <span class="operator">|</span> <span class="keyword">ADD</span> [<span class="keyword">CONSTRAINT</span> [约束名]] 主码约束</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">ADD</span> [<span class="keyword">CONSTRAINT</span> [约束名]] <span class="keyword">UNIQUE</span>约束</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">ADD</span> [<span class="keyword">CONSTRAINT</span> [约束名]] 外码约束</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">ADD</span> [<span class="keyword">CONSTRAINT</span> [约束名]] <span class="keyword">CHECK</span>约束</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">DROP</span> &#123;<span class="keyword">CHECK</span><span class="operator">|</span><span class="keyword">CONSTRAINT</span>&#125; 约束名</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">ALTER</span> [<span class="keyword">COLUMN</span>] 列名 &#123;<span class="keyword">SET</span> <span class="keyword">DEFAULT</span> &#123;常量 <span class="operator">|</span> (表达式)&#125; <span class="operator">|</span> <span class="keyword">DROP</span> <span class="keyword">DEFAULT</span>&#125;</span><br><span class="line">  <span class="operator">|</span> CHANGE [<span class="keyword">COLUMN</span>] 列名 新列名 数据类型 [列约束]</span><br><span class="line">        [<span class="keyword">FIRST</span> <span class="operator">|</span> AFTER col_name]</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">DROP</span> [<span class="keyword">COLUMN</span>] 列名</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">DROP</span> &#123;INDEX<span class="operator">|</span>KEY&#125; 索引名</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">DROP</span> <span class="keyword">PRIMARY</span> KEY</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">DROP</span> <span class="keyword">FOREIGN</span> KEY fk_symbol</span><br><span class="line">  <span class="operator">|</span> MODIFY [<span class="keyword">COLUMN</span>] 列名 数据类型 [列约束]</span><br><span class="line">        [<span class="keyword">FIRST</span> <span class="operator">|</span> AFTER col_name]</span><br><span class="line">  <span class="operator">|</span> RENAME <span class="keyword">COLUMN</span> 列名 <span class="keyword">TO</span> 新列名</span><br><span class="line">  <span class="operator">|</span> RENAME &#123;INDEX<span class="operator">|</span>KEY&#125; 索引名 <span class="keyword">TO</span> 新索引名</span><br><span class="line">  <span class="operator">|</span> RENAME [<span class="keyword">TO</span>] 新表名</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>sql-service中更改表名使用 exec sp_rename oldname,nername; 语句</p>
+</li>
+</ul>
+<h3 id="跨表查询"><a href="#跨表查询" class="headerlink" title="跨表查询"></a>跨表查询</h3><ul>
+<li>select * from t_1,t_2 where()</li>
+</ul>
+<h3 id="group-by"><a href="#group-by" class="headerlink" title="group by"></a>group by</h3><p> group by 可以将表格按照某些元素聚集起来。如可以将表单中id号相同的人聚集起来，这样方便对某一元素进行集中操作。如查询某一id下所有资产的总和就可以用group by</p>
+<h3 id="order-by"><a href="#order-by" class="headerlink" title="order by"></a>order by</h3><p>order by 可以让数据集按照某个数据的大小进行排序 如果要降序则在最后加上desc</p>
+<h3 id="in"><a href="#in" class="headerlink" title="in()"></a>in()</h3><p>in()可以用在筛选数据的where语句中，表示判断某个字段是否在某个数据集中，与之相反的有not in()</p>
+<h3 id="limit-a-offset-b"><a href="#limit-a-offset-b" class="headerlink" title="limit a offset b"></a>limit a offset b</h3><p>limit表示将查询的记录分页，每页a条记录，b表示显示第几页的数据</p>
+<h3 id="rank-over-…"><a href="#rank-over-…" class="headerlink" title="rank() over(…)"></a>rank() over(…)</h3><p>可以根据over内的排序生成序号,序号为间断的</p>
+<h3 id="dense-rank"><a href="#dense-rank" class="headerlink" title="dense_rank()"></a>dense_rank()</h3><p>对结果集进行排序，排名值没有间断。 特定行的排名等于该特定行之前不同排名值的数量加一。</p>
+<h3 id="opengauss-返回星期"><a href="#opengauss-返回星期" class="headerlink" title="opengauss 返回星期"></a>opengauss 返回星期</h3><h4 id="几个重要函数"><a href="#几个重要函数" class="headerlink" title="几个重要函数"></a>几个重要函数</h4><ul>
+<li>date_part(‘week’,d1) - 日期d1在当年的周次。week(‘2022-2-7’) &#x3D; 6;</li>
+<li>extract(DOW FROM cast(d1 as TIMESTAMP) - 返回d1在本周的次序(0 &#x3D; Sunday, 1 &#x3D; Monday, …, 6 &#x3D; Saturday)</li>
+<li>case when expr1 then expr2 else expr3 end - 若expr1为TRUE，返回expr2，否则返回expr3.</li>
+</ul>
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>sql</tag>
+        <tag>数据库</tag>
       </tags>
   </entry>
   <entry>
@@ -1387,70 +1491,6 @@
       <tags>
         <tag>前端学习</tag>
         <tag>微信小程序</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>sql笔记</title>
-    <url>/2023/05/01/sql/</url>
-    <content><![CDATA[<h2 id="基本指令"><a href="#基本指令" class="headerlink" title="基本指令"></a>基本指令</h2><ul>
-<li><p>创建数据库</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> database dbname</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建表</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> tablename(</span><br><span class="line">deptNo <span class="type">int</span> <span class="keyword">primary</span> key,  #<span class="keyword">primary</span> key为主键，主键的值是唯一的</span><br><span class="line">deptName <span class="type">varchar</span>(<span class="number">32</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建外码约束</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">#表级外码约束可以直接在创建表的时候定义，一般开头为FK_</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> dept(</span><br><span class="line">deptNo <span class="type">int</span> <span class="keyword">primary</span> key,</span><br><span class="line">deptName <span class="type">varchar</span>(<span class="number">32</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> staff(</span><br><span class="line">staffNo <span class="type">INT</span> <span class="keyword">primary</span> key, </span><br><span class="line">staffName <span class="type">varchar</span>(<span class="number">32</span>),</span><br><span class="line">gender <span class="type">char</span>(<span class="number">1</span>),</span><br><span class="line">dob <span class="type">date</span>,</span><br><span class="line">Salary <span class="type">numeric</span>(<span class="number">8</span>,<span class="number">2</span>),</span><br><span class="line">deptNo <span class="type">int</span>,</span><br><span class="line">#定义外码约束</span><br><span class="line"><span class="keyword">constraint</span> FK_staff_deptNo <span class="keyword">foreign</span> key(deptNo) <span class="keyword">references</span> dept(deptNo)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建CHECK约束</p>
-<p>只有在CHECK的表达式为TRUE时数据插入才有效</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">#当需要命名约束的名称时</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line">(</span><br><span class="line">P_Id <span class="type">int</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">LastName <span class="type">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">FirstName <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">Address <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">City <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line"><span class="keyword">CONSTRAINT</span> chk_Person <span class="keyword">CHECK</span> (P_Id<span class="operator">&gt;</span><span class="number">0</span> <span class="keyword">AND</span> City<span class="operator">=</span><span class="string">&#x27;Sandnes&#x27;</span>)</span><br><span class="line">);</span><br><span class="line">#当表已经创建后，需要添加约束时</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> chk_Person <span class="keyword">CHECK</span> (P_Id<span class="operator">&gt;</span><span class="number">0</span> <span class="keyword">AND</span> City<span class="operator">=</span><span class="string">&#x27;Sandnes&#x27;</span>)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建default约束</p>
-<p>default约束用于向列中加入默认值</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line">(</span><br><span class="line">    P_Id <span class="type">int</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    LastName <span class="type">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    FirstName <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">    Address <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">    City <span class="type">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="string">&#x27;Sandnes&#x27;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">#<span class="keyword">default</span>也可以使用函数插入系统值</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Orders</span><br><span class="line">(</span><br><span class="line">    O_Id <span class="type">int</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    OrderNo <span class="type">int</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    P_Id <span class="type">int</span>,</span><br><span class="line">    OrderDate <span class="type">date</span> <span class="keyword">DEFAULT</span> GETDATE()</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">#创建表后加入<span class="keyword">default</span>约束</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> ab_c <span class="keyword">DEFAULT</span> <span class="string">&#x27;SANDNES&#x27;</span> <span class="keyword">for</span> City</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#撤销<span class="keyword">default</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">COLUMN</span> City <span class="keyword">DROP</span> <span class="keyword">DEFAULT</span></span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>UNIQUE约束</p>
-<p>UNIQUE约束和主键约束类似，但是可以允许为NULL。</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> department(</span><br><span class="line">  dno <span class="type">char</span>(<span class="number">10</span>) <span class="keyword">primary</span> key,</span><br><span class="line">  dname <span class="type">varchar</span>(<span class="number">32</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">UNIQUE</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
-
-</li>
-<li><p>插入数据</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> table_name</span><br><span class="line"><span class="keyword">VALUES</span> (value1,value2,value3,...);</span><br><span class="line"></span><br><span class="line">#也可以指定插入的列</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> table_name (column1,column2,column3,...)</span><br><span class="line"><span class="keyword">VALUES</span> (value1,value2,value3,...);</span><br><span class="line"></span><br><span class="line">#如需命名 <span class="keyword">UNIQUE</span> 约束，并定义多个列的 <span class="keyword">UNIQUE</span> 约束，请使用下面的 <span class="keyword">SQL</span> 语法</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line">(</span><br><span class="line">P_Id <span class="type">int</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">LastName <span class="type">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">FirstName <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">Address <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">City <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line"><span class="keyword">CONSTRAINT</span> uc_PersonID <span class="keyword">UNIQUE</span> (P_Id,LastName)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">#当表已被创建时，如需在 &quot;P_Id&quot; 列创建 <span class="keyword">UNIQUE</span> 约束，请使用下面的 <span class="keyword">SQL</span>:</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> uc_PersonID <span class="keyword">UNIQUE</span> (P_Id,LastName)</span><br><span class="line"></span><br><span class="line">#如需撤销 <span class="keyword">UNIQUE</span> 约束，请使用下面的 <span class="keyword">SQL</span>：</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">CONSTRAINT</span> uc_PersonID</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>删除表</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> table_name</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>更改表的内容</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> table_name</span><br><span class="line"></span><br><span class="line">  <span class="keyword">ADD</span> [<span class="keyword">COLUMN</span>] 列名 数据类型 [列约束]</span><br><span class="line">       [<span class="keyword">FIRST</span> <span class="operator">|</span> AFTER col_name]</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">ADD</span> &#123;INDEX<span class="operator">|</span>KEY&#125; [索引名] [类型] (列<span class="number">1</span>,...) </span><br><span class="line">  <span class="operator">|</span> <span class="keyword">ADD</span> [<span class="keyword">CONSTRAINT</span> [约束名]] 主码约束</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">ADD</span> [<span class="keyword">CONSTRAINT</span> [约束名]] <span class="keyword">UNIQUE</span>约束</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">ADD</span> [<span class="keyword">CONSTRAINT</span> [约束名]] 外码约束</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">ADD</span> [<span class="keyword">CONSTRAINT</span> [约束名]] <span class="keyword">CHECK</span>约束</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">DROP</span> &#123;<span class="keyword">CHECK</span><span class="operator">|</span><span class="keyword">CONSTRAINT</span>&#125; 约束名</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">ALTER</span> [<span class="keyword">COLUMN</span>] 列名 &#123;<span class="keyword">SET</span> <span class="keyword">DEFAULT</span> &#123;常量 <span class="operator">|</span> (表达式)&#125; <span class="operator">|</span> <span class="keyword">DROP</span> <span class="keyword">DEFAULT</span>&#125;</span><br><span class="line">  <span class="operator">|</span> CHANGE [<span class="keyword">COLUMN</span>] 列名 新列名 数据类型 [列约束]</span><br><span class="line">        [<span class="keyword">FIRST</span> <span class="operator">|</span> AFTER col_name]</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">DROP</span> [<span class="keyword">COLUMN</span>] 列名</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">DROP</span> &#123;INDEX<span class="operator">|</span>KEY&#125; 索引名</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">DROP</span> <span class="keyword">PRIMARY</span> KEY</span><br><span class="line">  <span class="operator">|</span> <span class="keyword">DROP</span> <span class="keyword">FOREIGN</span> KEY fk_symbol</span><br><span class="line">  <span class="operator">|</span> MODIFY [<span class="keyword">COLUMN</span>] 列名 数据类型 [列约束]</span><br><span class="line">        [<span class="keyword">FIRST</span> <span class="operator">|</span> AFTER col_name]</span><br><span class="line">  <span class="operator">|</span> RENAME <span class="keyword">COLUMN</span> 列名 <span class="keyword">TO</span> 新列名</span><br><span class="line">  <span class="operator">|</span> RENAME &#123;INDEX<span class="operator">|</span>KEY&#125; 索引名 <span class="keyword">TO</span> 新索引名</span><br><span class="line">  <span class="operator">|</span> RENAME [<span class="keyword">TO</span>] 新表名</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>sql-service中更改表名使用 exec sp_rename oldname,nername; 语句</p>
-</li>
-</ul>
-<h3 id="跨表查询"><a href="#跨表查询" class="headerlink" title="跨表查询"></a>跨表查询</h3><ul>
-<li>select * from t_1,t_2 where()</li>
-</ul>
-<h3 id="group-by"><a href="#group-by" class="headerlink" title="group by"></a>group by</h3><p> group by 可以将表格按照某些元素聚集起来。如可以将表单中id号相同的人聚集起来，这样方便对某一元素进行集中操作。如查询某一id下所有资产的总和就可以用group by</p>
-<h3 id="order-by"><a href="#order-by" class="headerlink" title="order by"></a>order by</h3><p>order by 可以让数据集按照某个数据的大小进行排序 如果要降序则在最后加上desc</p>
-<h3 id="in"><a href="#in" class="headerlink" title="in()"></a>in()</h3><p>in()可以用在筛选数据的where语句中，表示判断某个字段是否在某个数据集中，与之相反的有not in()</p>
-<h3 id="limit-a-offset-b"><a href="#limit-a-offset-b" class="headerlink" title="limit a offset b"></a>limit a offset b</h3><p>limit表示将查询的记录分页，每页a条记录，b表示显示第几页的数据</p>
-<h3 id="rank-over-…"><a href="#rank-over-…" class="headerlink" title="rank() over(…)"></a>rank() over(…)</h3><p>可以根据over内的排序生成序号,序号为间断的</p>
-<h3 id="dense-rank"><a href="#dense-rank" class="headerlink" title="dense_rank()"></a>dense_rank()</h3><p>对结果集进行排序，排名值没有间断。 特定行的排名等于该特定行之前不同排名值的数量加一。</p>
-<h3 id="opengauss-返回星期"><a href="#opengauss-返回星期" class="headerlink" title="opengauss 返回星期"></a>opengauss 返回星期</h3><h4 id="几个重要函数"><a href="#几个重要函数" class="headerlink" title="几个重要函数"></a>几个重要函数</h4><ul>
-<li>date_part(‘week’,d1) - 日期d1在当年的周次。week(‘2022-2-7’) &#x3D; 6;</li>
-<li>extract(DOW FROM cast(d1 as TIMESTAMP) - 返回d1在本周的次序(0 &#x3D; Sunday, 1 &#x3D; Monday, …, 6 &#x3D; Saturday)</li>
-<li>case when expr1 then expr2 else expr3 end - 若expr1为TRUE，返回expr2，否则返回expr3.</li>
-</ul>
-]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>sql</tag>
-        <tag>数据库</tag>
       </tags>
   </entry>
 </search>

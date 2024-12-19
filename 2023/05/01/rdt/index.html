@@ -102,12 +102,6 @@
  
     </div>
       
-    <div class="tocbot"></div>
-
-
-
-
-  
     <div class="article-entry" itemprop="articleBody">
        
   <h1 id="RDT实验"><a href="#RDT实验" class="headerlink" title="RDT实验"></a>RDT实验</h1><h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">GBNReceiver</span> :<span class="keyword">public</span> RdtReceiver</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="type">int</span> expectSequenceNumberRcvd;	<span class="comment">// 期待收到的下一个报文序号</span></span><br><span class="line">	<span class="type">int</span> seqlen;                     <span class="comment">//序号宽度</span></span><br><span class="line">	Packet lastAckPkt;				<span class="comment">//上次发送的确认报文</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -360,22 +354,6 @@
 <script src="/js/lazyload.min.js"></script>
 
 <!-- Tocbot -->
- 
-<script src="/js/tocbot.min.js"></script>
-
-<script>
-  tocbot.init({
-    tocSelector: ".tocbot",
-    contentSelector: ".article-entry",
-    headingSelector: "h1, h2, h3, h4, h5, h6",
-    hasInnerContainers: true,
-    scrollSmooth: true,
-    scrollContainer: "main",
-    positionFixedSelector: ".tocbot",
-    positionFixedClass: "is-position-fixed",
-    fixedSidebarOffset: "auto",
-  });
-</script>
 
 <script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
 <link
