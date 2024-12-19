@@ -6,7 +6,7 @@
     <content><![CDATA[<h1 id="GridSE-Towards-Practical-Secure-Geographic-Search-via-Prefix-Symmetric-Searchable-Encryption"><a href="#GridSE-Towards-Practical-Secure-Geographic-Search-via-Prefix-Symmetric-Searchable-Encryption" class="headerlink" title="GridSE: Towards Practical Secure Geographic Search via Prefix Symmetric Searchable Encryption"></a>GridSE: Towards Practical Secure Geographic Search via Prefix Symmetric Searchable Encryption</h1><hr>
 <p>汇报人：严浩铭</p>
 <hr>
-<h2 id="BACKGROUND"><a href="#BACKGROUND" class="headerlink" title="BACKGROUND"></a>BACKGROUND</h2><p>随着物联网 (IoT) 设备的不断部署以及下一代无线和移动通信的到来，对地理信息系统 (GIS)，特别是基于位置的服务 (LBS) 和地理搜索 (GS) 的需求在各种上下文感知应用中空前高涨。</p>
+<h2 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h2><p>随着物联网 (IoT) 设备的不断部署以及下一代无线和移动通信的到来，对地理信息系统 (GIS)，特别是基于位置的服务 (LBS) 和地理搜索 (GS) 的需求在各种上下文感知应用中空前高涨。</p>
 <p>为了提供准确的 LBS 服务，GS 应用通常需要收集细粒度的个人信息，例如用户的实时位置和兴趣。出于隐私考虑，存储在 GS 服务器（通常托管在云端）中的数据应得到良好保护。因此，安全地理搜索 (SGS) 成为一种很有前景的数据保护技术，它支持对加密地理数据进行地理搜索。</p>
 <p>现有的地理空间（GS）系统，已经深深植根于一种被称为离散全球网格（DGG）的技术。离散全球网格系统将地球区域划分为几何网格。每个网格可以进一步递归地划分为更小的区域，这些区域称为单元格，并具有逐渐精细的分辨率。为了便于计算，每个区域或单元格都由一个点表示，并分配一个可识别的字符串，我们将其称为单元格代码。</p>
 <p><img src="/images/image-20241218194223653.png" alt="图1"></p>
@@ -24,14 +24,22 @@
 <li>构建了一个高效、可扩展且与 DGGS 兼容的 SGS 方案 GridSE，它支持正向和反向隐私。</li>
 <li>设计了一种新的密码学原语 - 对称前缀谓词加密 (SP2E) - 用于对前缀进行谓词加密。</li>
 </ul>
-<h2 id="PRELIMINARIES"><a href="#PRELIMINARIES" class="headerlink" title="PRELIMINARIES"></a>PRELIMINARIES</h2><h3 id="地理搜索框架"><a href="#地理搜索框架" class="headerlink" title="地理搜索框架"></a>地理搜索框架</h3><p>一个典型的地理信息服务系统主要包含三个主要实体，分别是用户、客户端、服务器。其中服务器是一个提供计算或存储服务的云提供商。客户端是一个 GIS&#x2F;LBS 提供商，它将数据（加密后）外包给服务器，同时保留一些本地计算和存储能力；用户是发出地理搜索请求的使用者。</p>
+<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="地理搜索框架"><a href="#地理搜索框架" class="headerlink" title="地理搜索框架"></a>地理搜索框架</h3><p>一个典型的地理信息服务系统主要包含三个主要实体，分别是用户、客户端、服务器。其中服务器是一个提供计算或存储服务的云提供商。客户端是一个 GIS&#x2F;LBS 提供商，它将数据（加密后）外包给服务器，同时保留一些本地计算和存储能力；用户是发出地理搜索请求的使用者。</p>
 <p><img src="/images/%E6%88%AA%E5%B1%8F2024.png" alt="图二：地理搜索框架"></p>
 <p>文章将数据库逻辑划分为数据和索引两个部分。数据按照位置进行索引，用于索引位置的键称为索引键。在本工作中，只关注位置属性（例如，与 DGGS 兼容的地理单元代码）以及如何检索其加密形式的精确索引键，以便正确、安全、高效地返回查询的加密块。</p>
 <h3 id="动态前缀对称可搜索加密"><a href="#动态前缀对称可搜索加密" class="headerlink" title="动态前缀对称可搜索加密"></a>动态前缀对称可搜索加密</h3><p>一个动态前缀对称可搜索加密方案$\sum&#x3D;(Setup,Search,Update)$。和一般的DSSE方案不同的是，在search协议中，服务器返回的结果$DB(w_p)$为所有以$w_p$为前缀的关键字$w$匹配的索引。</p>
 <p><strong>动态前缀对称可搜索加密的前后向安全</strong></p>
 <p>文章中的前后向安全定义参照了Bost等人在2017年提出的定义，即</p>
 <p>前向安全满足：<br>$$<br>\mathcal{L}^{Updt}(op,w,id)&#x3D;\mathcal{L}’^{Updt}(op,id)<br>$$<br>一类后向安全满足：<br>$$<br>\mathcal{L}^{Updt}(op,w,id)&#x3D;\mathcal{L}’(op)\ \mathcal{L}^{Srch}(w)&#x3D;\mathcal{L}’’(TimeDB(W),a_w)<br>$$<br>二类后向安全满足：<br>$$<br>\mathcal{L}^{Updt}(op,w,id)&#x3D;\mathcal{L}’(op,w)\<br>\mathcal{L}^{Srch}(w)&#x3D;\mathcal{L}’’(TimeDB(w),Updates(w))<br>$$<br>三类后向安全满足：<br>$$<br>\mathcal{L}^{Updt}(op,w,id)&#x3D;\mathcal{L}’(op,w)\<br>\mathcal{L}^{Srch}(w)&#x3D;\mathcal{L}’’(TimeDB(w),DelHist(w))<br>$$</p>
-<h2 id="方案构造"><a href="#方案构造" class="headerlink" title="方案构造"></a>方案构造</h2>]]></content>
+<h2 id="方案构造"><a href="#方案构造" class="headerlink" title="方案构造"></a>方案构造</h2><h3 id="f-bit-Bounded-Symmetric-Encryption"><a href="#f-bit-Bounded-Symmetric-Encryption" class="headerlink" title="$f$-bit Bounded Symmetric Encryption"></a>$f$-bit Bounded Symmetric Encryption</h3><p>令G表示一个输出为$\lambda$的伪随机函数，则一个SE-$f$可以用一个三元组表示(SE-$f$.Gen,SE-$f$.Enc,SE-$f$.Dec)。和一般的SE方案不同，SE-$f$在解密的时候只会解密一个$f$位的区间而不是整个密文。</p>
+<ul>
+<li>$SE-f.Gen(1^\lambda)\to k_1,k_2:$ 输入安全参数，从密钥空间中随机选取两个密钥$k_1,k_2$</li>
+<li>$SE-f.Enc(k_1,m)\to ct:$ 输入密钥和消息$m$，输出密文$ct$。其中$ct&#x3D;G(k_1,m)\oplus m$，其中$m$的比特长度和G输出的长度相同。</li>
+<li>$SE−f.Dec(k_1,k_2,ct)→m’:$需要解密连续$f$位的情况下，令开始和结束的位置为pos1和pos2。则$m’&#x3D;ct\oplus(G(k_2,m).sub(0,pos1)||G(k_1,m).sub(pos1,pos2)||G(k_2,m).sub(pos2,\lambda))$</li>
+</ul>
+<p><img src="/images/image1.png" alt="图3"></p>
+<h3 id="symmetric-preﬁx-predicate-encryption-scheme-SP-2E"><a href="#symmetric-preﬁx-predicate-encryption-scheme-SP-2E" class="headerlink" title="symmetric preﬁx predicate encryption scheme $(SP^2E)$"></a>symmetric preﬁx predicate encryption scheme $(SP^2E)$</h3><p>一个$SP^2E$方案包含了</p>
+]]></content>
       <categories>
         <category>DEES论文汇报</category>
       </categories>
