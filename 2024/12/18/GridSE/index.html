@@ -86,7 +86,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1k</span>
+            <span class="post-count">1.2k</span>
         </span>
     </span>
 
@@ -95,7 +95,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">3 min</span>
+            <span class="post-count">4 min</span>
         </span>
     </span>
 </div>
@@ -134,8 +134,11 @@
 <h2 id="PRELIMINARIES"><a href="#PRELIMINARIES" class="headerlink" title="PRELIMINARIES"></a>PRELIMINARIES</h2><h3 id="地理搜索框架"><a href="#地理搜索框架" class="headerlink" title="地理搜索框架"></a>地理搜索框架</h3><p>一个典型的地理信息服务系统主要包含三个主要实体，分别是用户、客户端、服务器。其中服务器是一个提供计算或存储服务的云提供商。客户端是一个 GIS&#x2F;LBS 提供商，它将数据（加密后）外包给服务器，同时保留一些本地计算和存储能力；用户是发出地理搜索请求的使用者。</p>
 <p><img src="/images/%E6%88%AA%E5%B1%8F2024.png" alt="图二：地理搜索框架"></p>
 <p>文章将数据库逻辑划分为数据和索引两个部分。数据按照位置进行索引，用于索引位置的键称为索引键。在本工作中，只关注位置属性（例如，与 DGGS 兼容的地理单元代码）以及如何检索其加密形式的精确索引键，以便正确、安全、高效地返回查询的加密块。</p>
-<h3 id="动态前缀对称可搜索加密"><a href="#动态前缀对称可搜索加密" class="headerlink" title="动态前缀对称可搜索加密"></a>动态前缀对称可搜索加密</h3><p>一个动态前缀对称可搜索加密方案$\sum&#x3D;(Setup,Search,Update)$。和一般的DSSE方案不同的是，在search协议中，服务器返回的</p>
- 
+<h3 id="动态前缀对称可搜索加密"><a href="#动态前缀对称可搜索加密" class="headerlink" title="动态前缀对称可搜索加密"></a>动态前缀对称可搜索加密</h3><p>一个动态前缀对称可搜索加密方案$\sum&#x3D;(Setup,Search,Update)$。和一般的DSSE方案不同的是，在search协议中，服务器返回的结果$DB(w_p)$为所有以$w_p$为前缀的关键字$w$匹配的索引。</p>
+<p><strong>动态前缀对称可搜索加密的前后向安全</strong></p>
+<p>文章中的前后向安全定义参照了Bost等人在2017年提出的定义，即</p>
+<p>前向安全满足：<br>$$<br>\mathcal{L}^{Updt}(op,w,id)&#x3D;\mathcal{L}’^{Updt}(op,id)<br>$$<br>一类后向安全满足：<br>$$<br>\mathcal{L}^{Updt}(op,w,id)&#x3D;\mathcal{L}’(op)\ \mathcal{L}^{Srch}(w)&#x3D;\mathcal{L}’’(TimeDB(W),a_w)<br>$$<br>二类后向安全满足：<br>$$<br>\mathcal{L}^{Updt}(op,w,id)&#x3D;\mathcal{L}’(op,w)\<br>\mathcal{L}^{Srch}(w)&#x3D;\mathcal{L}’’(TimeDB(w),Updates(w))<br>$$<br>三类后向安全满足：<br>$$<br>\mathcal{L}^{Updt}(op,w,id)&#x3D;\mathcal{L}’(op,w)\<br>\mathcal{L}^{Srch}(w)&#x3D;\mathcal{L}’’(TimeDB(w),DelHist(w))<br>$$</p>
+<h2 id="方案构造"><a href="#方案构造" class="headerlink" title="方案构造"></a>方案构造</h2> 
       <!-- reward -->
       
     </div>
