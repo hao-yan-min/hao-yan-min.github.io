@@ -86,7 +86,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">2.3k</span>
+            <span class="post-count">2.4k</span>
         </span>
     </span>
 
@@ -102,10 +102,19 @@
  
     </div>
       
+    <div class="tocbot"></div>
+
+
+
+
+  
     <div class="article-entry" itemprop="articleBody">
        
   <h1 id="GridSE-Towards-Practical-Secure-Geographic-Search-via-Prefix-Symmetric-Searchable-Encryption"><a href="#GridSE-Towards-Practical-Secure-Geographic-Search-via-Prefix-Symmetric-Searchable-Encryption" class="headerlink" title="GridSE: Towards Practical Secure Geographic Search via Prefix Symmetric Searchable Encryption"></a>GridSE: Towards Practical Secure Geographic Search via Prefix Symmetric Searchable Encryption</h1><hr>
 <p>汇报人：严浩铭</p>
+<p>论文时间：2024年</p>
+<p>作者：Ruoyang Guo，Jiarui Li，Shucheng Yu</p>
+<p>会议：USENIX Security Symposium</p>
 <hr>
 <h2 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h2><p>随着物联网 (IoT) 设备的不断部署以及下一代无线和移动通信的到来，对地理信息系统 (GIS)，特别是基于位置的服务 (LBS) 和地理搜索 (GS) 的需求在各种上下文感知应用中空前高涨。出于隐私考虑，存储在云端的用户地理位置信息应得到良好保护。因此，安全地理搜索 (SGS) 成为一种很有前景的数据保护技术，它支持对加密地理数据进行地理搜索。</p>
 <p>现有的地理空间（GS）系统，已经深深植根于一种被称为离散全球网格（DGG）的技术。离散全球网格系统将地球区域划分为几何网格。每个网格可以进一步递归地划分为更小的区域，这些区域称为单元格，并具有逐渐精细的分辨率。为了便于计算，每个区域或单元格都由一个点表示，并分配一个可识别的字符串，我们将其称为单元格代码。</p>
@@ -431,6 +440,22 @@
 <script src="/js/lazyload.min.js"></script>
 
 <!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
 
 <script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
 <link

@@ -5,6 +5,9 @@
     <url>/2024/12/18/GridSE/</url>
     <content><![CDATA[<h1 id="GridSE-Towards-Practical-Secure-Geographic-Search-via-Prefix-Symmetric-Searchable-Encryption"><a href="#GridSE-Towards-Practical-Secure-Geographic-Search-via-Prefix-Symmetric-Searchable-Encryption" class="headerlink" title="GridSE: Towards Practical Secure Geographic Search via Prefix Symmetric Searchable Encryption"></a>GridSE: Towards Practical Secure Geographic Search via Prefix Symmetric Searchable Encryption</h1><hr>
 <p>汇报人：严浩铭</p>
+<p>论文时间：2024年</p>
+<p>作者：Ruoyang Guo，Jiarui Li，Shucheng Yu</p>
+<p>会议：USENIX Security Symposium</p>
 <hr>
 <h2 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h2><p>随着物联网 (IoT) 设备的不断部署以及下一代无线和移动通信的到来，对地理信息系统 (GIS)，特别是基于位置的服务 (LBS) 和地理搜索 (GS) 的需求在各种上下文感知应用中空前高涨。出于隐私考虑，存储在云端的用户地理位置信息应得到良好保护。因此，安全地理搜索 (SGS) 成为一种很有前景的数据保护技术，它支持对加密地理数据进行地理搜索。</p>
 <p>现有的地理空间（GS）系统，已经深深植根于一种被称为离散全球网格（DGG）的技术。离散全球网格系统将地球区域划分为几何网格。每个网格可以进一步递归地划分为更小的区域，这些区域称为单元格，并具有逐渐精细的分辨率。为了便于计算，每个区域或单元格都由一个点表示，并分配一个可识别的字符串，我们将其称为单元格代码。</p>
@@ -138,187 +141,6 @@
       <tags>
         <tag>第一个</tag>
         <tag>技术</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Latex的使用</title>
-    <url>/2023/05/01/Latex/</url>
-    <content><![CDATA[<h2 id="Latex环境和命令"><a href="#Latex环境和命令" class="headerlink" title="Latex环境和命令"></a>Latex环境和命令</h2><p>$latex{}$ 的命令以\开头，而环境是指用以令一些效果在局部生效，或是生成特殊的文档元素。LATEX 环境</p>
-<p>的用法为一对命令 \begin 和 \end</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\begin&#123;⟨environment name⟩&#125;[⟨optional arguments⟩]&#123;⟨mandatory arguments⟩&#125;</span><br><span class="line">…</span><br><span class="line">\end&#123;⟨environment name⟩&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中 <em>⟨<strong>environment name</strong>⟩</em> 为环境名，\begin 和 \end 中填写的环境名应当一致。类似命令，</p>
-<p>{<em>⟨<strong>mandatory arguments</strong>⟩</em>} 和 [<em>⟨<strong>optional arguments</strong>⟩</em>] 为环境所需的必选和可选参数。LATEX 环</p>
-<p>境可能需要一个或多个必选&#x2F;可选参数，也可能完全不需要参数。部分环境允许嵌套使用。</p>
-<h3 id="Latex源代码结构"><a href="#Latex源代码结构" class="headerlink" title="Latex源代码结构"></a>Latex源代码结构</h3><p>LATEX 源代码以一个 \documentclass 命令作为开头，它指定了文档使用的<strong>文档类</strong>。docu</p>
-<p>ment 环境当中的内容是文档正文。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\documentclass[⟨options⟩]&#123;⟨class-name⟩&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>在 \documentclass 和 \begin{document} 之间的位置称为<strong>导言区</strong>。在导言区中常会使用</p>
-<p>\usepackage 命令调用<strong>宏包</strong>，还会进行文档的全局设置。</p>
-<p><img src="/images/image-20230424224310764.png" alt="image-20230424224310764"></p>
-<h3 id="Latex排版文字"><a href="#Latex排版文字" class="headerlink" title="Latex排版文字"></a>Latex排版文字</h3><p>使用latex排版中文的时候需要引入ctex包，代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\usepackage&#123;ctex&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="空格和分段"><a href="#空格和分段" class="headerlink" title="空格和分段"></a>空格和分段</h2><p>latex中每行开头的空格无效，一个或多个空格被视为一个空格。可以使用\par命令让文字分段。文末的一个换行符被视为一个空格，但多个换行符被视为一个换行符（对中文无效）</p>
-<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><p>latex使用%进行注释，该字符到行末的所有文字都被忽略</p>
-<h3 id="字体的设置"><a href="#字体的设置" class="headerlink" title="字体的设置"></a>字体的设置</h3><p>Latex中设置正文字体的时候使用 \setmainfont命令。例如，如果要设置字体为宋体，命令为\setmainfont{Simsun}</p>
-<p>在\documentclass[11pt,a4paper]{article}命令中可以设置正文字体大小和使用的纸张大小。</p>
-<h3 id="行间距的设置"><a href="#行间距的设置" class="headerlink" title="行间距的设置"></a>行间距的设置</h3><p>Latex中通过引入宏包</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\usepackage</span>&#123;setspace&#125; <span class="comment">% 加载 setspace 宏包</span></span><br><span class="line"><span class="keyword">\setstretch</span>&#123;1.5&#125; <span class="comment">% 设置行距为1.5倍</span></span><br></pre></td></tr></table></figure>
-
-<p>通过这种方式设置行间距。</p>
-<h3 id="设置目录"><a href="#设置目录" class="headerlink" title="设置目录"></a>设置目录</h3><p>通过引入包hyperref然后在文档内容中加入目录，具体代码如下：</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\usepackage</span>&#123;hyperref&#125; <span class="comment">% 引入超链接包</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\newpage</span> <span class="comment">% 新页</span></span><br><span class="line"><span class="keyword">\tableofcontents</span> <span class="comment">% 生成目录</span></span><br></pre></td></tr></table></figure>
-
-<p>这样生成的目录可以使用超链接且独占一页。</p>
-<h2 id="排版"><a href="#排版" class="headerlink" title="排版"></a>排版</h2><h3 id="段落"><a href="#段落" class="headerlink" title="段落"></a>段落</h3><p>可以使用\section{}标签生成一级段落，\subsection{}生成二级段落。 \subsubsection{} 生成三级段落。</p>
-<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p>使用</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;enumerate&#125;</span><br><span class="line"><span class="keyword">\item</span> 表项一</span><br><span class="line"><span class="keyword">\item</span> 表项二</span><br><span class="line">···</span><br><span class="line"><span class="keyword">\end</span>&#123;enumerate&#125;</span><br></pre></td></tr></table></figure>
-
-<p>生成有序列表，使用</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;itemize&#125;</span><br><span class="line"><span class="keyword">\item</span> 表项一</span><br><span class="line"><span class="keyword">\item</span> 表项二</span><br><span class="line">···</span><br><span class="line"><span class="keyword">\end</span>&#123;itemize&#125;</span><br></pre></td></tr></table></figure>
-
-<p>生成无序列表。如果要将标签数字用括号括起，使用</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\usepackage</span>&#123;enumitem&#125;</span><br><span class="line"><span class="keyword">\begin</span>&#123;enumerate&#125;[label=(<span class="keyword">\arabic</span>*)]</span><br><span class="line">    <span class="keyword">\item</span> 第一项内容</span><br><span class="line">    <span class="keyword">\item</span> 第二项内容</span><br><span class="line">    <span class="keyword">\item</span> 第三项内容</span><br><span class="line"><span class="keyword">\end</span>&#123;enumerate&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中*表示使用括号</p>
-<h2 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h2><p>如何需要添加一个公式段落，可以使用</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;equation&#125;<span class="keyword">\label</span>&#123;eq:eq1&#125;</span><br><span class="line">f(x)=a<span class="built_in">^</span>x+b</span><br><span class="line"><span class="keyword">\end</span>&#123;equation&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中label标签中定义了公式的引用key，在文章的其他部分可以使用<code>\ref&#123;eq:eq1&#125;</code>来进行引用。</p>
-<p>常用的公式符号如下：</p>
-<table>
-<thead>
-<tr>
-<th>符号</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>&#x3D;</td>
-<td>赋值</td>
-</tr>
-<tr>
-<td>&amp;</td>
-<td>对齐符号</td>
-</tr>
-<tr>
-<td>+</td>
-<td>加法</td>
-</tr>
-<tr>
-<td>-</td>
-<td>减法</td>
-</tr>
-<tr>
-<td>*</td>
-<td>乘法</td>
-</tr>
-<tr>
-<td>&#x2F;</td>
-<td>除法</td>
-</tr>
-<tr>
-<td>%</td>
-<td>取模</td>
-</tr>
-<tr>
-<td>^</td>
-<td>指数</td>
-</tr>
-<tr>
-<td>()</td>
-<td>括号，用于改变优先级</td>
-</tr>
-<tr>
-<td>{}</td>
-<td>大括号，用于组合数学表达式</td>
-</tr>
-<tr>
-<td>[]</td>
-<td>中括号，用于表示向量或矩阵</td>
-</tr>
-<tr>
-<td>_</td>
-<td>下划线，用于表示下标</td>
-</tr>
-<tr>
-<td>^{}</td>
-<td>脚注，用于表示上标</td>
-</tr>
-<tr>
-<td>\sqrt{}</td>
-<td>开方</td>
-</tr>
-<tr>
-<td>\frac{}{}</td>
-<td>分数</td>
-</tr>
-<tr>
-<td>\sum</td>
-<td>求和</td>
-</tr>
-<tr>
-<td>\int</td>
-<td>积分</td>
-</tr>
-<tr>
-<td>\lim</td>
-<td>极限</td>
-</tr>
-<tr>
-<td>\infty</td>
-<td>无穷</td>
-</tr>
-<tr>
-<td>\pm</td>
-<td>正负号</td>
-</tr>
-<tr>
-<td>\neq</td>
-<td>不等于号</td>
-</tr>
-<tr>
-<td>\leq</td>
-<td>小于等于号</td>
-</tr>
-<tr>
-<td>\geq</td>
-<td>大于等于号</td>
-</tr>
-<tr>
-<td>\mathop{\max}\limits_{x}</td>
-<td>$\mathop{\max}\limits_{x}$</td>
-</tr>
-</tbody></table>
-<h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><p>如果要插入图片，首先要引入graphicx包，具体的代码如下：</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\usepackage</span>&#123;graphicx&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>&#123;figure&#125;</span><br><span class="line"><span class="keyword">\centering</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\includegraphics</span>[width=0.5<span class="keyword">\textwidth</span>]&#123;Figure1.png&#125;</span><br><span class="line"><span class="keyword">\caption</span>&#123;DeepId模型结构图&#125; <span class="keyword">\label</span>&#123;fig:Figure1&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;figure&#125;</span><br></pre></td></tr></table></figure>
-
-<p>caption为图片题注，label为引用标签，\centering为设置图片居中</p>
-<p>$y^i_{j,k}&#x3D;\mathop{\max}\limits_{0\le m,n&lt;s}{x^i_{j\cdot s+m,k\cdot s+n}}$</p>
-<p>$y_j&#x3D;max\big(0,\sum\limits_ix^1_i\cdot w^1_{i,j}+\sum\limits_{i}x^2_i\cdot w^2_{i,j}+b_j\big)$</p>
-<p>$y_i&#x3D;\frac {exp(y_i)} {\sum^n_{i&#x3D;1}exp(y_j)}$</p>
-<h2 id="文献的引用"><a href="#文献的引用" class="headerlink" title="文献的引用"></a>文献的引用</h2><p>在$Latex$中，通常可以使用BibTeX文件对文件进行引用。BibTex是一个单独的文献引用数据库，其基本的格式是：</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">@article<span class="punctuation">&#123;</span>smith01<span class="punctuation">,</span></span><br><span class="line">  author = <span class="string">&quot;John Smith&quot;</span><span class="punctuation">,</span></span><br><span class="line">  title = <span class="string">&quot;A new approach to computer vision&quot;</span><span class="punctuation">,</span></span><br><span class="line">  journal = <span class="string">&quot;IEEE Transactions on Pattern Analysis and Machine Intelligence&quot;</span><span class="punctuation">,</span></span><br><span class="line">  volume = <span class="string">&quot;23&quot;</span><span class="punctuation">,</span></span><br><span class="line">  number = <span class="string">&quot;12&quot;</span><span class="punctuation">,</span></span><br><span class="line">  pages = <span class="string">&quot;1331--1335&quot;</span><span class="punctuation">,</span></span><br><span class="line">  year = <span class="string">&quot;2001&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>这个例子中的文献条目包括作者、标题、期刊名称、卷、期、页码和年份等信息。</p>
-<p>之后可以在LaTeX文档中使用\cite命令引用文献，例如：</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line">According to Smith <span class="keyword">\cite</span>&#123;smith01&#125;, computer vision is a challenging field.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>之后在LaTeX文档中需要生成文献参考表的位置指定BibTeX文件的位置和样式，例如：</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\bibliography</span>&#123;mybibfile&#125;</span><br><span class="line"><span class="keyword">\bibliographystyle</span>&#123;plain&#125;</span><br></pre></td></tr></table></figure>
-
-<p>最后，先使用xelatex编译一遍源文件，然后使用BibTex编译一遍源文件，然后再用xelatex编译一遍源文件就可以生成正确的pdf文件了。</p>
-]]></content>
-      <categories>
-        <category>Latex</category>
-      </categories>
-      <tags>
-        <tag>Latex</tag>
-        <tag>论文排版工具</tag>
       </tags>
   </entry>
   <entry>
@@ -692,87 +514,184 @@
       </tags>
   </entry>
   <entry>
-    <title>graph survey</title>
-    <url>/2023/05/01/graphsurvey/</url>
-    <content><![CDATA[<h1 id="graph-survey"><a href="#graph-survey" class="headerlink" title="graph survey"></a>graph survey</h1><h2 id="introduction"><a href="#introduction" class="headerlink" title="introduction"></a>introduction</h2><ul>
-<li><p>Graph ananalytics mainly includes s graph processing, graph mining, and graph learning.(图像处理，图像挖掘，图学习)</p>
-</li>
-<li><p>Graph Processing. Conventional grapg algorithms are designed to process graphs iteratively(迭代) until covergence(收敛). (<a href="https://zhuanlan.zhihu.com/p/137561088">PageRank算法</a>，<a href="https://blog.csdn.net/weixin_41579721/article/details/114552443">单源最短路径算法</a>)</p>
-<ul>
-<li>are based on traversal operations and generally focus on performing linear algebra-like computational operations on the graph.</li>
-</ul>
-</li>
-<li><p>Graph mining. Graph mining aims to discover specific structures or patterns in graphs.</p>
-<ul>
-<li><p>graph mining technology is an ideal tool for dealing with complex data structures because of its complex data object relationships and rich data presentation. </p>
-</li>
-<li><p>graph mining can be used to discover structure</p>
-<p>content relationships in social media data, to mine</p>
-<p>community-dense subgraphs, to extract network motifs or</p>
-<p>signifificant subgraphs in protein-protein or gene interaction</p>
-<p>networks, to discover 3D motifs in protein structures or</p>
-<p>chemical compounds, etc.</p>
-</li>
-</ul>
-</li>
-<li><p>Graph learning. </p>
-<ul>
-<li>graphs can characterize the relationships between everything.</li>
-<li>Graph neural networks establish a deep learning framework for non-Euclidean spatial data, and compared to traditional network representation learning, it is able to perform deeper information aggregation operations on graph structures than traditional network representation learning models.（图神经网络为非欧几里得空间数据建立了深度学习框架，与传统的网络表示学习相比，它能够比传统的网络表示学习模型对图结构执行更深入的信息聚合作。）</li>
-</ul>
-</li>
-</ul>
-<h2 id="background"><a href="#background" class="headerlink" title="background"></a>background</h2><ul>
-<li><p>graph  Terminology</p>
-<ul>
-<li>The formula for a graph is G &#x3D;(V,E), where V stands for the vertex set and E for the edge set.  Each vertex and each edge has its attribute value at the same time.</li>
-</ul>
-</li>
-<li><p>Domain-Specifific Architecture Types for Graph Analytics.</p>
-<p>FPGA-Based Architecture.</p>
-<ul>
-<li><p>consists various types of programmable resources, which enables developers to rapidly prototype application-specifific accelerators using dedicated hardware description languages and reconfigure these accelerators as often as needed. (使开发人员能够使用专用的硬件描述语言快速地原型化特定于应用程序的加速器，并根据需要经常重新配置这些加速器。)</p>
-</li>
-<li><p>offer reconfifigurability at the expense of lowered</p>
-<p>clock frequencies, which is about 10 × lower than that of</p>
-<p>CPUs(降低了时钟的频率)</p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="Software-Systems-Implementation-for-Graph-Analytics"><a href="#Software-Systems-Implementation-for-Graph-Analytics" class="headerlink" title="Software Systems Implementation for Graph Analytics"></a>Software Systems Implementation for Graph Analytics</h2><h3 id="Software-Graph-Processing-Systems"><a href="#Software-Graph-Processing-Systems" class="headerlink" title="Software Graph Processing Systems"></a>Software Graph Processing Systems</h3><ul>
-<li><p>can be classifified into two main categories: single-machine graph processing systems and distributed graph processing systems.</p>
-</li>
-<li><p>According to whether the graph data can be stored in memory during processing, these systems can be divided into in-memory graph processing systems and out-of-core graph processing systems.</p>
-</li>
-<li><p>Single-Machine Graph Processing Systems. </p>
-<ul>
-<li>Single machine graph processing systems can fully exploit the ability of a single machine to handle graph computation tasks and avoid the expensive network communication overhead in distributed systems. </li>
-<li>统受到固定的硬件资源的限制，无法实现良好的可伸缩性，并且处理时间通常与图形数据的大小成正比。</li>
-<li>Single-machine in-memory graph processing systems often have multiple cores and support very large memory of more than 1 TB, allowing them to handle graph data with hundreds of billions of edges.  However, single shared memory systems can only scale by increasing the number of CPUs or expanding the memory size.</li>
-<li>Ligra is a lightweight shared memory-based single machine graph processing system, which provides programming abstraction based on edgeMap function, vertexMap function, and vertexSubset type, simplifying the writing of graph processing algorithms.</li>
-<li>The key idea of Galois [85] single-machine graph processing system is to fully exploit the benefifits of autonomous scheduling in a data-driven computing mode.</li>
-</ul>
-</li>
-<li><p>Distributed Graph Processing Systems.</p>
-<ul>
-<li>A distributed graph computing system consists of multiple computing nodes, each of which has its own memory and external memory. Therefore, compared to single-machine graph computing systems, distributed graph processing systems are less limited by hardware in terms of scalability.</li>
-<li>设计一个合适的数据划分策略是一个挑战。同时，计算节点之间的通信成为性能的瓶颈</li>
-</ul>
-</li>
-</ul>
-<h3 id="Software-Graph-Mining-Systems"><a href="#Software-Graph-Mining-Systems" class="headerlink" title="Software Graph Mining Systems"></a>Software Graph Mining Systems</h3><ul>
-<li><p>They search for subgraphs that satisfy the conditions of the algorithm in the input graph G. The process of finding subgraphs can be modeled with a search tree where each node represents a subgraph, and the subgraphs at the k+1 level are expanded from the subgraphs at the k level.</p>
-<p><img src="/images/image-20230312162325702.png" alt="image-20230312162325702"></p>
-</li>
-</ul>
+    <title>Latex的使用</title>
+    <url>/2023/05/01/Latex/</url>
+    <content><![CDATA[<h2 id="Latex环境和命令"><a href="#Latex环境和命令" class="headerlink" title="Latex环境和命令"></a>Latex环境和命令</h2><p>$latex{}$ 的命令以\开头，而环境是指用以令一些效果在局部生效，或是生成特殊的文档元素。LATEX 环境</p>
+<p>的用法为一对命令 \begin 和 \end</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\begin&#123;⟨environment name⟩&#125;[⟨optional arguments⟩]&#123;⟨mandatory arguments⟩&#125;</span><br><span class="line">…</span><br><span class="line">\end&#123;⟨environment name⟩&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中 <em>⟨<strong>environment name</strong>⟩</em> 为环境名，\begin 和 \end 中填写的环境名应当一致。类似命令，</p>
+<p>{<em>⟨<strong>mandatory arguments</strong>⟩</em>} 和 [<em>⟨<strong>optional arguments</strong>⟩</em>] 为环境所需的必选和可选参数。LATEX 环</p>
+<p>境可能需要一个或多个必选&#x2F;可选参数，也可能完全不需要参数。部分环境允许嵌套使用。</p>
+<h3 id="Latex源代码结构"><a href="#Latex源代码结构" class="headerlink" title="Latex源代码结构"></a>Latex源代码结构</h3><p>LATEX 源代码以一个 \documentclass 命令作为开头，它指定了文档使用的<strong>文档类</strong>。docu</p>
+<p>ment 环境当中的内容是文档正文。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\documentclass[⟨options⟩]&#123;⟨class-name⟩&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在 \documentclass 和 \begin{document} 之间的位置称为<strong>导言区</strong>。在导言区中常会使用</p>
+<p>\usepackage 命令调用<strong>宏包</strong>，还会进行文档的全局设置。</p>
+<p><img src="/images/image-20230424224310764.png" alt="image-20230424224310764"></p>
+<h3 id="Latex排版文字"><a href="#Latex排版文字" class="headerlink" title="Latex排版文字"></a>Latex排版文字</h3><p>使用latex排版中文的时候需要引入ctex包，代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\usepackage&#123;ctex&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="空格和分段"><a href="#空格和分段" class="headerlink" title="空格和分段"></a>空格和分段</h2><p>latex中每行开头的空格无效，一个或多个空格被视为一个空格。可以使用\par命令让文字分段。文末的一个换行符被视为一个空格，但多个换行符被视为一个换行符（对中文无效）</p>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><p>latex使用%进行注释，该字符到行末的所有文字都被忽略</p>
+<h3 id="字体的设置"><a href="#字体的设置" class="headerlink" title="字体的设置"></a>字体的设置</h3><p>Latex中设置正文字体的时候使用 \setmainfont命令。例如，如果要设置字体为宋体，命令为\setmainfont{Simsun}</p>
+<p>在\documentclass[11pt,a4paper]{article}命令中可以设置正文字体大小和使用的纸张大小。</p>
+<h3 id="行间距的设置"><a href="#行间距的设置" class="headerlink" title="行间距的设置"></a>行间距的设置</h3><p>Latex中通过引入宏包</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\usepackage</span>&#123;setspace&#125; <span class="comment">% 加载 setspace 宏包</span></span><br><span class="line"><span class="keyword">\setstretch</span>&#123;1.5&#125; <span class="comment">% 设置行距为1.5倍</span></span><br></pre></td></tr></table></figure>
+
+<p>通过这种方式设置行间距。</p>
+<h3 id="设置目录"><a href="#设置目录" class="headerlink" title="设置目录"></a>设置目录</h3><p>通过引入包hyperref然后在文档内容中加入目录，具体代码如下：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\usepackage</span>&#123;hyperref&#125; <span class="comment">% 引入超链接包</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\newpage</span> <span class="comment">% 新页</span></span><br><span class="line"><span class="keyword">\tableofcontents</span> <span class="comment">% 生成目录</span></span><br></pre></td></tr></table></figure>
+
+<p>这样生成的目录可以使用超链接且独占一页。</p>
+<h2 id="排版"><a href="#排版" class="headerlink" title="排版"></a>排版</h2><h3 id="段落"><a href="#段落" class="headerlink" title="段落"></a>段落</h3><p>可以使用\section{}标签生成一级段落，\subsection{}生成二级段落。 \subsubsection{} 生成三级段落。</p>
+<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p>使用</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;enumerate&#125;</span><br><span class="line"><span class="keyword">\item</span> 表项一</span><br><span class="line"><span class="keyword">\item</span> 表项二</span><br><span class="line">···</span><br><span class="line"><span class="keyword">\end</span>&#123;enumerate&#125;</span><br></pre></td></tr></table></figure>
+
+<p>生成有序列表，使用</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;itemize&#125;</span><br><span class="line"><span class="keyword">\item</span> 表项一</span><br><span class="line"><span class="keyword">\item</span> 表项二</span><br><span class="line">···</span><br><span class="line"><span class="keyword">\end</span>&#123;itemize&#125;</span><br></pre></td></tr></table></figure>
+
+<p>生成无序列表。如果要将标签数字用括号括起，使用</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\usepackage</span>&#123;enumitem&#125;</span><br><span class="line"><span class="keyword">\begin</span>&#123;enumerate&#125;[label=(<span class="keyword">\arabic</span>*)]</span><br><span class="line">    <span class="keyword">\item</span> 第一项内容</span><br><span class="line">    <span class="keyword">\item</span> 第二项内容</span><br><span class="line">    <span class="keyword">\item</span> 第三项内容</span><br><span class="line"><span class="keyword">\end</span>&#123;enumerate&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中*表示使用括号</p>
+<h2 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h2><p>如何需要添加一个公式段落，可以使用</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;equation&#125;<span class="keyword">\label</span>&#123;eq:eq1&#125;</span><br><span class="line">f(x)=a<span class="built_in">^</span>x+b</span><br><span class="line"><span class="keyword">\end</span>&#123;equation&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中label标签中定义了公式的引用key，在文章的其他部分可以使用<code>\ref&#123;eq:eq1&#125;</code>来进行引用。</p>
+<p>常用的公式符号如下：</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&#x3D;</td>
+<td>赋值</td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td>对齐符号</td>
+</tr>
+<tr>
+<td>+</td>
+<td>加法</td>
+</tr>
+<tr>
+<td>-</td>
+<td>减法</td>
+</tr>
+<tr>
+<td>*</td>
+<td>乘法</td>
+</tr>
+<tr>
+<td>&#x2F;</td>
+<td>除法</td>
+</tr>
+<tr>
+<td>%</td>
+<td>取模</td>
+</tr>
+<tr>
+<td>^</td>
+<td>指数</td>
+</tr>
+<tr>
+<td>()</td>
+<td>括号，用于改变优先级</td>
+</tr>
+<tr>
+<td>{}</td>
+<td>大括号，用于组合数学表达式</td>
+</tr>
+<tr>
+<td>[]</td>
+<td>中括号，用于表示向量或矩阵</td>
+</tr>
+<tr>
+<td>_</td>
+<td>下划线，用于表示下标</td>
+</tr>
+<tr>
+<td>^{}</td>
+<td>脚注，用于表示上标</td>
+</tr>
+<tr>
+<td>\sqrt{}</td>
+<td>开方</td>
+</tr>
+<tr>
+<td>\frac{}{}</td>
+<td>分数</td>
+</tr>
+<tr>
+<td>\sum</td>
+<td>求和</td>
+</tr>
+<tr>
+<td>\int</td>
+<td>积分</td>
+</tr>
+<tr>
+<td>\lim</td>
+<td>极限</td>
+</tr>
+<tr>
+<td>\infty</td>
+<td>无穷</td>
+</tr>
+<tr>
+<td>\pm</td>
+<td>正负号</td>
+</tr>
+<tr>
+<td>\neq</td>
+<td>不等于号</td>
+</tr>
+<tr>
+<td>\leq</td>
+<td>小于等于号</td>
+</tr>
+<tr>
+<td>\geq</td>
+<td>大于等于号</td>
+</tr>
+<tr>
+<td>\mathop{\max}\limits_{x}</td>
+<td>$\mathop{\max}\limits_{x}$</td>
+</tr>
+</tbody></table>
+<h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><p>如果要插入图片，首先要引入graphicx包，具体的代码如下：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\usepackage</span>&#123;graphicx&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>&#123;figure&#125;</span><br><span class="line"><span class="keyword">\centering</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\includegraphics</span>[width=0.5<span class="keyword">\textwidth</span>]&#123;Figure1.png&#125;</span><br><span class="line"><span class="keyword">\caption</span>&#123;DeepId模型结构图&#125; <span class="keyword">\label</span>&#123;fig:Figure1&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;figure&#125;</span><br></pre></td></tr></table></figure>
+
+<p>caption为图片题注，label为引用标签，\centering为设置图片居中</p>
+<p>$y^i_{j,k}&#x3D;\mathop{\max}\limits_{0\le m,n&lt;s}{x^i_{j\cdot s+m,k\cdot s+n}}$</p>
+<p>$y_j&#x3D;max\big(0,\sum\limits_ix^1_i\cdot w^1_{i,j}+\sum\limits_{i}x^2_i\cdot w^2_{i,j}+b_j\big)$</p>
+<p>$y_i&#x3D;\frac {exp(y_i)} {\sum^n_{i&#x3D;1}exp(y_j)}$</p>
+<h2 id="文献的引用"><a href="#文献的引用" class="headerlink" title="文献的引用"></a>文献的引用</h2><p>在$Latex$中，通常可以使用BibTeX文件对文件进行引用。BibTex是一个单独的文献引用数据库，其基本的格式是：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">@article<span class="punctuation">&#123;</span>smith01<span class="punctuation">,</span></span><br><span class="line">  author = <span class="string">&quot;John Smith&quot;</span><span class="punctuation">,</span></span><br><span class="line">  title = <span class="string">&quot;A new approach to computer vision&quot;</span><span class="punctuation">,</span></span><br><span class="line">  journal = <span class="string">&quot;IEEE Transactions on Pattern Analysis and Machine Intelligence&quot;</span><span class="punctuation">,</span></span><br><span class="line">  volume = <span class="string">&quot;23&quot;</span><span class="punctuation">,</span></span><br><span class="line">  number = <span class="string">&quot;12&quot;</span><span class="punctuation">,</span></span><br><span class="line">  pages = <span class="string">&quot;1331--1335&quot;</span><span class="punctuation">,</span></span><br><span class="line">  year = <span class="string">&quot;2001&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这个例子中的文献条目包括作者、标题、期刊名称、卷、期、页码和年份等信息。</p>
+<p>之后可以在LaTeX文档中使用\cite命令引用文献，例如：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line">According to Smith <span class="keyword">\cite</span>&#123;smith01&#125;, computer vision is a challenging field.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>之后在LaTeX文档中需要生成文献参考表的位置指定BibTeX文件的位置和样式，例如：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\bibliography</span>&#123;mybibfile&#125;</span><br><span class="line"><span class="keyword">\bibliographystyle</span>&#123;plain&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后，先使用xelatex编译一遍源文件，然后使用BibTex编译一遍源文件，然后再用xelatex编译一遍源文件就可以生成正确的pdf文件了。</p>
 ]]></content>
       <categories>
-        <category>图神经网络</category>
+        <category>Latex</category>
       </categories>
       <tags>
-        <tag>图学习</tag>
-        <tag>深度学习</tag>
+        <tag>Latex</tag>
+        <tag>论文排版工具</tag>
       </tags>
   </entry>
   <entry>
@@ -970,6 +889,90 @@
       <tags>
         <tag>html</tag>
         <tag>CSS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>graph survey</title>
+    <url>/2023/05/01/graphsurvey/</url>
+    <content><![CDATA[<h1 id="graph-survey"><a href="#graph-survey" class="headerlink" title="graph survey"></a>graph survey</h1><h2 id="introduction"><a href="#introduction" class="headerlink" title="introduction"></a>introduction</h2><ul>
+<li><p>Graph ananalytics mainly includes s graph processing, graph mining, and graph learning.(图像处理，图像挖掘，图学习)</p>
+</li>
+<li><p>Graph Processing. Conventional grapg algorithms are designed to process graphs iteratively(迭代) until covergence(收敛). (<a href="https://zhuanlan.zhihu.com/p/137561088">PageRank算法</a>，<a href="https://blog.csdn.net/weixin_41579721/article/details/114552443">单源最短路径算法</a>)</p>
+<ul>
+<li>are based on traversal operations and generally focus on performing linear algebra-like computational operations on the graph.</li>
+</ul>
+</li>
+<li><p>Graph mining. Graph mining aims to discover specific structures or patterns in graphs.</p>
+<ul>
+<li><p>graph mining technology is an ideal tool for dealing with complex data structures because of its complex data object relationships and rich data presentation. </p>
+</li>
+<li><p>graph mining can be used to discover structure</p>
+<p>content relationships in social media data, to mine</p>
+<p>community-dense subgraphs, to extract network motifs or</p>
+<p>signifificant subgraphs in protein-protein or gene interaction</p>
+<p>networks, to discover 3D motifs in protein structures or</p>
+<p>chemical compounds, etc.</p>
+</li>
+</ul>
+</li>
+<li><p>Graph learning. </p>
+<ul>
+<li>graphs can characterize the relationships between everything.</li>
+<li>Graph neural networks establish a deep learning framework for non-Euclidean spatial data, and compared to traditional network representation learning, it is able to perform deeper information aggregation operations on graph structures than traditional network representation learning models.（图神经网络为非欧几里得空间数据建立了深度学习框架，与传统的网络表示学习相比，它能够比传统的网络表示学习模型对图结构执行更深入的信息聚合作。）</li>
+</ul>
+</li>
+</ul>
+<h2 id="background"><a href="#background" class="headerlink" title="background"></a>background</h2><ul>
+<li><p>graph  Terminology</p>
+<ul>
+<li>The formula for a graph is G &#x3D;(V,E), where V stands for the vertex set and E for the edge set.  Each vertex and each edge has its attribute value at the same time.</li>
+</ul>
+</li>
+<li><p>Domain-Specifific Architecture Types for Graph Analytics.</p>
+<p>FPGA-Based Architecture.</p>
+<ul>
+<li><p>consists various types of programmable resources, which enables developers to rapidly prototype application-specifific accelerators using dedicated hardware description languages and reconfigure these accelerators as often as needed. (使开发人员能够使用专用的硬件描述语言快速地原型化特定于应用程序的加速器，并根据需要经常重新配置这些加速器。)</p>
+</li>
+<li><p>offer reconfifigurability at the expense of lowered</p>
+<p>clock frequencies, which is about 10 × lower than that of</p>
+<p>CPUs(降低了时钟的频率)</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Software-Systems-Implementation-for-Graph-Analytics"><a href="#Software-Systems-Implementation-for-Graph-Analytics" class="headerlink" title="Software Systems Implementation for Graph Analytics"></a>Software Systems Implementation for Graph Analytics</h2><h3 id="Software-Graph-Processing-Systems"><a href="#Software-Graph-Processing-Systems" class="headerlink" title="Software Graph Processing Systems"></a>Software Graph Processing Systems</h3><ul>
+<li><p>can be classifified into two main categories: single-machine graph processing systems and distributed graph processing systems.</p>
+</li>
+<li><p>According to whether the graph data can be stored in memory during processing, these systems can be divided into in-memory graph processing systems and out-of-core graph processing systems.</p>
+</li>
+<li><p>Single-Machine Graph Processing Systems. </p>
+<ul>
+<li>Single machine graph processing systems can fully exploit the ability of a single machine to handle graph computation tasks and avoid the expensive network communication overhead in distributed systems. </li>
+<li>统受到固定的硬件资源的限制，无法实现良好的可伸缩性，并且处理时间通常与图形数据的大小成正比。</li>
+<li>Single-machine in-memory graph processing systems often have multiple cores and support very large memory of more than 1 TB, allowing them to handle graph data with hundreds of billions of edges.  However, single shared memory systems can only scale by increasing the number of CPUs or expanding the memory size.</li>
+<li>Ligra is a lightweight shared memory-based single machine graph processing system, which provides programming abstraction based on edgeMap function, vertexMap function, and vertexSubset type, simplifying the writing of graph processing algorithms.</li>
+<li>The key idea of Galois [85] single-machine graph processing system is to fully exploit the benefifits of autonomous scheduling in a data-driven computing mode.</li>
+</ul>
+</li>
+<li><p>Distributed Graph Processing Systems.</p>
+<ul>
+<li>A distributed graph computing system consists of multiple computing nodes, each of which has its own memory and external memory. Therefore, compared to single-machine graph computing systems, distributed graph processing systems are less limited by hardware in terms of scalability.</li>
+<li>设计一个合适的数据划分策略是一个挑战。同时，计算节点之间的通信成为性能的瓶颈</li>
+</ul>
+</li>
+</ul>
+<h3 id="Software-Graph-Mining-Systems"><a href="#Software-Graph-Mining-Systems" class="headerlink" title="Software Graph Mining Systems"></a>Software Graph Mining Systems</h3><ul>
+<li><p>They search for subgraphs that satisfy the conditions of the algorithm in the input graph G. The process of finding subgraphs can be modeled with a search tree where each node represents a subgraph, and the subgraphs at the k+1 level are expanded from the subgraphs at the k level.</p>
+<p><img src="/images/image-20230312162325702.png" alt="image-20230312162325702"></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>图神经网络</category>
+      </categories>
+      <tags>
+        <tag>图学习</tag>
+        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>
